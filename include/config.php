@@ -3,8 +3,8 @@ define('DB_DSN', 'mysql:host=127.0.0.1;dbname=introcee');
 define('DB_USER', 'introcee');
 define('DB_PASSWORD', 'introcee');
 
-define('ADMIN_COMMITTEE', 'introcee');
-define('ADMIN_EMAIL', 'IntroCee Cover <introcee@svcover.nl>');
+define('ADMIN_COMMITTEE', 'excee');
+define('ADMIN_EMAIL', 'ExCee Cover <excee@svcover.nl>');
 
 define('SERVER_NAME', 'https://inctrocee.svcover.nl');
 define('COVER_APP', 'introcee');
