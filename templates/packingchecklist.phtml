@@ -1,0 +1,146 @@
+<?php $this->extends('layout.phtml') ?>
+
+<?php $this->begin('content') ?>
+<div class="container container-narrow">
+    <section>
+        <h2>
+            Packing Checklist
+        </h1>
+        <div class="jumbotron">
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                Hi there, this grab list makes use of functional cookies. Which results in when you close this page by accident, or want to grab your stuff in multiple sessions, your browser will remember what you already grabbed for one month!
+                <br>
+                <br>
+                We do not place any cookies before you check something off. And the cookies are in no way or form used to generate a profit, or to cause harm.
+            </div>
+            <div class="row navPadding" id="paklijst">
+                <div style="width: 100%; overflow: hidden;">
+                    <div class="col-lg-6">
+                        <h3>Personal Care</h3>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Toothbrush" onclick="setCookie('Toothbrush')">
+                                Toothbrush
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Toothpaste" onclick="setCookie('Toothpaste')">
+                                Toothpaste
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Soap" onclick="setCookie('Soap')">
+                                Shampoo/Conditioner/Soap
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Towel" onclick="setCookie('Towel')">
+                                Towel
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Hairbrush" onclick="setCookie('Hairbrush')">
+                                Hairbrush
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Sun" onclick="setCookie('Sun')">
+                                Sun block 
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Make-up" onclick="setCookie('Make-up')">
+                                Make-up 
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Medicine" onclick="setCookie('Medicine')">
+                                Medicine (if needed)
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Deodorant" onclick="setCookie('Deodorant')">
+                                Deodorant
+                            </li>
+                        </ul>
+                        <h3>Clothes</h3>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Shirts" onclick="setCookie('Shirts')">
+                                (T-)Shirts
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Pants" onclick="setCookie('Pants')">
+                                Pants
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Socks" onclick="setCookie('Socks')">
+                                Socks
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Underware" onclick="setCookie('Underware')">
+                                Underware
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Jacket" onclick="setCookie('Jacket')">
+                                Jacket
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Shoes" onclick="setCookie('Shoes')">
+                                Shoes
+                            </li>
+                        </ul>
+                        <h3>Personal belongings</h3>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Wallet" onclick="setCookie('Wallet')">
+                                Wallet
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Passport" onclick="setCookie('Passport')">
+                                Passport/ID-card
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Charger" onclick="setCookie('Charger')">
+                                (Phone) charger
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Sunglasses" onclick="setCookie('Sunglasses')">
+                                 Sunglasses
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="goggles" onclick="setCookie('goggles')">
+                                Ski-goggles
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Swimsuit" onclick="setCookie('Swimsuit')">
+                                Swimsuit
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Prom" onclick="setCookie('Prom')">
+                                Prom wear
+                            </li>
+                        </ul>
+                        <h3>Optional</h3>
+                        <ul class="list-group">
+                        <li class="list-group-item">
+                                <input type="checkbox" value="" id="Headphones" onclick="setCookie('Headphones')">
+                                Headphones
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Games" onclick="setCookie('Games')">
+                                Games
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="Read" onclick="setCookie('Read')">
+                                Something to read
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="" onclick="setCookie('')">
+                                
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox" value="" id="" onclick="setCookie('')">
+                                
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<?php $this->end() ?>
