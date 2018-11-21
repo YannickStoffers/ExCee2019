@@ -27,6 +27,9 @@
                     <li <?php if ($page_id == 'index'): ?>class="active"<?php endif ?> >
                         <a href="index.php">Home</a>
                     </li>
+                    <li <?php if ($page_id == 'ideas'): ?>class="active"<?php endif ?> >
+                        <a href="ideas.php">Ideas & Suggestions</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -34,11 +37,29 @@
     <!-- Insert rendered content -->
     <?= $content ?>
 
+    <a href="ideas.php">
+        <div class="ideas">
+            <p>
+                <?php $option = rand(0, 4); if ($option == 0): ?>
+                    Got an idea?
+                <?php elseif ($option == 1): ?>
+                    Submit ideas!
+                <?php elseif ($option == 2): ?>
+                    I have an idea!
+                <?php elseif ($option == 3): ?>
+                    We could do...
+                <?php else: ?>
+                    Ideas go here.
+                <?php endif; ?>
+            </p>
+        </div>
+    </a>
+
     <!-- Footer -->
     <div class="container container-wide" style="font-size: small; align-self: center;">
         <hr>
         <p style="text-align: center;">
-            Created with &hearts; by Yannick Stoffers on behalf of the <a href="//excee.svcover.nl/index.php" style="text-decoration: inherit; color: inherit;">ExCee</a>. &bull; <a href="//sd.svcover.nl/Privacy%20Statement/Privacy%20statement.pdf" style="text-decoration: inherit; color: inherit;">Privacy statement.</a>
+            Created with &hearts; by Barbera de Mol & Yannick Stoffers on behalf of the <a href="//excee.svcover.nl/index.php" style="text-decoration: inherit; color: inherit;">ExCee</a>. &bull; <a href="//sd.svcover.nl/Privacy%20Statement/Privacy%20statement.pdf" style="text-decoration: inherit; color: inherit;">Privacy statement.</a>
         </p>
         <br>
     </div>
