@@ -96,5 +96,6 @@ button.astext {
     transform: translate(-50%, -50%);
     text-align: center;
     font-size: 150%;
+    color: white;
 }
 

@@ -37,8 +37,8 @@
     <!-- Insert rendered content -->
     <?= $content ?>
 
-    <a href="ideas.php">
-        <div class="ideas">
+    <div class="ideas">
+        <a href="ideas.php">
             <p>
                 <?php $option = rand(0, 4); if ($option == 0): ?>
                     Got an idea?
@@ -52,8 +52,8 @@
                     Ideas go here.
                 <?php endif; ?>
             </p>
-        </div>
-    </a>
+        </a>
+    </div>
 
     <!-- Footer -->
     <div class="container container-wide" style="font-size: small; align-self: center;">
