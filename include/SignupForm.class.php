@@ -59,3 +59,4 @@ class SignupForm extends Bootstrap3Form
         return $result;
     }
 }
+
