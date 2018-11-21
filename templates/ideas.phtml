@@ -1,31 +1,43 @@
 <?php $this->extends('layout.phtml') ?>
 
 <?php $this->begin('content') ?>
-<img src="/static/img/under_construction.png" class="banner">
+
+<div class="container container-narrow">
+
+<section>
+<br>
+<p>
+On this page you can send in your own ideas on what you would like to do during the trip. Every suggestion is welcome!
+</p>
+</section>
+
 <form>
 <div class="form-group">
-<label for="exampleFormControlInput1">Name</label>
+<label class="required" for="exampleFormControlInput1">Name</label>
 <input type="text" class="form-control" id="name" placeholder="First and last name">
+<br>
 <div class="form-group">
 <label for="exampleFormControlInput1">Email address</label>
 <input type="email" class="form-control" id="email" placeholder="name@example.com" data-validate="{required:true}">
+<br>
 <div class="form-group">
 <label for="exampleFormControlTextarea1">Idea for the trip! </label>
-<textarea class="form-control" id="idea" rows="4"></textarea>
+<textarea class="form-control" id="idea" placeholder="Type your idea here." rows="4"></textarea>
 </div>
-<button class="btn btn-primary" type="submit">Submit form</button>
-</div>
+<form action="http://excee.svcover.nl/thankyou.php?">
+    <input class="btn btn-primary" type="submit" value="Submit form" />
 </form>
+</div>
 
 <?php
 
 if (isset($_POST['submit'])) {
         // Process the form
-        $message = "Thank you for registering! We will respond to your request shortly";
+        $message = "This idea came in:";
         $name = $_POST['name'];
         $email = $_POST['email'];
         $idea = $_POST['idea'];
-        $date = gmdate("M d Y");        
+        $date = gmdate("M d Y");
         
         $to = "excee2019@svcover.nl";
         $subject = "Incoming ExCee Trip Idea";
