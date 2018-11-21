@@ -1,0 +1,22 @@
+<?php $this->extends('../layout.phtml') ?>
+
+<?php $this->begin('content') ?>
+
+<div class="container container-narrow">
+    <h1>Ideas & Suggestions</h1>
+    <p>
+    On this page you can send in your own ideas on what you would like to do during the trip. Every suggestion is welcome!
+    </p>
+
+    <form method="POST">
+        <?= $form->render_field('name', ['placeholder' => '[OPTIONAL] Santa Claus']) ?>
+        <?= $form->render_field('email', ['placeholder' => '[OPTIONAL] name@example.com']) ?>
+        <?= $form->render_field('idea', ['placeholder' => "Let's go to the beach!"]) ?>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+
+<?php $this->end() ?>
