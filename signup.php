@@ -17,9 +17,6 @@ class SignupView extends FormView
     protected function get_form() {
         $form = new SignupForm('signup');
 
-        // Set default value for type
-        $form->populate_field('type', 'First-year');
-
         // Prefill form with data from the website if user is logged in.
         if (cover_session_logged_in()){
             $member = get_cover_session();
@@ -49,7 +46,7 @@ class SignupView extends FormView
                 'message' => $e->getMessage()
             ];
         }
-        return $this->render_template($this->get_template('form_processed'), $context);
+        return $this->render_template($this->get_template('processed'), $context);
     }
     
     /** Processes the data of a valid form */
@@ -80,7 +77,7 @@ class SignupView extends FormView
     }
 }
 
-$opened = false;
+$opened = true;
 
 // Create and run home view
 $view = new SignupView();
