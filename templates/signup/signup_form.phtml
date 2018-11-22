@@ -42,7 +42,7 @@
                 <?= $form->render_field('iban', ['placeholder' => 'NL37BANK0123456789']) ?>
                 <?= $form->render_field('bic', ['placeholder' => 'BANKNL2G']) ?>
             <h3>Other</h3>
-                <?= $form->render_field('remarks', ['placeholder' => 'Comments (allergies, medication, remarks)', 'rows'=>3]) ?>
+                <?= $form->render_field('remarks', ['placeholder' => 'Comments (allergies, medication, remarks)', 'rows'=>3, 'style'=>'max-width: 100%;']) ?>
             <div class="checkbox <?= empty($form->get_field('accept_terms')->errors) ? '' : 'has-error' ?>">
                 <label>
                     <?= $form->get_field('accept_terms')->render() ?>
