@@ -9,3 +9,5 @@ define('ADMIN_EMAIL', 'ExCee Cover <excee@svcover.nl>');
 define('SERVER_NAME', 'https://excee.svcover.nl');
 define('COVER_APP', 'excee');
 define('COVER_SECRET', 'UNKNOWN');
+
+define('DEBUG', true);

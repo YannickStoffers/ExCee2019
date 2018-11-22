@@ -33,6 +33,22 @@
                     <li <?php if ($page_id == 'ideas'): ?>class="active"<?php endif ?> >
                         <a href="ideas.php">Ideas & Suggestions</a>
                     </li>
+                    <?php if(cover_session_logged_in() || DEBUG): ?>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <?php if (cover_session_in_committee(ADMIN_COMMITTEE) || DEBUG): ?>
+                                    <li class="dropdown-header">Registrations admin</li>
+                                    <li><a href="signup_admin.php">ExCee 2019</a></li>
+                                    <li role="separator" class="divider"></li>
+                                <?php endif; ?>
+                                <li class="dropdown-header">Logged in as <?= $this->html(get_cover_session()->voornaam) ?></li>
+                                <li><a href="<?= cover_logout_url() ?>">Logout</a></li>
+                            </ul>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>

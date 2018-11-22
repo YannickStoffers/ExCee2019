@@ -1,0 +1,236 @@
+<?php $this->extends('../layout.phtml') ?>
+
+<?php $this->begin('content') ?>
+<div class="container-fluid">
+    <header class="page-header">
+        <h1>Registrations</h1>
+    </header>
+
+    <h2>Statistics</h2>
+    <div class="row">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <b>Available slots</b>
+                <span class="badge badge-primary badge-pill">
+                    <?= 50 - count( $objects ) ?>
+                </span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Registrations
+                <span class="badge badge-primary badge-pill">
+                    <?= count( array_filter($objects, function ($p) { return $p['status'] === 'registered'; }) ) ?>
+                </span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Cancelled
+                <span class="badge badge-primary badge-pill">
+                    <?= count( array_filter($objects, function ($p) { return $p['status'] === 'cancelled'; }) ) ?>
+                </span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Waiting list
+                <span class="badge badge-primary badge-pill">
+                    <?= count( array_filter($objects, function ($p) { return $p['status'] === 'waiting_list'; }) ) ?>
+                </span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <b>Total</b>
+                <span class="badge badge-primary badge-pill">
+                    <?= count( $objects ) ?>
+                </span>
+            </li>
+        </ul>
+    </div>
+
+    <h2>Registrations</h2>
+    <!-- <button onclick="download()" style="border-width: 0; background: white;">
+        <img src="static/icons/download.png" style="height: auto; width: auto; max-height: 25px; max-width: 25px;">
+        Export for financial administration.
+    </button>
+    <button onclick="exportForBar()" style="border-width: 0; background: white;">
+        <img src="static/icons/download.png" style="height: auto; width: auto; max-height: 25px; max-width: 25px;">
+        Export for B.A.R.
+    </button> -->
+    <div class="table-responsive"> 
+        <table class="table table-hover table-registrations" id="registrations">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)" style="cursor: pointer;">Name</th>
+                    <th onclick="sortTable(1)" style="cursor: pointer;">Surname</th>
+                    <th onclick="sortTable(2)" style="cursor: pointer;">Birthday</th>
+                    <th onclick="sortTable(3)" style="cursor: pointer;">Address</th>
+                    <th onclick="sortTable(4)" style="cursor: pointer;">Postal</th>
+                    <th onclick="sortTable(5)" style="cursor: pointer;">City</th>
+                    <th onclick="sortTable(6)" style="cursor: pointer;">Email</th>
+                    <th onclick="sortTable(7)" style="cursor: pointer;">Phone</th>
+                    <th onclick="sortTable(8)" style="cursor: pointer;">Emergency</th>
+                    <th onclick="sortTable(9)" style="cursor: pointer;">IBAN</th>
+                    <th onclick="sortTable(10)" style="cursor: pointer;">BIC</th>
+                    <th onclick="sortTable(11)" style="cursor: pointer;">Remarks</th>
+                    <th onclick="sortTable(12)" style="cursor: pointer;">Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($objects as $participant): ?>
+                    <tr>
+                        <td><?= $this->html($participant['first_name']) ?></td>
+                        <td><?= $this->html($participant['surname']) ?></td>
+                        <td>
+                            <?php if (date_diff(date_create($participant['birthday']), date_create('now'))->y < 18): ?>
+                                <span class="label label-warning">
+                            <?php endif ?>
+                            <?= $this->html($participant['birthday']) ?>
+                            <?php if (date_diff(date_create($participant['birthday']), date_create('now'))->y < 18): ?>
+                                </span>
+                            <?php endif ?>
+                        </td>
+                        <td><?= $this->html($participant['address']) ?></td>
+                        <td><?= $this->html($participant['postal_code']) ?></td>
+                        <td><?= $this->html($participant['city']) ?></td>
+                        <td><?= $this->html($participant['email']) ?></td>
+                        <td><?= $this->html($participant['phone']) ?></td>
+                        <td><?= $this->html($participant['emergency_phone']) ?></td>
+                        <td><?= $this->html($participant['iban']) ?></td>
+                        <td><?= $this->html($participant['bic']) ?></td>
+                        <td class="truncate"><?= $this->html($participant['remarks']) ?></td>
+                        <td>
+                            <?php if ($participant['status'] === 'registered'): ?>
+                                <span class="label label-success">Registered</span>
+                            <?php elseif ($participant['status'] === 'cancelled'): ?>
+                                <span class="label label-danger">Cancelled</span>
+                            <?php elseif ($participant['status'] === 'waiting_list'): ?>
+                                <span class="label label-warning">Waiting list</span>
+                            <?php endif ?>
+                        </td>
+                        <td class="text-right">
+                            <ul class="list-inline">
+                                <li>
+                                    <a href="/signup_admin.php?view=update&id=<?= $participant['id'] ?>">edit</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                <?php endforeach ?>
+                <?php if (!$objects): ?>
+                    <tr><td colspan="" class="text-muted text-center">Nobody has registered yet :(</td></tr>
+                <?php endif ?>
+            </tbody>
+        </table>
+        <script>
+            function sortTable(n) {
+                var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+                table = document.getElementById("registrations");
+                switching = true;
+                // Set the sorting direction to ascending:
+                dir = "asc"; 
+                /* Make a loop that will continue until
+                no switching has been done: */
+                while (switching) {
+                    // Start by saying: no switching is done:
+                    switching = false;
+                    rows = table.getElementsByTagName("TR");
+                    /* Loop through all table rows (except the
+                    first, which contains table headers): */
+                    for (i = 1; i < (rows.length - 1); i++) {
+                        // Start by saying there should be no switching:
+                        shouldSwitch = false;
+                        /* Get the two elements you want to compare,
+                        one from current row and one from the next: */
+                        x = rows[i].getElementsByTagName("TD")[n];
+                        y = rows[i + 1].getElementsByTagName("TD")[n];
+                        /* Check if the two rows should switch place,
+                        based on the direction, asc or desc: */
+                        if (dir == "asc") {
+                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                // If so, mark as a switch and break the loop:
+                                shouldSwitch = true;
+                                break;
+                            }
+                        } else if (dir == "desc") {
+                            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                                // If so, mark as a switch and break the loop:
+                                shouldSwitch = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (shouldSwitch) {
+                        /* If a switch has been marked, make the switch
+                        and mark that a switch has been done: */
+                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                        switching = true;
+                        // Each time a switch is done, increase this count by 1:
+                        switchcount ++; 
+                    } else {
+                        /* If no switching has been done AND the direction is "asc",
+                        set the direction to "desc" and run the while loop again. */
+                        if (switchcount == 0 && dir == "asc") {
+                            dir = "desc";
+                            switching = true;
+                        }
+                    }
+                }
+            }
+
+            function download() {
+                var table, rows, row, i, csv;
+
+                table = document.getElementById("registrations");
+                rows = table.getElementsByTagName("TR");
+
+                csv = "type;name;surname;student_number;birthday;address;postal;city;email;phone;emergency_phone;iban;bic;study;study_year;remarks;vegetarian;status\n";
+                for (i = 1; i < rows.length; i++) {
+                    row = rows[i].getElementsByTagName("TD");
+                    csv += row[0].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "").replace(/\n/g, " -- ");
+                    for (j = 1; j < row.length - 1; j++) {
+                        csv += ";" + row[j].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "").replace(/\n/g, " -- ");
+                    }
+                    csv += "\n";
+                }
+
+                if (!csv.match(/^data:text\/csv/i)) {
+                    csv = 'data:text/csv;charset=utf-8,' + csv;
+                }
+                data = encodeURI(csv);
+
+                link = document.createElement('a');
+                link.setAttribute('href', data);
+                link.setAttribute('download', 'export.csv');
+                link.click();
+            }
+
+            function exportForBar() {
+                var table, rows, row, i, csv, date;
+
+                table = document.getElementById("registrations");
+                rows = table.getElementsByTagName("TR");
+
+                csv = "name;birthday;address;city;email;iban;bic\n";
+                for (i = 1; i < rows.length; i++) {
+                    row = rows[i].getElementsByTagName("TD");
+                    csv += row[1].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "") + " " + row[2].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "");
+                    date = row[4].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "").split ("-");
+                    csv += ";" + date[2] + "-" + date[1] + "-" + date[0];
+                    csv += ";" + row[5].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "");
+                    csv += ";" + row[7].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "");
+                    csv += ";" + row[8].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "");
+                    csv += ";" + row[11].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "");
+                    csv += ";" + row[12].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "");
+                    csv += "\n";
+                }
+
+                if (!csv.match(/^data:text\/csv/i)) {
+                    csv = 'data:text/csv;charset=utf-8,' + csv;
+                }
+                data = encodeURI(csv);
+
+                link = document.createElement('a');
+                link.setAttribute('href', data);
+                link.setAttribute('download', 'export.csv');
+                link.click();
+            }
+        </script>
+    </div>
+</div>
+<?php $this->end() ?>
