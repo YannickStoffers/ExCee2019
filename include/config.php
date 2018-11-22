@@ -11,4 +11,4 @@ define('COVER_APP', 'excee');
 define('COVER_SECRET', 'UNKNOWN');
 
 define('DEBUG', true);
-define('SIGNUPS_OPENED', true);
+define('SIGNUPS_OPENED', false);
