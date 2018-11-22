@@ -7,7 +7,6 @@ class SignupView extends FormView
 {
     protected $model;
     protected $template_base_name = 'templates/signup/signup';
-    protected $singups_opened = true;
 
     public function __construct(){
         parent::__construct('signup', 'Sign up');

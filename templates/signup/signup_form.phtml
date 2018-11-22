@@ -3,7 +3,7 @@
 <?php $this->begin('content') ?>
 <div class="container container-narrow">
     <!-- Show sign up form if user is logged in and sign ups are open. -->
-    <?php if (cover_session_logged_in() && $this->$signups_opened): ?>
+    <?php if ((cover_session_logged_in() && SIGNUPS_OPENED) || DEBUG): ?>
         <h1>Sign up</h1>
 
         <!-- Say hello to the user. -->
@@ -61,7 +61,7 @@
         </form>
 
     <!-- Show alternative page if signups have not opened. -->
-    <?php elseif (!$this->$signups_opened): ?>
+    <?php elseif (!SIGNUPS_OPENED): ?>
         <h1>Sign ups closed</h1>
         <p>
             Hi there, unfortunately it is not possible to sign up at this moment.
