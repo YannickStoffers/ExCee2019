@@ -22,10 +22,14 @@
     <?php else: ?>
         <h1>Woopsie :(</h1>
         <p>
-            <?= $this->html($message) ?>
+            Information for nerds:
+            <br>
+            <div class="jumbotron" style="font-family: monospace;">
+                    <?= $this->html($message) ?>
+            </div>
         </p>
         <p>
-            Please contact the <a href="mailto:excee@svcover.nl">ExCee</a>, because the website should not behave this way.
+            Please contact the <a href="mailto:excee@svcover.nl">ExCee</a> if you strongly believe the website should not behave this way.
         </p>
     <?php endif; ?>
 </div>
