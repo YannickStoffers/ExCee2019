@@ -7,6 +7,7 @@ class SignupView extends FormView
 {
     protected $model;
     protected $template_base_name = 'templates/signup/signup';
+    protected $singups_opened = true;
 
     public function __construct(){
         parent::__construct('signup', 'Sign up');
@@ -77,12 +78,6 @@ class SignupView extends FormView
     }
 }
 
-$opened = true;
-
 // Create and run home view
-$view = new SignupView();
-if (!$opened) {
-    $view = new TemplateView ('signup/signup_closed');
-}
-
+$view = new SignupView();    
 $view->run();
