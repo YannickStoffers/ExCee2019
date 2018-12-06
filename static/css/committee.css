@@ -80,3 +80,8 @@ body {
 h1, h2 {
 	text-align: center;
 }
+
+.ideas {
+	background: white; 
+	color: #C8102E; 
+}
