@@ -14,8 +14,8 @@
 
         <!-- Notify user if the maximum capacity of participants has been exceeded. -->
         <?php if (count( array_filter(get_model('Registration')->get(), function ($p) {
-            return $p['status'] === 'registered' && $p['type'] === 'First-year';
-        })) >= 50): ?>
+            return $p['status'] === 'registered';
+        })) >= MAX_SIGNUPS): ?>
             <p>
             <div class="alert alert-warning alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>

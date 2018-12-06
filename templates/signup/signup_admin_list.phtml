@@ -12,7 +12,7 @@
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <b>Available slots</b>
                 <span class="badge badge-primary badge-pill">
-                    <?= 50 - 
+                    <?= MAX_SIGNUPS - 
                     count( array_filter($objects, function ($p) { return $p['status'] === 'registered'; })) - 
                     count( array_filter($objects, function ($p) { return $p['status'] === 'waiting_list'; })) ?>
                 </span>
@@ -115,7 +115,7 @@
                     </tr>
                 <?php endforeach ?>
                 <?php if (!$objects): ?>
-                    <tr><td colspan="" class="text-muted text-center">Nobody has registered yet :(</td></tr>
+                    <tr><td colspan="13" class="text-muted text-center">Nobody has registered yet :(</td></tr>
                 <?php endif ?>
             </tbody>
         </table>

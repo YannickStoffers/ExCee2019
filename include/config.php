@@ -12,3 +12,4 @@ define('COVER_SECRET', 'UNKNOWN');
 
 define('DEBUG', true);
 define('SIGNUPS_OPENED', false);
+define('MAX_SIGNUPS', 30);

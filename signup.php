@@ -58,7 +58,7 @@ class SignupView extends FormView
         // Check if registrations are full, if so place on waiting list.
         $data['status'] = count( array_filter($this->model->get (), function ($p) {
             return $p['status'] === 'registered';
-        })) >= 50 ? 'waiting_list' : 'registered';
+        })) >= MAX_SIGNUPS ? 'waiting_list' : 'registered';
         
         $this->model->create($data);
 
