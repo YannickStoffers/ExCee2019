@@ -6,19 +6,19 @@
 
 <?php $this->begin('content') ?>
 
-<div class="container"?>
-	<img src="/static/img/madrid.jpg" class="banner">
-</div>
-
-
 <div class="container container-wide">
-	<h1>
-		Committee members
-	</h1>
+	<header>
+        <h1>Meet the crew!</h1>
+        <div>
+            <img alt= "" src="/static/img/committee.jpg" class="committee-photo" id="imgClickAndChange" onclick="changeImage()">
+            <button type="button" class="astext" onclick="highQuality()" id="highQualityButton" style="visibility: hidden;">I want high quality!</button>
+            <button type="button" class="astext" onclick="lowQuality()" id="lowQualityButton" style="visibility: hidden;">I want a fast website!</button>
+        </div>
+    </header>
 
-<div class="committee-member">
+    <div class="committee-member">
         <div class="committee-member-photo">
-            <a href="ehbo.nl">
+            <a href="//ehbo.nl" target="_blank">
                 <img src="/static/img/susanne.jpeg">
             </a>
         </div>
@@ -26,23 +26,29 @@
             <h1>Susanne de Boer</h1>
             <h2>Chairman</h2>
             <p>
-            	Stukje
+            	TODO: Stukje schrijven
             </p>
         </div>
     </div>
 
-	<section>
-		<h1>
-			Marieke Kopmels - Vice Chair
-		</h1>
-		<p>
-			TODO Stukjes schrijven
-		</p>
-	</section>
-
-<div class="committee-member">
+    <div class="committee-member">
         <div class="committee-member-photo">
-            <a href="www.svcover.nl">
+            <a href="www.svcover.nl" target="_blank">
+                <img src="/static/img/marieke.jpg">
+            </a>
+        </div>
+        <div class="committee-text">
+            <h1>Marieke Kopmels</h1>
+            <h2>Vice-Chairman</h2>
+            <p>
+            	TODO: Stukje schrijven
+            </p>
+        </div>
+    </div>
+
+	<div class="committee-member">
+        <div class="committee-member-photo">
+            <a href="www.svcover.nl" target="_blank">
                 <img src="/static/img/janco.jpg">
             </a>
         </div>
@@ -50,27 +56,39 @@
             <h1>Janco van der Molen</h1>
             <h2>Secretary</h2>
             <p>
-            	Stukje
+            	TODO: Stukje schrijven
             </p>
         </div>
     </div>
 
-		<section>
-		<h1>
-			Barbera de Mol - Treasurer
-		</h1>
-		<p>
-			TODO Stukjes schrijven
-		</p>
-	</section>
+    <div class="committee-member">
+        <div class="committee-member-photo">
+            <a href="www.svcover.nl" target="_blank">
+                <img src="/static/img/barbera.jpg">
+            </a>
+        </div>
+        <div class="committee-text">
+            <h1>Barbera de Mol</h1>
+            <h2>Treasurer</h2>
+            <p>
+            	TODO: Stukje schrijven
+            </p>
+        </div>
+    </div>
 
-	<section>
-		<h1>
-			Yannick Stoffers - Senior Advisor
-		</h1>
-		<p>
-			TODO Stukjes schrijven
-		</p>
-	</section>
+    <div class="committee-member">
+        <div class="committee-member-photo">
+            <a href="www.svcover.nl" target="_blank">
+                <img src="/static/img/yannick.jpeg">
+            </a>
+        </div>
+        <div class="committee-text">
+            <h1>Yannick Stoffers</h1>
+            <h2>Senior Advisor</h2>
+            <p>
+            	TODO: Stukje schrijven
+            </p>
+        </div>
+    </div>
 </div>
 <?php $this->end() ?>
