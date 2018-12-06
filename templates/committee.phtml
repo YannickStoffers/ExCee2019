@@ -1,15 +1,35 @@
 <?php $this->extends('layout.phtml') ?>
 
+<?php $this->begin('styles') ?>
+<link rel="stylesheet" href="/static/css/committee.css" type="text/css">
+<?php $this->end() ?>
+
 <?php $this->begin('content') ?>
-<div class="container container-narrow"?>
-	<section>
-		<h1>
-			Susanne de Boer - Chair
-		</h1>
-		<p>
-			TODO Stukjes schrijven
-		</p>
-	</section>
+
+<div class="container"?>
+	<img src="/static/img/madrid.jpg" class="banner">
+</div>
+
+
+<div class="container container-wide">
+	<h1>
+		Committee members
+	</h1>
+
+<div class="committee-member">
+        <div class="committee-member-photo">
+            <a href="ehbo.nl">
+                <img src="/static/img/susanne.jpeg">
+            </a>
+        </div>
+        <div class="committee-text">
+            <h1>Susanne de Boer</h1>
+            <h2>Chairman</h2>
+            <p>
+            	Stukje
+            </p>
+        </div>
+    </div>
 
 	<section>
 		<h1>
@@ -20,14 +40,20 @@
 		</p>
 	</section>
 
-	<section>
-		<h1>
-			Janco van der Molen - Secretary
-		</h1>
-		<p>
-			TODO Stukjes schrijven
-		</p>
-	</section>
+<div class="committee-member">
+        <div class="committee-member-photo">
+            <a href="www.svcover.nl">
+                <img src="/static/img/janco.jpg">
+            </a>
+        </div>
+        <div class="committee-text">
+            <h1>Janco van der Molen</h1>
+            <h2>Secretary</h2>
+            <p>
+            	Stukje
+            </p>
+        </div>
+    </div>
 
 		<section>
 		<h1>
