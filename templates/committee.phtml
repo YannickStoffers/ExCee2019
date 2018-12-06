@@ -1,0 +1,107 @@
+<?php $this->extends('layout.phtml') ?>
+
+<?php $this->begin('styles') ?>
+<link rel="stylesheet" href="/static/css/committee.css" type="text/css">
+<?php $this->end() ?>
+
+<?php $this->begin('content') ?>
+
+<div class="container container-wide">
+	<header>
+        <h1>Meet the crew!</h1>
+        <div>
+            <img alt= "" src="/static/img/committee.jpg" class="committee-photo">
+        </div>
+    </header>
+
+    <div class="committee-member">
+        <div class="committee-member-photo">
+            <a href="//ehbo.nl" target="_blank">
+                <img src="/static/img/susanne.jpeg">
+            </a>
+        </div>
+        <div class="committee-text">
+            <h1>Susanne de Boer</h1>
+            <h2>Chairman</h2>
+            <p>
+            	TODO: Stukje schrijven
+            </p>
+        </div>
+    </div>
+
+    <div class="committee-member">
+        <div class="committee-member-photo">
+            <a href="//svcover.nl" target="_blank">
+                <img src="/static/img/marieke.jpg">
+            </a>
+        </div>
+        <div class="committee-text">
+            <h1>Marieke Kopmels</h1>
+            <h2>Vice-Chairman</h2>
+            <p>
+            	TODO: Stukje schrijven
+            </p>
+        </div>
+    </div>
+
+	<div class="committee-member">
+        <div class="committee-member-photo">
+            <a href="//svcover.nl" target="_blank">
+                <img src="/static/img/janco.jpg">
+            </a>
+        </div>
+        <div class="committee-text">
+            <h1>Janco van der Molen</h1>
+            <h2>Secretary</h2>
+            <p>
+            	TODO: Stukje schrijven
+            </p>
+        </div>
+    </div>
+
+    <div class="committee-member">
+        <div class="committee-member-photo">
+            <a href="//svcover.nl" target="_blank">
+                <img src="/static/img/barbera.jpg">
+            </a>
+        </div>
+        <div class="committee-text">
+            <h1>Barbera de Mol</h1>
+            <h2>Treasurer</h2>
+            <p>
+            	TODO: Stukje schrijven
+            </p>
+        </div>
+    </div>
+
+    <div class="committee-member">
+        <div class="committee-member-photo">
+            <a href="//svcover.nl" target="_blank">
+                <img src="/static/img/yannick.jpeg">
+            </a>
+        </div>
+        <div class="committee-text">
+            <h1>Yannick Stoffers</h1>
+            <h2>Senior Advisor</h2>
+            <p>
+            	TODO: Stukje schrijven
+            </p>
+        </div>
+    </div>
+
+    <div class="committee-member">
+        <div class="committee-member-photo">
+            <a href="//instagram.com/dibbesdekat" target="_blank">
+                <img src=<?= "/static/img/dibbes/" . rand(1, 10) . ".jpg"?>>
+            </a>
+        </div>
+        <div class="committee-text">
+            <h1>Dibbes</h1>
+            <h2>Committee mascot</h2>
+            <p>
+            	Dibbes is a cat.
+            </p>
+        </div>
+    </div>
+</div>
+<?php $this->end() ?>
