@@ -8,40 +8,54 @@
 
     <h2>Statistics</h2>
     <div class="row">
-        <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <b>Available slots</b>
-                <span class="badge badge-primary badge-pill">
-                    <?= MAX_SIGNUPS - 
-                    count( array_filter($objects, function ($p) { return $p['status'] === 'registered'; })) - 
-                    count( array_filter($objects, function ($p) { return $p['status'] === 'waiting_list'; })) ?>
-                </span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Registrations
-                <span class="badge badge-primary badge-pill">
-                    <?= count( array_filter($objects, function ($p) { return $p['status'] === 'registered'; }) ) ?>
-                </span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Cancelled
-                <span class="badge badge-primary badge-pill">
-                    <?= count( array_filter($objects, function ($p) { return $p['status'] === 'cancelled'; }) ) ?>
-                </span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Waiting list
-                <span class="badge badge-primary badge-pill">
-                    <?= count( array_filter($objects, function ($p) { return $p['status'] === 'waiting_list'; }) ) ?>
-                </span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <b>Total</b>
-                <span class="badge badge-primary badge-pill">
-                    <?= count( $objects ) ?>
-                </span>
-            </li>
-        </ul>
+        <div class="col-xs-12 col-md-8 col-lg-4">
+            <table class="table table-hover ">        
+                <thead>
+                    <tr>
+                        <th>Student transit product type</th>
+                        <th>Registered</th>
+                        <th>Cancelled</th>
+                        <th>Waiting list</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach (get_model('Registration')::$ov_options as $type): ?>
+                        <tr>
+                            <td><?= $type ?></td>
+                            <td>
+                                <?= count( array_filter($objects, function ($p) use ($type) {
+                                    return $p['student_ov'] === $type && $p['status'] === 'registered';
+                                }) ) ?>
+                            </td>
+                            <td>
+                                <?= count( array_filter($objects, function ($p) use ($type) {
+                                    return $p['student_ov'] === $type && $p['status'] === 'cancelled';
+                                }) ) ?>
+                            </td>
+                            <td>
+                                <?= count( array_filter($objects, function ($p) use ($type) {
+                                    return $p['student_ov'] === $type && $p['status'] === 'waiting_list';
+                                }) ) ?>
+                            </td>
+                        </tr>
+                    <?php endforeach ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Total</th>
+                        <th>
+                            <?= count( array_filter($objects, function ($p) { return $p['status'] === 'registered'; }) ) ?>
+                        </th>
+                        <th>
+                            <?= count( array_filter($objects, function ($p) { return $p['status'] === 'cancelled'; }) ) ?>
+                        </th>
+                        <th>
+                            <?= count( array_filter($objects, function ($p) { return $p['status'] === 'waiting_list'; }) ) ?>
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
 
     <h2>Registrations</h2>
@@ -68,8 +82,9 @@
                     <th onclick="sortTable(8)" style="cursor: pointer;">Emergency</th>
                     <th onclick="sortTable(9)" style="cursor: pointer;">IBAN</th>
                     <th onclick="sortTable(10)" style="cursor: pointer;">BIC</th>
-                    <th onclick="sortTable(11)" style="cursor: pointer;">Remarks</th>
-                    <th onclick="sortTable(12)" style="cursor: pointer;">Status</th>
+                    <th onclick="sortTable(11)" style="cursor: pointer;">Student transit product</th>
+                    <th onclick="sortTable(12)" style="cursor: pointer;">Remarks</th>
+                    <th onclick="sortTable(13)" style="cursor: pointer;">Status</th>
                     <th></th>
                 </tr>
             </thead>
@@ -95,6 +110,7 @@
                         <td><?= $this->html($participant['emergency_phone']) ?></td>
                         <td><?= $this->html($participant['iban']) ?></td>
                         <td><?= $this->html($participant['bic']) ?></td>
+                        <td><?= $this->html($participant['student_ov']) ?></td>
                         <td class="truncate"><?= $this->html($participant['remarks']) ?></td>
                         <td>
                             <?php if ($participant['status'] === 'registered'): ?>
@@ -115,7 +131,7 @@
                     </tr>
                 <?php endforeach ?>
                 <?php if (!$objects): ?>
-                    <tr><td colspan="13" class="text-muted text-center">Nobody has registered yet :(</td></tr>
+                    <tr><td colspan="14" class="text-muted text-center">Nobody has registered yet :(</td></tr>
                 <?php endif ?>
             </tbody>
         </table>
