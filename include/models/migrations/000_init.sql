@@ -16,6 +16,7 @@ CREATE TABLE `registrations` (
   `emergency_phone` varchar(100),
   `iban` varchar(34), -- official max length of an iban
   `bic` varchar(11), -- official max length of a bic
+  `student_ov` enum('Weekend','Week','Neither') NOT NULL,
   `remarks` varchar(1024),
   `accept_terms` tinyint(1) NOT NULL DEFAULT '0',
   `accept_costs` tinyint(1) NOT NULL DEFAULT '0',

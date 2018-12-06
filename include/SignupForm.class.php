@@ -7,6 +7,8 @@ class SignupForm extends Bootstrap3Form
 {
     public function __construct($name, $strict=true){
         $model = get_model('Registration');
+        $ov_options = [['Select your student transit product.', ['selected', 'disabled']]];
+        $ov_options = array_merge($ov_options, $model::$ov_options);
 
         $fields = [
             'first_name'      => new StringField   ('First name',                             !$strict, ['maxlength' => 255]),
@@ -20,9 +22,10 @@ class SignupForm extends Bootstrap3Form
             'emergency_phone' => new StringField   ('Emergency contact',                      !$strict, ['maxlength' => 100]),
             'iban'            => new StringField   ('IBAN',                                   !$strict, ['maxlength' => 34]),
             'bic'             => new StringField   ('BIC (only for non-Dutch bank accounts)', true,     ['maxlength' => 11]),
+            'student_ov'      => new SelectField   ('I travel by train for free during the...', $ov_options),
             'remarks'         => new TextAreaField ('Comments',                               true,     ['maxlength' => 1024]),
             'accept_terms'    => new CheckBoxField ('I have read and accepted the terms and conditions', !$strict),
-            'accept_costs'    => new CheckBoxField ('I accept the costs', !$strict),
+            'accept_costs'    => new CheckBoxField ('I accept the costs',                     !$strict),
         ];
 
         return parent::__construct($name, $fields);
