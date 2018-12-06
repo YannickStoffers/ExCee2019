@@ -95,7 +95,7 @@ button.astext {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    font-size: 140%;
+    font-size: 120%;
 }
 
 @media only screen and (max-width: 786px) {
