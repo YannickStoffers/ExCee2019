@@ -42,7 +42,12 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>Total</th>
+                        <th>
+                            Total (<?= MAX_SIGNUPS - 
+                                count( array_filter($objects, function ($p) { return $p['status'] === 'registered'; })) - 
+                                count( array_filter($objects, function ($p) { return $p['status'] === 'waiting_list'; })) ?> 
+                            spots remaining)
+                        </th>
                         <th>
                             <?= count( array_filter($objects, function ($p) { return $p['status'] === 'registered'; }) ) ?>
                         </th>
@@ -110,7 +115,14 @@
                         <td><?= $this->html($participant['emergency_phone']) ?></td>
                         <td><?= $this->html($participant['iban']) ?></td>
                         <td><?= $this->html($participant['bic']) ?></td>
-                        <td><?= $this->html($participant['student_ov']) ?></td>
+                        <td>
+                            <?php if ($participant['student_ov'] === 'Weekend'): ?>
+                                <span class="label label-success">Weekend free</span>
+                            <?php elseif ($participant['student_ov'] === 'Week'): ?>
+                                <span class="label label-warning">Weekdays free</span>
+                            <?php elseif ($participant['student_ov'] === 'Neither'): ?>
+                                <span class="label label-danger">No free :(</span>
+                            <?php endif ?></td>
                         <td class="truncate"><?= $this->html($participant['remarks']) ?></td>
                         <td>
                             <?php if ($participant['status'] === 'registered'): ?>
