@@ -1,0 +1,39 @@
+<?php $this->extends('../layout.phtml') ?>
+
+<?php $this->begin('content') ?>
+<div class="container container-narrow">
+    <?php if ($status === 'success'): ?>
+        <h1>
+            <?php $option = rand(0, 4); if ($option == 0): ?>
+                Sweet!
+            <?php elseif ($option == 1): ?>
+                Awesome!
+            <?php elseif ($option == 2): ?>
+                You did it!
+            <?php elseif ($option == 3): ?>
+                Registered!
+            <?php else: ?>
+                Nice!
+            <?php endif; ?>
+        </h1>
+        <p>
+            You successfully registered for the ExCee 2019. We'll keep in touch considering the details. Also, we're very much looking forward to the trip, and we hope you're every bit excited as we are!
+        </p>
+        <p>
+            Also, look in your inbox for a confirmation email of your registration! Feel free to contact the <a href="mailto:excee@svcover.nl">ExCee</a> to correct any and all information if necessary.
+        </p>
+    <?php else: ?>
+        <h1>Woopsie :(</h1>
+        <p>
+            Information for nerds:
+            <br>
+            <div class="jumbotron" style="font-family: monospace;">
+                    <?= $this->html($message) ?>
+            </div>
+        </p>
+        <p>
+            Please contact the <a href="mailto:excee@svcover.nl">ExCee</a> if you strongly believe the website should not behave this way.
+        </p>
+    <?php endif; ?>
+</div>
+<?php $this->end() ?>

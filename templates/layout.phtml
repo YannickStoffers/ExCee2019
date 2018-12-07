@@ -30,9 +30,28 @@
                     <li <?php if ($page_id == 'committee'): ?>class="active"<?php endif ?> >
                         <a href="committee.php">Committee</a>
                     </li>
+                    <li <?php if ($page_id == 'signup'): ?>class="active"<?php endif ?> >
+                        <a href="signup.php">Sign up</a>
+                    </li>
                     <li <?php if ($page_id == 'ideas'): ?>class="active"<?php endif ?> >
                         <a href="ideas.php">Ideas & Suggestions</a>
                     </li>
+                    <?php if(cover_session_logged_in() || DEBUG): ?>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <?php if (cover_session_in_committee(ADMIN_COMMITTEE) || DEBUG): ?>
+                                    <li class="dropdown-header">Registrations admin</li>
+                                    <li><a href="signup_admin.php">ExCee 2019</a></li>
+                                    <li role="separator" class="divider"></li>
+                                <?php endif; ?>
+                                <li class="dropdown-header">Logged in as <?= $this->html(get_cover_session()->voornaam) ?></li>
+                                <li><a href="<?= cover_logout_url() ?>">Logout</a></li>
+                            </ul>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
@@ -48,7 +67,7 @@
                 <?php elseif ($option == 1): ?>
                     Submit ideas!
                 <?php elseif ($option == 2): ?>
-                    I have an idea!
+                    Share an idea!
                 <?php elseif ($option == 3): ?>
                     We could do...
                 <?php else: ?>
@@ -62,7 +81,7 @@
     <div class="container container-wide" style="font-size: small; align-self: center;">
         <hr>
         <p style="text-align: center;">
-            Created with &hearts; by Barbera de Mol & Yannick Stoffers on behalf of the <a href="//excee.svcover.nl/index.php" style="text-decoration: inherit; color: inherit;">ExCee</a>. &bull; <a href="//sd.svcover.nl/Privacy%20Statement/Privacy%20statement.pdf" style="text-decoration: inherit; color: inherit;">Privacy statement.</a>
+            Created with &hearts; by the <a href="/committee/php" style="text-decoration: inherit; color: inherit;">ExCee</a>. &bull; <a href="//sd.svcover.nl/Privacy%20Statement/Privacy%20statement.pdf" style="text-decoration: inherit; color: inherit;">Privacy statement.</a>
         </p>
         <br>
     </div>

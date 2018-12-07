@@ -1,0 +1,79 @@
+<?php $this->extends('../layout.phtml') ?>
+
+<?php $this->begin('content') ?>
+<div class="container container-narrow">
+    <!-- Show sign up form if user is logged in and sign ups are open. -->
+    <?php if ((cover_session_logged_in() && SIGNUPS_OPENED) || DEBUG): ?>
+        <h1>Sign up</h1>
+
+        <!-- Say hello to the user. -->
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            Hi <?= get_cover_session()->voornaam ?>! We prefilled the form with some your information from the Cover website.
+        </div>
+
+        <!-- Notify user if the maximum capacity of participants has been exceeded. -->
+        <?php if (count( array_filter(get_model('Registration')->get(), function ($p) {
+            return $p['status'] === 'registered';
+        })) >= MAX_SIGNUPS): ?>
+            <p>
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                At this moment the ExCee trip is full! If you sign up now, and we recommend to do so, we will place you on the waiting list automatically!
+                <p>
+                <b>We will not charge you with costs in case you are on the waiting list.</b>
+            </div>
+        <?php endif ?>
+
+        <form method="POST">
+            <input type="hidden" name="type" value="First-year">
+            <h3>Personal</h3>
+                <?= $form->render_field('first_name', ['placeholder' => 'Jan']) ?>
+                <?= $form->render_field('surname', ['placeholder' => 'de Joker']) ?>
+                <?= $form->render_field('birthday', ['placeholder' => '20-09-1993']) ?>
+            <h3>Contact</h3>
+                <?= $form->render_field('address', ['placeholder' => 'Nijenborgh 9']) ?>
+                <?= $form->render_field('postal_code', ['placeholder' => '9747 AG']) ?>
+                <?= $form->render_field('city', ['placeholder' => 'Groningen']) ?>
+                <?= $form->render_field('email', ['placeholder' => 'excee@svcover.nl']) ?>
+                <?= $form->render_field('phone', ['placeholder' => '+316 1234 5678']) ?>
+                <?= $form->render_field('emergency_phone', ['placeholder' => '+3150 363 6898']) ?>
+            <h3>Financial</h3>
+                <?= $form->render_field('iban', ['placeholder' => 'NL37BANK0123456789']) ?>
+                <?= $form->render_field('bic', ['placeholder' => 'BANKNL2G']) ?>
+            <h3>Other</h3>
+                <?= $form->render_field('student_ov') ?>
+                <?= $form->render_field('remarks', ['placeholder' => 'Comments (allergies, medication, remarks)', 'rows'=>3, 'style'=>'max-width: 100%;']) ?>
+            <div class="checkbox <?= empty($form->get_field('accept_terms')->errors) ? '' : 'has-error' ?>">
+                <label>
+                    <?= $form->get_field('accept_terms')->render() ?>
+                    I have read and accepted the <a href='/index.php'>terms and conditions</a>
+                </label>
+            </div>
+            <div class="checkbox <?= empty($form->get_field('accept_costs')->errors) ? '' : 'has-error' ?>">
+                <label>
+                    <?= $form->get_field('accept_costs')->render() ?>
+                    I have accepted the costs of &euro; 1000,-
+                </label>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+
+    <!-- Show alternative page if signups have not opened. -->
+    <?php elseif (!SIGNUPS_OPENED): ?>
+        <h1>Sign ups closed</h1>
+        <p>
+            Hi there, unfortunately it is not possible to sign up at this moment.
+        </p>
+    <!-- Show alternative page if user is not logged in. -->
+    <?php else: ?>
+        <h1>Please sign in</h1>
+        <p>
+            Hi there! Please sign in on the Cover website in order to continue. Besides being able to verify your membership status, we can also fill in most of the form for you already! You can log in <a href='//www.svcover.nl/sessions.php'>here</a>, or sign up <a href='//www.svcover.nl/lidworden.php'>here</a>.
+        </p>
+    <?php endif ?>
+
+</div>
+<?php $this->end() ?>

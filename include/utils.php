@@ -49,7 +49,11 @@ function send_mail($from, $to, $body, $subject=null, array $headers=[]) {
     }
     
     // Send email
-    return mail($to, $subject, $body, implode("\r\n", $headers));
+    if (!DEBUG) {
+        return mail($to, $subject, $body, implode("\r\n", $headers));
+    } else {
+        return file_put_contents("DEBUG_MAIL.html", $body);
+    }
 }
 
 /**
