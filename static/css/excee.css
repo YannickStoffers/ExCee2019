@@ -19,6 +19,7 @@ header.page-header h1 {
 .banner{
 	width: 100%;
 	height: auto;
+	display: flex;
 }
 
 .icon{
@@ -147,7 +148,7 @@ button.astext {
 	}
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 550px) {
 	.half-width {
 		flex-wrap: wrap;
 	}
