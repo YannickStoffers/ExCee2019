@@ -37,7 +37,7 @@
                         <a href="ideas.php">Ideas & Suggestions</a>
                     </li>
                     <?php if(cover_session_logged_in() || DEBUG): ?>
-                        <li class="dropdown">
+                        <li class="dropdown <?php if ($page_id == 'signup_admin'): ?>active<?php endif ?> ">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-angle-down"></i>
                             </a>
@@ -78,10 +78,10 @@
     </a>
 
     <!-- Footer -->
-    <div class="container container-wide" style="font-size: small; align-self: center;">
+    <div class="container container-wide footer">
         <hr>
-        <p style="text-align: center;">
-            Created with &hearts; by the <a href="/committee.php" style="text-decoration: inherit; color: inherit;">ExCee</a>. &bull; <a href="//sd.svcover.nl/Privacy%20Statement/Privacy%20statement.pdf" style="text-decoration: inherit; color: inherit;">Privacy statement.</a>
+        <p>
+            Created with &hearts; by the <a href="/committee.php">ExCee</a>. &bull; <a href="//sd.svcover.nl/Privacy%20Statement/Privacy%20statement.pdf">Privacy statement.</a>
         </p>
         <br>
     </div>

@@ -157,3 +157,17 @@ button.astext {
 		max-width: 100%;
 	}
 }
+
+.footer {
+	font-size: small; 
+	align-self: center;
+}
+
+.footer p {
+	text-align: center;
+}
+
+.footer a {
+	text-decoration: inherit; 
+	color: inherit;
+}

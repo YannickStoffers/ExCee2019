@@ -9,8 +9,8 @@ body {
 	color: #ffffff;
 }
 
-p {
-	font-size: 120%;
+.committee-member p {
+	font-size: 110%;
 }
 
 .committee-photo{
