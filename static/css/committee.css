@@ -1,8 +1,16 @@
 /* Your custom CSS here */
 
 body {
+	background-image: url("/static/img/committee/background_placeholder.png");
+	background-attachment: fixed;
+	background-position: center; 
+	
 	background-color: #C8102E;
 	color: #ffffff;
+}
+
+.committee-member p {
+	font-size: 110%;
 }
 
 .committee-photo{
