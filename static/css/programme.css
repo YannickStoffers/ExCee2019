@@ -76,14 +76,24 @@
 		flex: 1 0 50%;
 	}
 
+	.programme-item-photo {
+		max-width: 50%;
+	}
+
 	.programme-item:nth-of-type(even) .programme-item-text {
-		padding-left: 20%;
-		padding-right: 15px;
+		/*padding-left: 20%;
+		padding-right: 15px;*/
+		margin-left: auto;
+		margin-right: 0;
+		max-width: 570px;
 	}
 
 	.programme-item-text {
-		padding-left: 15px;
-		padding-right: 20%;
+		/*padding-left: 15px;
+		padding-right: 20%;*/
+		margin-left: 0;
+		margin-right: auto;
+		max-width: 570px;
 	}
 }
 
