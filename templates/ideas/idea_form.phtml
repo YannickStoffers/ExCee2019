@@ -14,7 +14,7 @@
     <form method="POST">
         <?= $form->render_field('name', ['placeholder' => '[OPTIONAL] Santa Claus']) ?>
         <?= $form->render_field('email', ['placeholder' => '[OPTIONAL] name@example.com']) ?>
-        <?= $form->render_field('idea', ['placeholder' => "Let's go to the beach!"]) ?>
+        <?= $form->render_field('idea', ['placeholder' => "Let's go to the beach!", 'style'=>'max-width: 100%;']) ?>
 
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Submit</button>
