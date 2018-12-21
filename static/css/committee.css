@@ -89,6 +89,10 @@ h1, h2 {
 	text-align: center;
 }
 
+hr {
+	border-top: 1px solid white;
+}
+
 .ideas {
 	background: white; 
 	color: #C8102E; 
