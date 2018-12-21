@@ -104,7 +104,7 @@
                         <td><?= $this->html($participant['surname']) ?></td>
                         <td>
                             <?php if (date_diff(date_create($participant['birthday']), date_create('now'))->y < 18): ?>
-                                <span class="label label-warning">
+                                <span class="badge badge-warning">
                             <?php endif ?>
                             <?= $this->html($participant['birthday']) ?>
                             <?php if (date_diff(date_create($participant['birthday']), date_create('now'))->y < 18): ?>
@@ -121,20 +121,20 @@
                         <td><?= $this->html($participant['bic']) ?></td>
                         <td>
                             <?php if ($participant['student_ov'] === 'Weekend'): ?>
-                                <span class="label label-success">Weekend free</span>
+                                <span class="badge badge-success">Weekend free</span>
                             <?php elseif ($participant['student_ov'] === 'Week'): ?>
-                                <span class="label label-warning">Weekdays free</span>
+                                <span class="badge badge-warning">Weekdays free</span>
                             <?php elseif ($participant['student_ov'] === 'Neither'): ?>
-                                <span class="label label-danger">No free :(</span>
+                                <span class="badge badge-danger">No free :(</span>
                             <?php endif ?></td>
                         <td class="truncate"><?= $this->html($participant['remarks']) ?></td>
                         <td>
                             <?php if ($participant['status'] === 'registered'): ?>
-                                <span class="label label-success">Registered</span>
+                                <span class="badge badge-success">Registered</span>
                             <?php elseif ($participant['status'] === 'cancelled'): ?>
-                                <span class="label label-danger">Cancelled</span>
+                                <span class="badge badge-danger">Cancelled</span>
                             <?php elseif ($participant['status'] === 'waiting_list'): ?>
-                                <span class="label label-warning">Waiting list</span>
+                                <span class="badge badge-warning">Waiting list</span>
                             <?php endif ?>
                         </td>
                         <td class="text-right">
