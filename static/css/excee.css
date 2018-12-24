@@ -178,3 +178,7 @@ button.astext {
 .navbar-brand {
 	padding-right: 7px !important;
 }
+
+h1 {
+	margin-top: 15px;
+}
