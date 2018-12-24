@@ -105,6 +105,8 @@ button.astext {
 	flex-wrap: nowrap;
 	flex-direction: row;
 	justify-content: flex-start;
+
+	margin: 0 !important;
 }
 
 .half-width {
