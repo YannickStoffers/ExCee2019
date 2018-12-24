@@ -178,3 +178,11 @@ button.astext {
 .navbar-brand {
 	padding-right: 7px !important;
 }
+
+.decreased-margin-bottom {
+	margin-bottom: -64px !important;
+}
+
+.extra-padding-top {
+	padding-top: 64px !important;
+}
