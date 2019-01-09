@@ -80,3 +80,8 @@ function lowQuality()
     document.getElementById("highQualityButton").style.visibility = "visible";
     document.getElementById("lowQualityButton").style.visibility = "hidden";
 }
+
+
+function toggleHamburger(x) {
+    x.classList.toggle("change");
+}
