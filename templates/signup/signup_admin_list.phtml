@@ -83,6 +83,7 @@
                     <th onclick="sortTable(0)" style="cursor: pointer;">Name</th>
                     <th onclick="sortTable(1)" style="cursor: pointer;">Surname</th>
                     <th onclick="sortTable(2)" style="cursor: pointer;">Birthday</th>
+                    <th onclick="sortTable(2)" style="cursor: pointer;">Travel document</th>
                     <th onclick="sortTable(3)" style="cursor: pointer;">Address</th>
                     <th onclick="sortTable(4)" style="cursor: pointer;">Postal</th>
                     <th onclick="sortTable(5)" style="cursor: pointer;">City</th>
@@ -91,6 +92,7 @@
                     <th onclick="sortTable(8)" style="cursor: pointer;">Emergency</th>
                     <th onclick="sortTable(9)" style="cursor: pointer;">IBAN</th>
                     <th onclick="sortTable(10)" style="cursor: pointer;">BIC</th>
+                    <th onclick="sortTable(10)" style="cursor: pointer;">Installments</th>
                     <th onclick="sortTable(11)" style="cursor: pointer;">Student transit product</th>
                     <th onclick="sortTable(12)" style="cursor: pointer;">Remarks</th>
                     <th onclick="sortTable(13)" style="cursor: pointer;">Status</th>
@@ -111,6 +113,7 @@
                                 </span>
                             <?php endif ?>
                         </td>
+                        <td><?= $this->html($participant['passport']) ?></td>
                         <td><?= $this->html($participant['address']) ?></td>
                         <td><?= $this->html($participant['postal_code']) ?></td>
                         <td><?= $this->html($participant['city']) ?></td>
@@ -119,6 +122,13 @@
                         <td><?= $this->html($participant['emergency_phone']) ?></td>
                         <td><?= $this->html($participant['iban']) ?></td>
                         <td><?= $this->html($participant['bic']) ?></td>
+                        <td>
+                            <?php if ($participant['installments'] == true): ?>
+                                <span class="badge badge-info">Payment in installments</span>
+                            <?php else: ?>
+                                <span class="badge badge-warning">Single payment</span>
+                            <?php endif; ?>
+                        </td>
                         <td>
                             <?php if ($participant['student_ov'] === 'Weekend'): ?>
                                 <span class="badge badge-success">Weekend free</span>

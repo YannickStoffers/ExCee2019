@@ -8,6 +8,7 @@ CREATE TABLE `registrations` (
   `first_name` varchar(255),
   `surname` varchar(255),
   `birthday` date,
+  `passport` varchar(9), -- length of a travel document number
   `address` varchar(255),
   `postal_code` varchar(255),
   `city` varchar(255),
@@ -18,6 +19,7 @@ CREATE TABLE `registrations` (
   `bic` varchar(11), -- official max length of a bic
   `student_ov` enum('Weekend','Week','Neither') NOT NULL,
   `remarks` varchar(1024),
+  `installments` tinyint(1) NOT NULL DEFAULT '0',
   `accept_terms` tinyint(1) NOT NULL DEFAULT '0',
   `accept_costs` tinyint(1) NOT NULL DEFAULT '0',
   `status` enum('registered','cancelled','waiting_list') NOT NULL DEFAULT 'registered',

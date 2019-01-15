@@ -26,6 +26,8 @@ class SignupForm extends Bootstrap3Form
             'remarks'         => new TextAreaField ('Comments',                               true,     ['maxlength' => 1024]),
             'accept_terms'    => new CheckBoxField ('I have read and accepted the terms and conditions', !$strict),
             'accept_costs'    => new CheckBoxField ('I accept the costs',                     !$strict),
+            'installments'    => new CheckBoxField ('I would like to pay in installments',    true),
+            'passport'        => new StringField   ('Identification document number (for flight check-in)',  !$strict, ['maxlength' => 9]),
         ];
 
         return parent::__construct($name, $fields);

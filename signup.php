@@ -54,6 +54,7 @@ class SignupView extends FormView
         // Convert booleans to tinyints
         $data['accept_terms'] = empty($data['accept_terms']) ? 0 : 1;
         $data['accept_costs'] = empty($data['accept_costs']) ? 0 : 1;
+        $data['installments'] = empty($data['installments']) ? 0 : 1;
 
         // Check if registrations are full, if so place on waiting list.
         $data['status'] = count( array_filter($this->model->get (), function ($p) {
