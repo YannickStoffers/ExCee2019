@@ -17,7 +17,7 @@
         </p>
     <?php else: ?>
         <p>
-            Thank you for your registration for the ExCee. But, due to high interest we have reached or participants capacity already. We will keep in touch in case someone still decides to cancel. We hope you understand.
+            Thank you for your registration for the ExCee. But, due to high interest we have reached our participants capacity already. We will keep in touch in case someone still decides to cancel. We hope you understand.
         </p>
     <?php endif; ?>
     <p>To reiterate, you provided us with the following information:<br>
@@ -40,6 +40,10 @@
                 <tr>
                     <td>Birthday</td>
                     <td><?= $this->html($birthday) ?></td>
+                </tr>
+                <tr>
+                    <td>Identification document number</td>
+                    <td><?= $this->html($passport) ?></td>
                 </tr>
                 <tr>
                     <td>Address</td>
@@ -72,6 +76,10 @@
                 <tr>
                     <td>BIC</td>
                     <td><?= $this->html($bic) ?></td>
+                </tr>
+                <tr>
+                    <td>Payment in installments</td>
+                    <td><?= $this->html($installments) ? "Yes" : "No" ?></td>
                 </tr>
                 <tr>
                     <td>Student OV product</td>
