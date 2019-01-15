@@ -11,6 +11,10 @@ header.page-header h1 {
 	margin-top: 0;
 }
 
+h1 {
+	margin-top: 7px;
+}
+
 .page-filling{
 	max-height: 100%;
 	width:100%;
