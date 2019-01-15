@@ -85,3 +85,7 @@ function lowQuality()
 function toggleHamburger(x) {
     x.classList.toggle("change");
 }
+
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})

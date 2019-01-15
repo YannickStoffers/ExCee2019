@@ -113,7 +113,11 @@
                                 </span>
                             <?php endif ?>
                         </td>
-                        <td><?= $this->html($participant['passport']) ?></td>
+                        <td>
+                            <a tabindex="0" data-toggle="popover" data-trigger="focus" title="Travel document number" data-content=<?= $this->html($participant['passport']) ?>>
+                                <span class="badge badge-secondary">Click to view</span>
+                            </a>
+                        </td>
                         <td><?= $this->html($participant['address']) ?></td>
                         <td><?= $this->html($participant['postal_code']) ?></td>
                         <td><?= $this->html($participant['city']) ?></td>
@@ -124,7 +128,7 @@
                         <td><?= $this->html($participant['bic']) ?></td>
                         <td>
                             <?php if ($participant['installments'] == true): ?>
-                                <span class="badge badge-info">Payment in installments</span>
+                                <span class="badge badge-info">Installments</span>
                             <?php else: ?>
                                 <span class="badge badge-warning">Single payment</span>
                             <?php endif; ?>
