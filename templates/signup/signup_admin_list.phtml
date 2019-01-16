@@ -17,6 +17,7 @@
                 <thead>
                     <tr>
                         <th>Student transit product type</th>
+                        <th>Pending</th>
                         <th>Registered</th>
                         <th>Cancelled</th>
                         <th>Waiting list</th>
@@ -26,6 +27,11 @@
                     <?php foreach (get_model('Registration')::$ov_options as $type): ?>
                         <tr>
                             <td><?= $type ?></td>
+                            <td>
+                                <?= count( array_filter($objects, function ($p) use ($type) {
+                                    return $p['student_ov'] === $type && $p['status'] === 'pending';
+                                }) ) ?>
+                            </td>
                             <td>
                                 <?= count( array_filter($objects, function ($p) use ($type) {
                                     return $p['student_ov'] === $type && $p['status'] === 'registered';
@@ -49,8 +55,12 @@
                         <th>
                             Total (<?= MAX_SIGNUPS - 
                                 count( array_filter($objects, function ($p) { return $p['status'] === 'registered'; })) - 
-                                count( array_filter($objects, function ($p) { return $p['status'] === 'waiting_list'; })) ?> 
+                                count( array_filter($objects, function ($p) { return $p['status'] === 'waiting_list'; })) -
+                                count( array_filter($objects, function ($p) { return $p['status'] === 'pending'; })) ?> 
                             spots remaining)
+                        </th>
+                        <th>
+                            <?= count( array_filter($objects, function ($p) { return $p['status'] === 'pending'; }) ) ?>
                         </th>
                         <th>
                             <?= count( array_filter($objects, function ($p) { return $p['status'] === 'registered'; }) ) ?>
@@ -143,12 +153,16 @@
                             <?php endif ?></td>
                         <td class="truncate"><?= $this->html($participant['remarks']) ?></td>
                         <td>
-                            <?php if ($participant['status'] === 'registered'): ?>
+                            <?php if ($participant['status'] === 'pending'): ?>
+                                <span class="badge badge-info">Pending</span>
+                            <?php elseif ($participant['status'] === 'registered'): ?>
                                 <span class="badge badge-success">Registered</span>
                             <?php elseif ($participant['status'] === 'cancelled'): ?>
                                 <span class="badge badge-danger">Cancelled</span>
                             <?php elseif ($participant['status'] === 'waiting_list'): ?>
-                                <span class="badge badge-warning">Waiting list</span>
+                                <span class="badge badge-warning">Waiting List</span>
+                            <?php else: ?>
+                                <span class="badge badge-secondary">Status Unknown</span>
                             <?php endif ?>
                         </td>
                         <td class="text-right">

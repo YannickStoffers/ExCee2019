@@ -11,7 +11,13 @@
 </head>
 <body>
     <p>Dear <?= $this->html($first_name) ?>,</p>
-    <?php if ($status === 'registered'): ?>
+    <?php if ($status === 'pending'): ?>
+        <p>
+            Thank you for your registration for the ExCee!
+            As you may know, we are working with a lottery system for the participants.
+            The lottery will take place at !TODO:INSERT DATUM HIER, after which we will inform you whether you get to come and have an awesome time with us!
+        </p>
+    <?php elseif ($status === 'registered'): ?>
         <p>
             Thank you for your registration for the ExCee. We're very excited already and we're glad you're going to be joining us!
         </p>
@@ -87,7 +93,7 @@
                 </tr>
                 <tr>
                     <td>Remarks</td>
-                    <td><?= $this->html($remarks) ?></td>
+                    <td><?= empty($remarks) ? "<i>No remarks</i>" : $this->html($remarks) ?></td>
                 </tr>
             </tbody>
         </table>
