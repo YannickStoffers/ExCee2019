@@ -36,6 +36,7 @@ class SignupAdminView extends ModelView
         // Convert booleans to tinyints
         $data['accept_terms'] = empty($data['accept_terms']) ? 0 : 1;
         $data['accept_costs'] = empty($data['accept_costs']) ? 0 : 1;
+        $data['installments'] = empty($data['installments']) ? 0 : 1;
         
         parent::process_form_data($data);   
     }

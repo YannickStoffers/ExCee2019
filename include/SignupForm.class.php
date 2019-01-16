@@ -14,6 +14,7 @@ class SignupForm extends Bootstrap3Form
             'first_name'      => new StringField   ('First name',                             !$strict, ['maxlength' => 255]),
             'surname'         => new StringField   ('Surname',                                !$strict, ['maxlength' => 255]),
             'birthday'        => new DateField     ('Date of birth', 'Y-m-d',                 !$strict),
+            'passport'        => new StringField   ('Travel document number (for flight check-in)',  !$strict, ['maxlength' => 9]),
             'address'         => new StringField   ('Street name + number',                   !$strict, ['maxlength' => 255]),
             'postal_code'     => new StringField   ('Postal code',                            !$strict, ['maxlength' => 255]),
             'city'            => new StringField   ('Place of residence',                     !$strict, ['maxlength' => 255]),
@@ -22,12 +23,11 @@ class SignupForm extends Bootstrap3Form
             'emergency_phone' => new StringField   ('Emergency contact',                      !$strict, ['maxlength' => 100]),
             'iban'            => new StringField   ('IBAN',                                   !$strict, ['maxlength' => 34]),
             'bic'             => new StringField   ('BIC (only for non-Dutch bank accounts)', true,     ['maxlength' => 11]),
+            'installments'    => new CheckBoxField ('I would like to pay in installments',    true),
+            'accept_costs'    => new CheckBoxField ('I accept the costs',                     !$strict),
             'student_ov'      => new SelectField   ('I travel by train for free during the...', $ov_options),
             'remarks'         => new TextAreaField ('Comments',                               true,     ['maxlength' => 1024]),
             'accept_terms'    => new CheckBoxField ('I have read and accepted the terms and conditions', !$strict),
-            'accept_costs'    => new CheckBoxField ('I accept the costs',                     !$strict),
-            'installments'    => new CheckBoxField ('I would like to pay in installments',    true),
-            'passport'        => new StringField   ('Travel document number (for flight check-in)',  !$strict, ['maxlength' => 9]),
         ];
 
         return parent::__construct($name, $fields);
