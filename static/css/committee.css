@@ -1,9 +1,10 @@
 /* Your custom CSS here */
 
 body {
-	background-image: url("/static/img/committee/background.png");
+	background-image: url("/static/img/committee/background.svg");
 	background-attachment: fixed;
-	background-position: center; 
+	background-position: center;
+	background-size: cover; 
 	
 	background-color: #C8102E;
 	color: #ffffff;
