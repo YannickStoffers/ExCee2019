@@ -25,14 +25,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item <?php if ($page_id == 'index'): ?>active<?php endif ?>" >
-                    <a href="index.php">Home</a>
+                <li class="nav-item <?php if ($page_id == 'index' || $page_id == 'pre-announcement'): ?>active<?php endif ?>" >
+                    <a href="/index.php">Home</a>
                 </li>
                 <li class="nav-item <?php if ($page_id == 'committee'): ?>active<?php endif ?>" >
-                    <a href="committee.php">Committee</a>
+                    <a href="/committee.php">Committee</a>
                 </li>
                 <li class="nav-item <?php if ($page_id == 'ideas'): ?>active<?php endif ?>" >
-                    <a href="ideas.php">Ideas & Suggestions</a>
+                    <a href="/ideas.php">Ideas & Suggestions</a>
                 </li>
             </ul>
         </div>
