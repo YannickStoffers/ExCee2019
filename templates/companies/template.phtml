@@ -9,15 +9,11 @@
 <div class="container container-narrow">
 	<img src=<?= empty($company_logo) ? "/static/img/logo_black.svg" : $company_logo ?> class="banner">
 	<h1><?= empty($company_name) ? "Company Name" : $company_name ?></h1>
-	<p>
-		<?= empty($company_description) ? "Company description should be placed here." : $company_description ?>
-	</p>
+	<?= empty($company_description) ? "<p>Company description should be placed here.</p>" : $company_description ?>
 
 	<h2>The Activity</h2>
 	<h4><?= empty($activity_date) ? "2019-04-29 17:00" : $activity_date ?></h4>
-	<p>
-		<?= empty($activity_description) ? "Activity description should be placed here." : $activity_description ?>
-	</p>
+	<?= empty($activity_description) ? "<p>Activity description should be placed here.</p>" : $activity_description ?>
 
 	<h2>Company location:</h2>
 </div>

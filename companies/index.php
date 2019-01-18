@@ -4,6 +4,6 @@ require_once '../include/init.php';
 
 // Create and run home view
 
-$view = new TemplateView('companies/index');
+$view = new TemplateView('companies/overview');
 
 $view->run();

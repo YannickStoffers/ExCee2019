@@ -4,6 +4,17 @@
 	display: none;
 }
 
+.corner {
+	position: absolute;
+	bottom: 30px;
+	right: 0;
+	left: auto;
+}
+
+.corner h4 {
+	text-align: right;
+}
+
 .third-width {
 	flex: 1 1 33.333%;
 	height: auto;
@@ -34,6 +45,7 @@
 
 .programme-item-photo,
 .programme-item-text {
+	position: relative;
 	height: 50%;
 	width: 100%;
 	display: flex;
@@ -67,6 +79,15 @@
 
 	.programme-item:nth-of-type(even) .programme-item-text {
 		order: -1;
+	}
+
+	.programme-item:nth-of-type(even) .corner {
+		left: 0;
+		right: auto;
+	}
+
+	.programme-item:nth-of-type(even) .corner h4 {
+		text-align: left;
 	}
 }
 

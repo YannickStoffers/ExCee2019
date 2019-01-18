@@ -1,0 +1,35 @@
+<?php $this->extends('../layout.phtml') ?>
+
+<?php $this->begin('styles') ?>
+<link rel="stylesheet" href="/static/css/companies.css" type="text/css">
+<?php $this->end() ?>
+
+<?php $this->begin('content') ?>
+
+<div class="container container-wide">
+	<header>
+        <h1>During the excursion we will visit the following companies:</h1>
+    </header>
+
+    <div class="company">
+        <div class="company-photo">
+            <a href="//svcover.nl" target="_blank">
+                <img src="/static/img/logo_black.svg">
+            </a>
+        </div>
+        <div class="company-text">
+            <h1>Generic Company Name</h1>
+            <p>
+            	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <p>
+            	Fermentum posuere urna nec tincidunt praesent. Eget dolor morbi non arcu risus quis varius quam quisque. Eu tincidunt tortor aliquam nulla facilisi cras. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus.
+            </p>
+            <p>
+            	Ac tortor dignissim convallis aenean et tortor at risus. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque. Quis ipsum suspendisse ultrices gravida. Eu feugiat pretium nibh ipsum consequat.
+            </p>
+        </div>
+        <a href="/companies/company_template.php"><h4><span class="corner badge badge-primary">Read more...</span></h4></a>
+    </div>
+
+<?php $this->end() ?>
