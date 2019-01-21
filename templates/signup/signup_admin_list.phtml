@@ -110,7 +110,8 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($objects as $participant): ?>
+                <?php $pending_count = 0;
+                    foreach ($objects as $participant): ?>
                     <tr>
                         <td><?= $this->html($participant['first_name']) ?></td>
                         <td><?= $this->html($participant['surname']) ?></td>
@@ -154,7 +155,8 @@
                         <td class="truncate"><?= $this->html($participant['remarks']) ?></td>
                         <td>
                             <?php if ($participant['status'] === 'pending'): ?>
-                                <span class="badge badge-info">Pending</span>
+                                <?php $pending_count = $pending_count + 1; ?>
+                                <span class="badge badge-info">Pending #<?= $pending_count ?></span>
                             <?php elseif ($participant['status'] === 'registered'): ?>
                                 <span class="badge badge-success">Registered</span>
                             <?php elseif ($participant['status'] === 'cancelled'): ?>
