@@ -1,13 +1,13 @@
 /* Your custom CSS here */
 
 body {
-	background-image: url("/static/img/committee/background.svg");
+	background-image: url("/static/img/committee/background-banana-yellow.svg");
 	background-attachment: fixed;
 	background-position: center;
 	background-size: cover; 
 	
-	background-color: #C8102E;
-	color: #ffffff;
+	background-color: #ffe135;
+	/*color: #ffffff;*/
 }
 
 .committee-member p {
@@ -23,7 +23,7 @@ body {
 .committee-member {
 	display: flex;
 	flex-direction: column;
-	border-top: 1px solid white;
+	border-top: 1px solid black;
 	padding: 15px 0;
 }
 
@@ -92,10 +92,11 @@ h1, h2 {
 }
 
 hr {
-	border-top: 1px solid white;
+	border-top: 1px solid black;
 }
 
 .ideas {
 	background: white; 
-	color: #C8102E; 
+	/*color: #C8102E; */ /* Coverrood */
+	color: black;
 }
