@@ -106,6 +106,7 @@
                     <th onclick="sortTable(11)" style="cursor: pointer;">Student transit product</th>
                     <th onclick="sortTable(12)" style="cursor: pointer;">Remarks</th>
                     <th onclick="sortTable(13)" style="cursor: pointer;">Status</th>
+                    <th onclick="sortTable(14)" style="cursor: pointer;">Registration time</th>
                     <th></th>
                 </tr>
             </thead>
@@ -167,14 +168,31 @@
                                 <span class="badge badge-secondary">Status Unknown</span>
                             <?php endif ?>
                         </td>
-                        <td class="text-right">
-                            <ul class="list-inline">
-                                <li>
-                                    <a href="/signup_admin.php?view=update&id=<?= $participant['id'] ?>">
-                                        <span class="badge badge-primary">edit</span>
-                                    </a>
-                                </li>
-                            </ul>
+                        <td><span class="badge badge-primary">
+                            <?php 
+                                $date1 = new DateTime (date("Y-m-d H:i:s"));
+                                $date2 = new DateTime ($participant['registration_date']);
+                                $diff = $date1->diff($date2);
+                                $hours = $diff->h;
+
+                                $result = "";
+
+                                if ($diff->d != 0){
+                                    $result = $result . $diff->d . " day" . ($diff->d > 0 ? "s" : "");
+                                }
+                                if ($diff->h != 0)
+                                    $result = $result . " " . $diff->h . " hour" . ($diff->h > 0 ? "s" : "");
+                                if ($diff->d == 0 && $diff->i != 0)
+                                    $result = $result . " " . $diff->i . " minute" . ($diff->i > 0 ? "s" : "");
+                                if ($diff->d == 0 && $diff->h == 0 && $diff->i == 0)
+                                    $result = $result . $diff->s . " second" . ($diff->s > 0 ? "s" : "");
+                                echo $result . " ago";
+                            ?></span>
+                        </td>
+                        <td class="text-right bg-primary">
+                            <a href="/signup_admin.php?view=update&id=<?= $participant['id'] ?>">
+                                <span class="badge badge-primary">edit</span>
+                            </a>
                         </td>
                     </tr>
                 <?php endforeach ?>

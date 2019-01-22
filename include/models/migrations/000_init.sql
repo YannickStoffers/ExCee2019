@@ -5,6 +5,7 @@
 DROP TABLE IF EXISTS `registrations`;
 CREATE TABLE `registrations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `registration_date` datetime,
   `first_name` varchar(255),
   `surname` varchar(255),
   `birthday` date,
