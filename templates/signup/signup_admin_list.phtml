@@ -90,30 +90,35 @@
         <table class="table table-hover table-registrations" id="registrations">
             <thead>
                 <tr>
-                    <th onclick="sortTable(0)" style="cursor: pointer;">Name</th>
-                    <th onclick="sortTable(1)" style="cursor: pointer;">Surname</th>
-                    <th onclick="sortTable(2)" style="cursor: pointer;">Birthday</th>
-                    <th onclick="sortTable(2)" style="cursor: pointer;">Travel document</th>
-                    <th onclick="sortTable(3)" style="cursor: pointer;">Address</th>
-                    <th onclick="sortTable(4)" style="cursor: pointer;">Postal</th>
-                    <th onclick="sortTable(5)" style="cursor: pointer;">City</th>
-                    <th onclick="sortTable(6)" style="cursor: pointer;">Email</th>
-                    <th onclick="sortTable(7)" style="cursor: pointer;">Phone</th>
-                    <th onclick="sortTable(8)" style="cursor: pointer;">Emergency</th>
-                    <th onclick="sortTable(9)" style="cursor: pointer;">IBAN</th>
-                    <th onclick="sortTable(10)" style="cursor: pointer;">BIC</th>
-                    <th onclick="sortTable(10)" style="cursor: pointer;">Installments</th>
-                    <th onclick="sortTable(11)" style="cursor: pointer;">Student transit product</th>
-                    <th onclick="sortTable(12)" style="cursor: pointer;">Remarks</th>
-                    <th onclick="sortTable(13)" style="cursor: pointer;">Status</th>
-                    <th onclick="sortTable(14)" style="cursor: pointer;">Registration time</th>
+                    <th onClick="sortTable(0)"></th>
+                    <th onclick="sortTable(1)" style="cursor: pointer;">Name</th>
+                    <th onclick="sortTable(2)" style="cursor: pointer;">Surname</th>
+                    <th onclick="sortTable(3)" style="cursor: pointer;">Birthday</th>
+                    <th onclick="sortTable(4)" style="cursor: pointer;">Travel document</th>
+                    <th onclick="sortTable(5)" style="cursor: pointer;">Address</th>
+                    <th onclick="sortTable(6)" style="cursor: pointer;">Postal</th>
+                    <th onclick="sortTable(7)" style="cursor: pointer;">City</th>
+                    <th onclick="sortTable(8)" style="cursor: pointer;">Email</th>
+                    <th onclick="sortTable(9)" style="cursor: pointer;">Phone</th>
+                    <th onclick="sortTable(10)" style="cursor: pointer;">Emergency</th>
+                    <th onclick="sortTable(11)" style="cursor: pointer;">IBAN</th>
+                    <th onclick="sortTable(12)" style="cursor: pointer;">BIC</th>
+                    <th onclick="sortTable(13)" style="cursor: pointer;">Installments</th>
+                    <th onclick="sortTable(14)" style="cursor: pointer;">Student transit product</th>
+                    <th onclick="sortTable(15)" style="cursor: pointer;">Remarks</th>
+                    <th onclick="sortTable(16)" style="cursor: pointer;">Status</th>
+                    <th onclick="sortTable(17)" style="cursor: pointer;">Registration time</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <?php $pending_count = 0;
+                    $total_count = 0;
                     foreach ($objects as $participant): ?>
                     <tr>
+                        <td class="text-center bg-success">
+                            <span class="badge badge-success">#<?= ++$total_count < 10 ? "0" . $total_count : $total_count ?></span>
+                        </td>
                         <td><?= $this->html($participant['first_name']) ?></td>
                         <td><?= $this->html($participant['surname']) ?></td>
                         <td>
@@ -125,7 +130,7 @@
                                 </span>
                             <?php endif ?>
                         </td>
-                        <td>
+                        <td class="text-center bg-secondary">
                             <a tabindex="0" data-toggle="popover" data-trigger="focus" title="Travel document number" data-content=<?= $this->html($participant['passport']) ?>>
                                 <span class="badge badge-secondary">Click to view</span>
                             </a>
@@ -138,14 +143,20 @@
                         <td><?= $this->html($participant['emergency_phone']) ?></td>
                         <td><?= $this->html($participant['iban']) ?></td>
                         <td><?= $this->html($participant['bic']) ?></td>
-                        <td>
+                        <td class=<?= $participant['installments'] ? "bg-info" : "bg-warning"?>>
                             <?php if ($participant['installments'] == true): ?>
                                 <span class="badge badge-info">Installments</span>
                             <?php else: ?>
                                 <span class="badge badge-warning">Single payment</span>
                             <?php endif; ?>
                         </td>
-                        <td>
+                        <td class=
+                            <?= ($participant['student_ov'] === 'Weekend') ? "bg-success" : (
+                                ($participant['student_ov'] === 'Week') ? "bg-warning" : (
+                                    ($participant['student_ov'] === 'Neither') ? "bg-danger" : ""
+                                )
+                            ) 
+                            ?>>
                             <?php if ($participant['student_ov'] === 'Weekend'): ?>
                                 <span class="badge badge-success">Weekend free</span>
                             <?php elseif ($participant['student_ov'] === 'Week'): ?>
@@ -154,7 +165,14 @@
                                 <span class="badge badge-danger">No free :(</span>
                             <?php endif ?></td>
                         <td class="truncate"><?= $this->html($participant['remarks']) ?></td>
-                        <td>
+                        <td class=
+                            <?= ($participant['status'] === 'pending') ? "bg-info" : (
+                                ($participant['status'] === 'registered') ? "bg-success" : (
+                                    ($participant['status'] === 'cancelled') ? "bg-danger" : (
+                                        ($participant['status'] === 'waiting_list') ? "bg-warning" : "bg-secondary")
+                                    )
+                                ) 
+                            ?>>
                             <?php if ($participant['status'] === 'pending'): ?>
                                 <?php $pending_count = $pending_count + 1; ?>
                                 <span class="badge badge-info">Pending #<?= $pending_count ?></span>
@@ -168,30 +186,35 @@
                                 <span class="badge badge-secondary">Status Unknown</span>
                             <?php endif ?>
                         </td>
-                        <td><span class="badge badge-primary">
-                            <?php 
-                                $date1 = new DateTime (date("Y-m-d H:i:s"));
-                                $date2 = new DateTime ($participant['registration_date']);
-                                $diff = $date1->diff($date2);
-                                $hours = $diff->h;
+                        <td class="text-center bg-primary">
+                            <a tabindex="0" data-toggle="popover" data-trigger="focus" title="Time of registration" data-content="<?= 
+                            $this->html(date_format(new DateTime($participant['registration_date']), "d-m H:i"))
+                            ?>">
+                            <span class="badge badge-primary">
+                                <?php 
+                                    $date1 = new DateTime (date("Y-m-d H:i:s"));
+                                    $date2 = new DateTime ($participant['registration_date']);
+                                    $diff = $date1->diff($date2);
+                                    $hours = $diff->h;
 
-                                $result = "";
+                                    $result = "";
 
-                                if ($diff->d != 0){
-                                    $result = $result . $diff->d . " day" . ($diff->d > 0 ? "s" : "");
-                                }
-                                if ($diff->h != 0)
-                                    $result = $result . " " . $diff->h . " hour" . ($diff->h > 0 ? "s" : "");
-                                if ($diff->d == 0 && $diff->i != 0)
-                                    $result = $result . " " . $diff->i . " minute" . ($diff->i > 0 ? "s" : "");
-                                if ($diff->d == 0 && $diff->h == 0 && $diff->i == 0)
-                                    $result = $result . $diff->s . " second" . ($diff->s > 0 ? "s" : "");
-                                echo $result . " ago";
-                            ?></span>
+                                    if ($diff->d != 0){
+                                        $result = $result . $diff->d . " day" . ($diff->d > 1 ? "s" : "");
+                                    }
+                                    if ($diff->h != 0)
+                                        $result = $result . " " . $diff->h . " hour" . ($diff->h > 1 ? "s" : "");
+                                    if ($diff->d == 0 && $diff->i != 0)
+                                        $result = $result . " " . $diff->i . " minute" . ($diff->i > 1 ? "s" : "");
+                                    if ($diff->d == 0 && $diff->h == 0 && $diff->i == 0)
+                                        $result = $result . $diff->s . " second" . ($diff->s > 1 ? "s" : "");
+                                    echo $result . " ago";
+                                ?>
+                            </span></a>
                         </td>
-                        <td class="text-right bg-primary">
+                        <td class="text-right bg-dark">
                             <a href="/signup_admin.php?view=update&id=<?= $participant['id'] ?>">
-                                <span class="badge badge-primary">edit</span>
+                                <span class="badge badge-dark">edit</span>
                             </a>
                         </td>
                     </tr>
