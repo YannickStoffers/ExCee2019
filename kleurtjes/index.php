@@ -1,8 +1,7 @@
 <?php
 set_include_path('../');
-require_once '../include/init.php';
+require_once 'include/init.php';
 
-/** Renders and processes CRUD operations for the Signup Model */
 class LogoColourView extends TemplateView
 {
     /** 
