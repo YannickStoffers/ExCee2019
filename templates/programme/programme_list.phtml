@@ -1,4 +1,4 @@
-<?php $this->extends('layout.phtml') ?>
+<?php $this->extends('../layout.phtml') ?>
 
 <?php $this->begin('title') ?>
 Programme
@@ -37,21 +37,40 @@ Programme
         </div>
     </a>
 </div>
-<?= $activities ?>
-<?php foreach ($activities as $title): ?>
+
+<?php if ((cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITEE)) || DEBUG): ?>
+    <div class="always-show">
+        <a class="btn btn-success" href="/programme/index.php?view=create">
+            New activity
+        </a>
+    </div>
+<?php endif; ?>
+
+<?php foreach ($objects as $activity): ?>
     <div class="programme-item">
         <div class="programme-item-photo">
-            <img src="/static/img/programme/trein.jpg">
+            <img src="/static/img/programme/<?= $activity['image_name'] ?>">
         </div>
         <div class="programme-item-text">
-            <h4>26<sup>th</sup> of April - 10:00</h4>
-            <h1><?= $title ?></h1>
-            <p>
-                We will leave our beloved Groningen to go sightseeing through Drenthe and other provinces to finally arrive at Schiphol Airport.
-                The train ride will take approximately two and a half hours, after which we will spend another couple of hours at the airport checking in and going through customs.
-                On the airport itself there will be plenty of time to buy some overpriced McDonald's or Starbucks coffee before we finally take off and really start our excursion.
-            </p>
+            <?php if (!empty($activity['date']) || DEBUG): ?>
+                <h4><?= $this->html(date_format(new DateTime($activity['date']), "jS \of F") . (empty($activity['time']) ? "" : " " . $activity['time'])) ?></h4>
+            <?php endif; ?>
+            <h1><?= $activity['title'] ?></h1>
+            <p><?= $activity['description'] ?></p>
+            <?php if ($activity['company_visit']): ?>
+                <div class="corner btn-group" role="group">
+                    <!-- TODO: fix url. -->
+                    <a class="btn btn-primary" href="/companies/company_template.php" role="button">Read more</a>
+                    <a class="btn btn-secondary" href="/companies" role="button">All company visits</a>
+                </div>
+            <?php endif; ?>
         </div>
+        <?php if ((cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITEE)) || DEBUG): ?>
+            <div class="corner-top btn-group">
+                <a class="btn btn-primary" href="/programme/index.php?view=update&id=<?= $activity['id'] ?>" role="button">Edit</a>
+                <a class="btn btn-danger" href="/programme/index.php?view=delete&id=<?= $activity['id'] ?>" role="button">Delete</a>
+            </div>
+        <?php endif; ?>
     </div>
 <?php endforeach; ?>
 
