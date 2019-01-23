@@ -5,8 +5,8 @@
 DROP TABLE IF EXISTS `programme`;
 CREATE TABLE `programme` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `date` datetime,
-  `time` varchar(5),
+  `date` date,
+  `time` time,
   `title` varchar(255),
   `description` varchar(4096),
   `image_name` varchar(30),

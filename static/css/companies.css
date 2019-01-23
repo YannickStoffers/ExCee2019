@@ -8,7 +8,7 @@ iframe {
 /* Your custom CSS here */
 .corner {
 	position: absolute;
-	bottom: 30px;
+	bottom: 15px;
 	right: 0;
 	left: auto;
 }
@@ -29,6 +29,11 @@ iframe {
 	flex-direction: column;
 	border-top: 1px solid black;
 	padding: 15px 0;
+}
+
+.company h1, 
+.company h2 {
+	text-align: center;
 }
 
 .company:first-of-type {
@@ -93,9 +98,5 @@ iframe {
 	.company-photo {
 		flex: 1 0 50%;
 	}
-}
-
-h1, h2 {
-	text-align: center;
 }
 

@@ -19,5 +19,11 @@ class ProgrammeForm extends Bootstrap3Form
 
         return parent::__construct($name, $fields);
     }
+
+    public function validate() {
+        $result = parent::validate();
+
+        return $result;
+    }
 }
 

@@ -4,13 +4,6 @@
 	display: none;
 }
 
-.always-show {
-	position: fixed;
-	top: 79px;
-	right: 30px;
-	z-index: 1200;
-}
-
 .corner {
 	position: absolute;
 	bottom: 30px;
@@ -52,7 +45,7 @@
 	position: relative;
 	object-fit: cover;
 
-	background-image: url("/static/img/programme/woopsie.svg");
+	background-image: url("/static/img/woopsie.svg");
 	background-position: center;
 	background-size: cover; 
 }

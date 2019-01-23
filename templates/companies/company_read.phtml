@@ -1,0 +1,18 @@
+<?php $this->extends('../layout.phtml') ?>
+
+<?php $this->begin('styles') ?>
+<link rel="stylesheet" href="/static/css/companies.css" type="text/css">
+<?php $this->end() ?>
+
+<?php $this->begin('content') ?>
+
+<div class="container container-narrow">
+	<img src=<?= $object['logo_url'] ?> class="banner">
+	<h1><?= $object['name'] ?></h1>
+	<p><?= $object['description'] ?></p>
+
+	<h2>The Activity</h2>
+	<h4><?= date_format(new DateTime($object['activity_date']), "jS \of F") . " &middot; " . date_format(new DateTime($object['activity_time']), "H:i") ?></h4>
+	<p><?= $object['activity_description'] ?></p>
+</div>
+<?php $this->end() ?>

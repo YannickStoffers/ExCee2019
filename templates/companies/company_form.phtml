@@ -1,0 +1,14 @@
+<?php $this->extends('../layout.phtml') ?>
+
+<?php $this->begin('styles') ?>
+<link rel="stylesheet" href="/static/css/admin.css" type="text/css">
+<?php $this->end() ?>
+
+<?php $this->begin('content') ?>
+<div class="container container-narrow">
+    <header>
+        <h1>Company</h1>
+    </header>
+    <?= $form->render() ?>
+</div>
+<?php $this->end() ?>
