@@ -15,15 +15,10 @@ class ProgrammeForm extends Bootstrap3Form
             'description'   => new TextAreaField ('Description',                            !$strict,     ['maxlength' => 4096]),
             'image_name'	=> new StringField	 ('Image name (make sure the image is uploaded to the server)', !$strict, ['maxlength' => 30]),
             'company_visit' => new CheckBoxField ('This is a company visit',    			!$strict),
+            'company_id'    => new NumberField   ('Company database ID',                    false),
         ];
 
         return parent::__construct($name, $fields);
-    }
-
-    public function validate() {
-        $result = parent::validate();
-
-        return $result;
     }
 }
 

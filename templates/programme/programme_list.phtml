@@ -53,14 +53,14 @@ Programme
         </div>
         <div class="programme-item-text">
             <?php if (!empty($activity['date']) || DEBUG): ?>
-                <h4><?= $this->html(date_format(new DateTime($activity['date']), "jS \of F") . (empty($activity['time']) ? "" : " " . $activity['time'])) ?></h4>
+                <h4><?= date_format(new DateTime($activity['date']), "jS \of F") . (empty($activity['time']) ? "" : " &middot; " . date_format(new DateTime($activity['time']), "H:i")) ?></h4>
             <?php endif; ?>
             <h1><?= $activity['title'] ?></h1>
             <p><?= $activity['description'] ?></p>
             <?php if ($activity['company_visit']): ?>
                 <div class="corner btn-group" role="group">
                     <!-- TODO: fix url. -->
-                    <a class="btn btn-primary" href="/companies/company_template.php" role="button">Read more</a>
+                    <a class="btn btn-primary" href="/companies/index.php?view=read&id=<?= $activity['company_id'] ?>" role="button">Read more</a>
                     <a class="btn btn-secondary" href="/companies" role="button">All company visits</a>
                 </div>
             <?php endif; ?>
