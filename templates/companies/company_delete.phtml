@@ -7,30 +7,22 @@
 <?php $this->begin('content') ?>
 <div class="container container-narrow">
 
-	<?php if ((cover_session_logged_in () && cover_session_in_committee (ADMIN_COMMITTEE)) || DEBUG): ?>
-
-		<h1>Delete company</h1>
-		<form method="POST">
-			<fieldset disabled>
-				<div class="form-group">
-					<label for="id">Company ID</label>
-					<input class="form-control disabled" type="text" name="id" id="id" value="<?= $object['id'] ?>">
-				</div>
-				<div class="form-group">
-					<label for="name">Company name</label>
-					<input class="form-control disabled" type="text" name="name" id="name" value="<?= $object['name'] ?>">
-				</div>
-			</fieldset>
+	<h1>Delete company</h1>
+	<form method="POST">
+		<fieldset disabled>
 			<div class="form-group">
-				<button class="btn btn-danger" type="submit">Permanently delete this company</button>
+				<label for="id">Company ID</label>
+				<input class="form-control disabled" type="text" name="id" id="id" value="<?= $object['id'] ?>">
 			</div>
-		</form>
-
-	<?php elseif (!cover_session_logged_in ()): ?>
-		<a href="<?= cover_login_url() ?>" class="btn btn-primary">Login and get started!</a>
-	<?php elseif (!cover_session_in_committee (ADMIN_COMMITTEE)): ?>
-		You need to be a member of the ExCee to see this page!
-	<?php endif; ?>
+			<div class="form-group">
+				<label for="name">Company name</label>
+				<input class="form-control disabled" type="text" name="name" id="name" value="<?= $object['name'] ?>">
+			</div>
+		</fieldset>
+		<div class="form-group">
+			<button class="btn btn-danger" type="submit">Permanently delete this company</button>
+		</div>
+	</form>
 	
 </div>
 <?php $this->end() ?>

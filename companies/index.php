@@ -10,6 +10,18 @@ class CompaniesView extends ModelView
     protected $views = ['create', 'read', 'update', 'delete', 'list'];
     protected $template_base_name = 'templates/companies/company';
 
+    public function run_page() {
+        if ($this->_view === 'list' || $this->_view === 'read')
+            return parent::run_page ();
+
+        if (!cover_session_logged_in() && !DEBUG)
+            throw new HttpException(401, 'Unauthorized', sprintf('<a href="%s" class="btn btn-primary">Login and get started!</a>', cover_login_url()));
+        else if (!cover_session_in_committee(ADMIN_COMMITTEE) && !DEBUG)
+            throw new HttpException(403, 'You need to be a member of the ExCee to see this page!');
+        else
+            return parent::run_page ();
+    }
+
     /** Create and returns the form to use for create and update */
     protected function get_form() {
         $form = new CompaniesForm('companies', false);
