@@ -56,6 +56,9 @@
                         </a>
                     </li>
                 <?php endif; ?>
+                <?php if ((cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITTEE)) || DEBUG): ?>
+                    <?= !empty($extra_navbar_button) ? $extra_navbar_button : '' ?>
+                <?php endif; ?>
             </ul>
         </div>
     </nav>

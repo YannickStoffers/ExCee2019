@@ -8,6 +8,12 @@ Programme
 <link rel="stylesheet" href="/static/css/programme.css" type="text/css">
 <?php $this->end() ?>
 
+<?php $this->begin('extra_navbar_button') ?>
+	<li class="nav-item" >
+		<a class="btn-success" href="/programme/index.php?view=create">New Activity</a>
+	</li>
+<?php $this->end() ?>
+
 <?php $this->begin('content') ?>
 <div class="banner decreased-margin-bottom">
 	<div class="third-width">
@@ -21,30 +27,22 @@ Programme
 	</div>
 </div>
 <div class="banner sticky-top extra-padding-top">
-	<a href="#destination01">
+	<a href="#pre-excursion">
 		<div class="third-width">
 			<img src="/static/img/programme/destination_title_banner_01.png">
 		</div>
 	</a>
-	<a href="#destination02">
+	<a href="#city-01">
 		<div class="third-width">
 			<img src="/static/img/programme/destination_title_banner_02.png">
 		</div>
 	</a>
-	<a href="#destination03">
+	<a href="#city-02">
 		<div class="third-width">
 			<img src="/static/img/programme/destination_title_banner_03.png">
 		</div>
 	</a>
 </div>
-
-<?php if ((cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITEE)) || DEBUG): ?>
-	<div class="always-show">
-		<a class="btn btn-success" href="/programme/index.php?view=create">
-			New activity
-		</a>
-	</div>
-<?php endif; ?>
 
 <?php 
 	$activities = [];
@@ -72,7 +70,6 @@ Programme
 				<p><?= $activity['description'] ?></p>
 				<?php if ($activity['company_visit'] || (cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITEE)) || DEBUG): ?>
 					<div class="corner btn-group" role="group">
-						<!-- TODO: fix url. -->
 						<?php if ($activity['company_visit']): ?>
 							<a class="btn btn-primary" href="/companies/index.php?view=read&id=<?= $activity['company_id'] ?>" role="button">Read more</a>
 							<a class="btn btn-secondary" href="/companies" role="button">All company visits</a>
@@ -87,7 +84,7 @@ Programme
 		</div>
 	<?php endforeach; ?>
 
-	<img src="/static/img/programme/end-of-section-banners/<?= $section ?>.png" class="banner" id="destination01">
+	<img src="/static/img/programme/end-of-section-banners/<?= $section ?>.png" class="banner" id="<?= $section ?>">
 
 <?php endforeach; ?>
 

@@ -4,16 +4,13 @@
 <link rel="stylesheet" href="/static/css/companies.css" type="text/css">
 <?php $this->end() ?>
 
+<?php $this->begin('extra_navbar_button') ?>
+    <li class="nav-item" >
+        <a class="btn-success" href="/companies/index.php?view=create">New Company</a>
+    </li>
+<?php $this->end() ?>
+
 <?php $this->begin('content') ?>
-
-<?php if ((cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITEE)) || DEBUG): ?>
-    <div class="always-show">
-        <a class="btn btn-success" href="/companies/index.php?view=create">
-            New company
-        </a>
-    </div>
-<?php endif; ?>
-
 <div class="container container-wide text-center">
 	<header>
         <h1>During the excursion we will visit the following companies:</h1>
