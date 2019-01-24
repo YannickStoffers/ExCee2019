@@ -49,13 +49,13 @@ class ProgrammeForm extends Bootstrap3Form
 
 		$company_id = $this->get_value('company_id');
 
-        // Validate if BIC is set for non-Dutch IBANs.
-        if (!empty($this->get_value ('company_visit'))) {
-            if (!isset($company_id)){
-                $this->get_field('company_id')->errors[] = 'Company ID is required for company visits.';
-                $result = false && $result;
-            }
-        }
+		// Validate if BIC is set for non-Dutch IBANs.
+		if (!empty($this->get_value ('company_visit'))) {
+			if (!isset($company_id)){
+				$this->get_field('company_id')->errors[] = 'Company ID is required for company visits.';
+				$result = false && $result;
+			}
+		}
 
 		return $result;
 	}
