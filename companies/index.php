@@ -7,7 +7,7 @@ require_once 'include/CompaniesForm.class.php';
 /** Renders and processes CRUD operations for the Signup Model */
 class CompaniesView extends ModelView
 {
-    protected $views = ['create', 'read', 'update', 'list'];
+    protected $views = ['create', 'read', 'update', 'delete', 'list'];
     protected $template_base_name = 'templates/companies/company';
 
     /** Create and returns the form to use for create and update */
