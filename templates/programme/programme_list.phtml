@@ -10,172 +10,85 @@ Programme
 
 <?php $this->begin('content') ?>
 <div class="banner decreased-margin-bottom">
-    <div class="third-width">
-        <img src="/static/img/programme/destination_banner_01.png">
-    </div>
-    <div class="third-width">
-        <img src="/static/img/programme/destination_banner_02.png">
-    </div>
-    <div class="third-width">
-        <img src="/static/img/programme/destination_banner_03.png">
-    </div>
+	<div class="third-width">
+		<img src="/static/img/programme/destination_banner_01.png">
+	</div>
+	<div class="third-width">
+		<img src="/static/img/programme/destination_banner_02.png">
+	</div>
+	<div class="third-width">
+		<img src="/static/img/programme/destination_banner_03.png">
+	</div>
 </div>
 <div class="banner sticky-top extra-padding-top">
-    <a href="#destination01">
-        <div class="third-width">
-            <img src="/static/img/programme/destination_title_banner_01.png">
-        </div>
-    </a>
-    <a href="#destination02">
-        <div class="third-width">
-            <img src="/static/img/programme/destination_title_banner_02.png">
-        </div>
-    </a>
-    <a href="#destination03">
-        <div class="third-width">
-            <img src="/static/img/programme/destination_title_banner_03.png">
-        </div>
-    </a>
+	<a href="#destination01">
+		<div class="third-width">
+			<img src="/static/img/programme/destination_title_banner_01.png">
+		</div>
+	</a>
+	<a href="#destination02">
+		<div class="third-width">
+			<img src="/static/img/programme/destination_title_banner_02.png">
+		</div>
+	</a>
+	<a href="#destination03">
+		<div class="third-width">
+			<img src="/static/img/programme/destination_title_banner_03.png">
+		</div>
+	</a>
 </div>
 
 <?php if ((cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITEE)) || DEBUG): ?>
-    <div class="always-show">
-        <a class="btn btn-success" href="/programme/index.php?view=create">
-            New activity
-        </a>
-    </div>
+	<div class="always-show">
+		<a class="btn btn-success" href="/programme/index.php?view=create">
+			New activity
+		</a>
+	</div>
 <?php endif; ?>
 
 <?php 
-    $activities = [];
-    foreach (get_model('Programme')::$sections as $section)
-        $activities[$section] = [];
-    foreach ($objects as $activity)
-        $activities[$activity['section']][] = $activity;
+	$activities = [];
+	foreach (get_model('Programme')::$sections as $section)
+		$activities[$section] = [];
+	foreach ($objects as $activity)
+		$activities[$activity['section']][] = $activity;
 ?>
 
 <?php foreach (get_model('Programme')::$sections as $section): ?>
-    <h1><?= $section ?></h1>
+	<?php $set = $activities[$section];
+		usort($set, function($a, $b) {
+			return strtotime($a['date']) - strtotime($b['date']);
+		});
+		foreach ($set as $activity): ?>
+		<div class="programme-item">
+			<div class="programme-item-photo">
+				<img src="/static/img/programme/<?= $activity['image_name'] ?>">
+			</div>
+			<div class="programme-item-text">
+				<?php if (!empty($activity['date']) || DEBUG): ?>
+					<h4><?= date_format(new DateTime($activity['date']), "jS \of F") . (empty($activity['time']) ? "" : " &middot; " . date_format(new DateTime($activity['time']), "H:i")) ?></h4>
+				<?php endif; ?>
+				<h1><?= $activity['title'] ?></h1>
+				<p><?= $activity['description'] ?></p>
+				<?php if ($activity['company_visit'] || (cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITEE)) || DEBUG): ?>
+					<div class="corner btn-group" role="group">
+						<!-- TODO: fix url. -->
+						<?php if ($activity['company_visit']): ?>
+							<a class="btn btn-primary" href="/companies/index.php?view=read&id=<?= $activity['company_id'] ?>" role="button">Read more</a>
+							<a class="btn btn-secondary" href="/companies" role="button">All company visits</a>
+						<?php endif; ?>
+						<?php if ((cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITEE)) || DEBUG): ?>
+							<a class="btn btn-secondary" href="/programme/index.php?view=update&id=<?= $activity['id'] ?>" role="button">Edit</a>
+							<a class="btn btn-danger" href="/programme/index.php?view=delete&id=<?= $activity['id'] ?>" role="button">Delete</a>
+						<?php endif; ?>
+					</div>
+				<?php endif; ?>
+			</div>
+		</div>
+	<?php endforeach; ?>
 
-    <?php $set = $activities[$section];
-        foreach ($set as $activity): ?>
-        <div class="programme-item">
-            <div class="programme-item-photo">
-                <img src="/static/img/programme/<?= $activity['image_name'] ?>">
-            </div>
-            <div class="programme-item-text">
-                <?php if (!empty($activity['date']) || DEBUG): ?>
-                    <h4><?= date_format(new DateTime($activity['date']), "jS \of F") . (empty($activity['time']) ? "" : " &middot; " . date_format(new DateTime($activity['time']), "H:i")) ?></h4>
-                <?php endif; ?>
-                <h1><?= $activity['title'] ?></h1>
-                <?= $activity['section']; ?>
-                <p><?= $activity['description'] ?></p>
-                <?php if ($activity['company_visit'] || (cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITEE)) || DEBUG): ?>
-                    <div class="corner btn-group" role="group">
-                        <!-- TODO: fix url. -->
-                        <?php if ($activity['company_visit']): ?>
-                            <a class="btn btn-primary" href="/companies/index.php?view=read&id=<?= $activity['company_id'] ?>" role="button">Read more</a>
-                            <a class="btn btn-secondary" href="/companies" role="button">All company visits</a>
-                        <?php endif; ?>
-                        <?php if ((cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITEE)) || DEBUG): ?>
-                            <a class="btn btn-secondary" href="/programme/index.php?view=update&id=<?= $activity['id'] ?>" role="button">Edit</a>
-                            <a class="btn btn-danger" href="/programme/index.php?view=delete&id=<?= $activity['id'] ?>" role="button">Delete</a>
-                        <?php endif; ?>
-                    </div>
-                <?php endif; ?>
-            </div>
-        </div>
-    <?php endforeach; ?>
+	<img src="/static/img/programme/end-of-section-banners/<?= $section ?>.png" class="banner" id="destination01">
 
 <?php endforeach; ?>
-
-<div class="programme-item">
-    <div class="programme-item-photo">
-        <img src="/static/img/programme/trein.jpg">
-    </div>
-    <div class="programme-item-text">
-        <h4>26<sup>th</sup> of April - 10:00</h4>
-        <h1>Travel by train</h1>
-        <p>
-            We will leave our beloved Groningen to go sightseeing through Drenthe and other provinces to finally arrive at Schiphol Airport.
-            The train ride will take approximately two and a half hours, after which we will spend another couple of hours at the airport checking in and going through customs.
-            On the airport itself there will be plenty of time to buy some overpriced McDonald's or Starbucks coffee before we finally take off and really start our excursion.
-        </p>
-    </div>
-</div>
-
-<img src="/static/img/programme/travel_banner_01.png" class="banner" id="destination01">
-
-<div class="programme-item">
-    <div class="programme-item-photo">
-        <img src="/static/img/programme/ratio_placeholder.png">
-    </div>
-    <div class="programme-item-text">
-        <h4>1<sup>st</sup> of May - 14:00</h4>
-        <h1>Arrival in [LOCATION]</h1>
-    </div>
-</div>
-
-<div class="programme-item">
-    <div class="programme-item-photo">
-        <img src="/static/img/programme/ratio_placeholder.png">
-    </div>
-    <div class="programme-item-text">
-        <h4>1<sup>st</sup> of May - 14:00</h4>
-        <h1>Pub crawl</h1>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consequat mauris nunc congue nisi vitae suscipit tellus mauris a. Sit amet consectetur adipiscing elit. Sit amet facilisis magna etiam tempor orci eu lobortis.
-        </p>
-        <div class="corner btn-group" role="group">
-            <!-- TODO: fix url. -->
-            <a class="btn btn-primary" href="/companies/company_template.php" role="button">Read more</a>
-            <a class="btn btn-secondary" href="/companies" role="button">All company visits</a>
-        </div>
-    </div>
-</div>
-
-<div class="programme-item">
-    <div class="programme-item-photo">
-        <img src="/static/img/programme/ratio_placeholder.png">
-    </div>
-    <div class="programme-item-text">
-        <h4>1<sup>st</sup> of May - 14:00</h4>
-        <h1>Generic Company Name</h1>
-        <p>
-            Fermentum posuere urna nec tincidunt praesent. Eget dolor morbi non arcu risus quis varius quam quisque. Eu tincidunt tortor aliquam nulla facilisi cras. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus.
-        </p>
-        <div class="corner btn-group" role="group">
-            <!-- TODO: fix url. -->
-            <a class="btn btn-primary" href="/companies/company_template.php" role="button">Read more</a>
-            <a class="btn btn-secondary" href="/companies" role="button">All company visits</a>
-        </div>
-    </div>
-</div>
-<div class="programme-item">
-    <div class="programme-item-photo">
-        <img src="/static/img/programme/ratio_placeholder.png">
-    </div>
-    <div class="programme-item-text">
-        <h4>1<sup>st</sup> of May - 14:00</h4>
-        <h1>Departure from [LOCATION]</h1>
-        <p>
-            Ac tortor dignissim convallis aenean et tortor at risus. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque. Quis ipsum suspendisse ultrices gravida. Eu feugiat pretium nibh ipsum consequat.
-        </p>
-    </div>
-</div>
-
-<img src="/static/img/programme/travel_banner_02.png" class="banner" id="destination02">
-
-<div class="programme-item">
-    <div class="programme-item-photo">
-        <img src="/static/img/programme/ratio_placeholder.png">
-    </div>
-    <div class="programme-item-text">
-        <h4>1<sup>st</sup> of May - 14:00</h4>
-        <h1>Arrival in [LOCATION]</h1>
-    </div>
-</div>
-
-<img src="/static/img/programme/travel_banner_03.png" class="banner" id="destination03">
 
 <?php $this->end() ?>
