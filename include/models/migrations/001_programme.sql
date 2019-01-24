@@ -5,6 +5,7 @@
 DROP TABLE IF EXISTS `programme`;
 CREATE TABLE `programme` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `section` enum('pre-excursion','city-01','city-02','city-03','post-excursion') NOT NULL DEFAULT 'pre-excursion',
   `date` date,
   `time` time,
   `title` varchar(255),

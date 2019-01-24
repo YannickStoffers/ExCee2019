@@ -6,9 +6,15 @@
 
 <?php $this->begin('content') ?>
 <div class="container container-narrow">
-    <header>
-        <h1>Activity</h1>
-    </header>
-    <?= $form->render() ?>
+	<header>
+		<h1>Activity</h1>
+	</header>
+	<?php if ((cover_session_logged_in () && cover_session_in_committee (ADMIN_COMMITTEE)) || DEBUG): ?>
+		<?= $form->render() ?>
+	<?php elseif (!cover_session_logged_in ()): ?>
+		<a href="<?= cover_login_url() ?>" class="btn btn-primary">Login and get started!</a>
+	<?php elseif (!cover_session_in_committee (ADMIN_COMMITTEE)): ?>
+		You need to be a member of the ExCee to see this page!
+	<?php endif; ?>
 </div>
 <?php $this->end() ?>
