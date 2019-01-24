@@ -20,6 +20,7 @@ class ProgrammeForm extends Bootstrap3Form
 		$fields = [
 			'section'		=> new SelectField		('Location of the activity', $sections,							false),
 			'date'        	=> new DateField		('Date of activity (yyyy-mm-dd)', 'Y-m-d',						!$strict),
+			'show_time' 	=> new CheckBoxField	('Show time in programme',    									true),
 			'time'          => new StringField		('Time of activity (hh:mm)',									!$strict, ['maxlength' => 10]),
 			'title'         => new StringField		('Title',														!$strict, ['maxlength' => 255]),
 			'description'   => new TextAreaField	('Description',													!$strict, ['maxlength' => 4096]),

@@ -32,9 +32,7 @@ class CompaniesView extends ModelView
     /** Maps a valid form to its database representation */
     protected function process_form_data($data) {
         // Convert booleans to tinyints
-        // $data['company_visit'] = empty($data['company_visit']) ? 0 : 1;
-        // $data['accept_costs'] = empty($data['accept_costs']) ? 0 : 1;
-        // $data['installments'] = empty($data['installments']) ? 0 : 1;
+        $data['show_time'] = empty($data['show_time']) ? 0 : 1;
 
         $url = explode('//', $data['home_page'], 2);
         $data['home_page'] = '//' . (count($url) > 1 ? $url[1] : $url[0]);

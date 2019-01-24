@@ -10,7 +10,7 @@ Programme
 
 <?php $this->begin('extra_navbar_button') ?>
 	<li class="nav-item" >
-		<a class="btn-success" href="/programme/index.php?view=create">New Activity</a>
+		<a class="bg-success" href="/programme/index.php?view=create">New Activity</a>
 	</li>
 <?php $this->end() ?>
 
@@ -64,7 +64,7 @@ Programme
 			</div>
 			<div class="programme-item-text">
 				<?php if (!empty($activity['date']) || DEBUG): ?>
-					<h4><?= date_format(new DateTime($activity['date']), "jS \of F") . (empty($activity['time']) ? "" : " &middot; " . date_format(new DateTime($activity['time']), "H:i")) ?></h4>
+					<h4><?= date_format(new DateTime($activity['date']), "jS \of F") . ($activity['show_time'] ? " &middot; " . date_format(new DateTime($activity['time']), "H:i") : "") ?></h4>
 				<?php endif; ?>
 				<h1><?= $activity['title'] ?></h1>
 				<p><?= $activity['description'] ?></p>

@@ -33,8 +33,7 @@ class ProgrammeView extends ModelView
 	protected function process_form_data($data) {
 		// Convert booleans to tinyints
 		$data['company_visit'] = empty($data['company_visit']) ? 0 : 1;
-		// $data['accept_costs'] = empty($data['accept_costs']) ? 0 : 1;
-		// $data['installments'] = empty($data['installments']) ? 0 : 1;
+		$data['show_time'] = empty($data['show_time']) ? 0 : 1;
 		
 		parent::process_form_data($data);   
 	}
