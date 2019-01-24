@@ -182,6 +182,15 @@ button.astext {
 		flex: 1 0 100%;
 		max-width: 100%;
 	}
+
+	.decreased-margin-bottom {
+		margin-bottom: -48px !important;
+	}
+
+	.extra-padding-top {
+		padding-top: 48px !important;
+}
+
 }
 
 @media only screen and (max-width: 550px) {
@@ -214,9 +223,9 @@ button.astext {
 }
 
 .decreased-margin-bottom {
-	margin-bottom: -64px !important;
+	margin-bottom: -64px;
 }
 
 .extra-padding-top {
-	padding-top: 64px !important;
+	padding-top: 64px;
 }

@@ -7,10 +7,9 @@ iframe {
 
 /* Your custom CSS here */
 .corner {
-	position: absolute;
-	bottom: 15px;
-	right: 0;
-	left: auto;
+	position: relative;
+	justify-content: flex-start;
+	margin-top: 30px;
 }
 
 .company p {
@@ -88,8 +87,11 @@ iframe {
 	}
 
 	.company:nth-of-type(even) .corner {
-		right: auto;
-		left: 0;
+		justify-content: flex-start;
+	}
+
+	.corner {
+		justify-content: flex-end;
 	}
 }
 

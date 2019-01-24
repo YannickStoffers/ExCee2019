@@ -5,42 +5,42 @@
 <?php $this->end() ?>
 
 <?php $this->begin('extra_navbar_button') ?>
-    <li class="nav-item" >
-        <a class="btn-success" href="/companies/index.php?view=create">New Company</a>
-    </li>
+	<li class="nav-item" >
+		<a class="btn-success" href="/companies/index.php?view=create">New Company</a>
+	</li>
 <?php $this->end() ?>
 
 <?php $this->begin('content') ?>
 <div class="container container-wide text-center">
 	<header>
-        <h1>During the excursion we will visit the following companies:</h1>
-    </header>
+		<h1>During the excursion we will visit the following companies:</h1>
+	</header>
 
-    <?php foreach ($objects as $company): ?>
-        <div class="company">
-            <div class="company-photo">
-                <a href="<?= $company['home_page'] ?>" target="_blank">
-                    <img src="<?= $company['logo_url'] ?>">
-                </a>
-            </div>
-            <div class="company-text">
-                <h1>
-                    <?= $company['name'] ?>
-                    <?php if ((cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITEE)) || DEBUG): ?>
-                        <span class="badge badge-dark">#<?= $company['id'] ?></span>
-                    <?php endif; ?>
-                </h1>
-                <p><?= $company['description'] ?></p>
-            </div>
-            <div class="btn-group corner">
-                <a class="btn btn-primary" href="/companies/index.php?view=read&id=<?= $company['id'] ?>">Read more</a>
-                <?php if ((cover_session_logged_in () && cover_session_in_committee (ADMIN_COMMITEE)) || DEBUG): ?>
-                    <a class="btn btn-secondary" href="/companies/index.php?view=update&id=<?= $company['id'] ?>">Edit</a>
-                    <a class="btn btn-danger" href="/companies/index.php?view=delete&id=<?= $company['id'] ?>">Delete</a>
-                <?php endif;?>
-            </div>
-        </div>
-    <?php endforeach;?>
+	<?php foreach ($objects as $company): ?>
+		<div class="company">
+			<div class="company-photo">
+				<a href="<?= $company['home_page'] ?>" target="_blank">
+					<img src="<?= $company['logo_url'] ?>">
+				</a>
+			</div>
+			<div class="company-text">
+				<h1>
+					<?= $company['name'] ?>
+					<?php if ((cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITEE)) || DEBUG): ?>
+						<span class="badge badge-dark">#<?= $company['id'] ?></span>
+					<?php endif; ?>
+				</h1>
+				<p><?= $company['description'] ?></p>
+				<div class="btn-group corner">
+					<a class="btn btn-primary" href="/companies/index.php?view=read&id=<?= $company['id'] ?>">Read more</a>
+					<?php if ((cover_session_logged_in () && cover_session_in_committee (ADMIN_COMMITEE)) || DEBUG): ?>
+						<a class="btn btn-secondary" href="/companies/index.php?view=update&id=<?= $company['id'] ?>">Edit</a>
+						<a class="btn btn-danger" href="/companies/index.php?view=delete&id=<?= $company['id'] ?>">Delete</a>
+					<?php endif;?>
+				</div>
+			</div>
+		</div>
+	<?php endforeach;?>
 </div>
 
 <?php $this->end() ?>

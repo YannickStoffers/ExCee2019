@@ -6,338 +6,340 @@
 
 <?php $this->begin('content') ?>
 <div class="container-fluid">
-    <header class="page-header">
-        <h1>Registrations</h1>
-    </header>
+	<header class="page-header">
+		<h1>Registrations</h1>
+	</header>
 
-    <h2>Statistics</h2>
-    <div class="row">
-        <div class="col-xs-12 col-md-8 col-lg-4">
-            <table class="table table-hover ">        
-                <thead>
-                    <tr>
-                        <th>Student transit product type</th>
-                        <th>Pending</th>
-                        <th>Registered</th>
-                        <th>Cancelled</th>
-                        <th>Waiting list</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach (get_model('Registration')::$ov_options as $type): ?>
-                        <tr>
-                            <td><?= $type ?></td>
-                            <td>
-                                <?= count( array_filter($objects, function ($p) use ($type) {
-                                    return $p['student_ov'] === $type && $p['status'] === 'pending';
-                                }) ) ?>
-                            </td>
-                            <td>
-                                <?= count( array_filter($objects, function ($p) use ($type) {
-                                    return $p['student_ov'] === $type && $p['status'] === 'registered';
-                                }) ) ?>
-                            </td>
-                            <td>
-                                <?= count( array_filter($objects, function ($p) use ($type) {
-                                    return $p['student_ov'] === $type && $p['status'] === 'cancelled';
-                                }) ) ?>
-                            </td>
-                            <td>
-                                <?= count( array_filter($objects, function ($p) use ($type) {
-                                    return $p['student_ov'] === $type && $p['status'] === 'waiting_list';
-                                }) ) ?>
-                            </td>
-                        </tr>
-                    <?php endforeach ?>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>
-                            Total (<?= MAX_SIGNUPS - 
-                                count( array_filter($objects, function ($p) { return $p['status'] === 'registered'; })) - 
-                                count( array_filter($objects, function ($p) { return $p['status'] === 'waiting_list'; })) -
-                                count( array_filter($objects, function ($p) { return $p['status'] === 'pending'; })) ?> 
-                            spots remaining)
-                        </th>
-                        <th>
-                            <?= count( array_filter($objects, function ($p) { return $p['status'] === 'pending'; }) ) ?>
-                        </th>
-                        <th>
-                            <?= count( array_filter($objects, function ($p) { return $p['status'] === 'registered'; }) ) ?>
-                        </th>
-                        <th>
-                            <?= count( array_filter($objects, function ($p) { return $p['status'] === 'cancelled'; }) ) ?>
-                        </th>
-                        <th>
-                            <?= count( array_filter($objects, function ($p) { return $p['status'] === 'waiting_list'; }) ) ?>
-                        </th>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-    </div>
+	<h2>Statistics</h2>
+	<div class="row">
+		<div class="col-xs-12 col-md-8 col-lg-4">
+			<div class="table-responsive"> 
+				<table class="table table-hover ">        
+					<thead>
+						<tr>
+							<th>Student transit product type</th>
+							<th>Pending</th>
+							<th>Registered</th>
+							<th>Cancelled</th>
+							<th>Waiting list</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach (get_model('Registration')::$ov_options as $type): ?>
+							<tr>
+								<td><?= $type ?></td>
+								<td>
+									<?= count( array_filter($objects, function ($p) use ($type) {
+										return $p['student_ov'] === $type && $p['status'] === 'pending';
+									}) ) ?>
+								</td>
+								<td>
+									<?= count( array_filter($objects, function ($p) use ($type) {
+										return $p['student_ov'] === $type && $p['status'] === 'registered';
+									}) ) ?>
+								</td>
+								<td>
+									<?= count( array_filter($objects, function ($p) use ($type) {
+										return $p['student_ov'] === $type && $p['status'] === 'cancelled';
+									}) ) ?>
+								</td>
+								<td>
+									<?= count( array_filter($objects, function ($p) use ($type) {
+										return $p['student_ov'] === $type && $p['status'] === 'waiting_list';
+									}) ) ?>
+								</td>
+							</tr>
+						<?php endforeach ?>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th>
+								Total (<?= MAX_SIGNUPS - 
+									count( array_filter($objects, function ($p) { return $p['status'] === 'registered'; })) - 
+									count( array_filter($objects, function ($p) { return $p['status'] === 'waiting_list'; })) -
+									count( array_filter($objects, function ($p) { return $p['status'] === 'pending'; })) ?> 
+								spots remaining)
+							</th>
+							<th>
+								<?= count( array_filter($objects, function ($p) { return $p['status'] === 'pending'; }) ) ?>
+							</th>
+							<th>
+								<?= count( array_filter($objects, function ($p) { return $p['status'] === 'registered'; }) ) ?>
+							</th>
+							<th>
+								<?= count( array_filter($objects, function ($p) { return $p['status'] === 'cancelled'; }) ) ?>
+							</th>
+							<th>
+								<?= count( array_filter($objects, function ($p) { return $p['status'] === 'waiting_list'; }) ) ?>
+							</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
 
-    <h2>Registrations</h2>
-    <!-- <button onclick="download()" style="border-width: 0; background: white;">
-        <img src="static/icons/download.png" style="height: auto; width: auto; max-height: 25px; max-width: 25px;">
-        Export for financial administration.
-    </button>
-    <button onclick="exportForBar()" style="border-width: 0; background: white;">
-        <img src="static/icons/download.png" style="height: auto; width: auto; max-height: 25px; max-width: 25px;">
-        Export for B.A.R.
-    </button> -->
-    <div class="table-responsive"> 
-        <table class="table table-hover table-registrations" id="registrations">
-            <thead>
-                <tr>
-                    <th onClick="sortTable(0)"></th>
-                    <th onclick="sortTable(1)" style="cursor: pointer;">Name</th>
-                    <th onclick="sortTable(2)" style="cursor: pointer;">Surname</th>
-                    <th onclick="sortTable(3)" style="cursor: pointer;">Birthday</th>
-                    <th onclick="sortTable(4)" style="cursor: pointer;">Travel document</th>
-                    <th onclick="sortTable(5)" style="cursor: pointer;">Address</th>
-                    <th onclick="sortTable(6)" style="cursor: pointer;">Postal</th>
-                    <th onclick="sortTable(7)" style="cursor: pointer;">City</th>
-                    <th onclick="sortTable(8)" style="cursor: pointer;">Email</th>
-                    <th onclick="sortTable(9)" style="cursor: pointer;">Phone</th>
-                    <th onclick="sortTable(10)" style="cursor: pointer;">Emergency</th>
-                    <th onclick="sortTable(11)" style="cursor: pointer;">IBAN</th>
-                    <th onclick="sortTable(12)" style="cursor: pointer;">BIC</th>
-                    <th onclick="sortTable(13)" style="cursor: pointer;">Installments</th>
-                    <th onclick="sortTable(14)" style="cursor: pointer;">Student transit product</th>
-                    <th onclick="sortTable(15)" style="cursor: pointer;">Remarks</th>
-                    <th onclick="sortTable(16)" style="cursor: pointer;">Status</th>
-                    <th onclick="sortTable(17)" style="cursor: pointer;">Registration time</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php $pending_count = 0;
-                    $total_count = 0;
-                    foreach ($objects as $participant): ?>
-                    <tr>
-                        <td class="text-center bg-success">
-                            <span class="badge badge-success">#<?= ++$total_count < 10 ? "0" . $total_count : $total_count ?></span>
-                        </td>
-                        <td><?= $this->html($participant['first_name']) ?></td>
-                        <td><?= $this->html($participant['surname']) ?></td>
-                        <td>
-                            <?php if (date_diff(date_create($participant['birthday']), date_create('now'))->y < 18): ?>
-                                <span class="badge badge-warning">
-                            <?php endif ?>
-                            <?= $this->html($participant['birthday']) ?>
-                            <?php if (date_diff(date_create($participant['birthday']), date_create('now'))->y < 18): ?>
-                                </span>
-                            <?php endif ?>
-                        </td>
-                        <td class="text-center bg-secondary">
-                            <a tabindex="0" data-toggle="popover" data-trigger="focus" title="Travel document number" data-content=<?= $this->html($participant['passport']) ?>>
-                                <span class="badge badge-secondary">Click to view</span>
-                            </a>
-                        </td>
-                        <td><?= $this->html($participant['address']) ?></td>
-                        <td><?= $this->html($participant['postal_code']) ?></td>
-                        <td><?= $this->html($participant['city']) ?></td>
-                        <td><?= $this->html($participant['email']) ?></td>
-                        <td><?= $this->html($participant['phone']) ?></td>
-                        <td><?= $this->html($participant['emergency_phone']) ?></td>
-                        <td><?= $this->html($participant['iban']) ?></td>
-                        <td><?= $this->html($participant['bic']) ?></td>
-                        <td class=<?= $participant['installments'] ? "bg-info" : "bg-warning"?>>
-                            <?php if ($participant['installments'] == true): ?>
-                                <span class="badge badge-info">Installments</span>
-                            <?php else: ?>
-                                <span class="badge badge-warning">Single payment</span>
-                            <?php endif; ?>
-                        </td>
-                        <td class=
-                            <?= ($participant['student_ov'] === 'Weekend') ? "bg-success" : (
-                                ($participant['student_ov'] === 'Week') ? "bg-warning" : (
-                                    ($participant['student_ov'] === 'Neither') ? "bg-danger" : ""
-                                )
-                            ) 
-                            ?>>
-                            <?php if ($participant['student_ov'] === 'Weekend'): ?>
-                                <span class="badge badge-success">Weekend free</span>
-                            <?php elseif ($participant['student_ov'] === 'Week'): ?>
-                                <span class="badge badge-warning">Weekdays free</span>
-                            <?php elseif ($participant['student_ov'] === 'Neither'): ?>
-                                <span class="badge badge-danger">No free :(</span>
-                            <?php endif ?></td>
-                        <td class="truncate"><?= $this->html($participant['remarks']) ?></td>
-                        <td class=
-                            <?= ($participant['status'] === 'pending') ? "bg-info" : (
-                                ($participant['status'] === 'registered') ? "bg-success" : (
-                                    ($participant['status'] === 'cancelled') ? "bg-danger" : (
-                                        ($participant['status'] === 'waiting_list') ? "bg-warning" : "bg-secondary")
-                                    )
-                                ) 
-                            ?>>
-                            <?php if ($participant['status'] === 'pending'): ?>
-                                <?php $pending_count = $pending_count + 1; ?>
-                                <span class="badge badge-info">Pending #<?= $pending_count ?></span>
-                            <?php elseif ($participant['status'] === 'registered'): ?>
-                                <span class="badge badge-success">Registered</span>
-                            <?php elseif ($participant['status'] === 'cancelled'): ?>
-                                <span class="badge badge-danger">Cancelled</span>
-                            <?php elseif ($participant['status'] === 'waiting_list'): ?>
-                                <span class="badge badge-warning">Waiting List</span>
-                            <?php else: ?>
-                                <span class="badge badge-secondary">Status Unknown</span>
-                            <?php endif ?>
-                        </td>
-                        <td class="text-center bg-primary">
-                            <a tabindex="0" data-toggle="popover" data-trigger="focus" title="Time of registration" data-content="<?= 
-                            $this->html(date_format(new DateTime($participant['registration_date']), "d-m H:i"))
-                            ?>">
-                            <span class="badge badge-primary">
-                                <?php 
-                                    $date1 = new DateTime (date("Y-m-d H:i:s"));
-                                    $date2 = new DateTime ($participant['registration_date']);
-                                    $diff = $date1->diff($date2);
-                                    $hours = $diff->h;
+	<h2>Registrations</h2>
+	<!-- <button onclick="download()" style="border-width: 0; background: white;">
+		<img src="static/icons/download.png" style="height: auto; width: auto; max-height: 25px; max-width: 25px;">
+		Export for financial administration.
+	</button>
+	<button onclick="exportForBar()" style="border-width: 0; background: white;">
+		<img src="static/icons/download.png" style="height: auto; width: auto; max-height: 25px; max-width: 25px;">
+		Export for B.A.R.
+	</button> -->
+	<div class="table-responsive"> 
+		<table class="table table-hover table-registrations" id="registrations">
+			<thead>
+				<tr>
+					<th onClick="sortTable(0)"></th>
+					<th onclick="sortTable(1)" style="cursor: pointer;">Name</th>
+					<th onclick="sortTable(2)" style="cursor: pointer;">Surname</th>
+					<th onclick="sortTable(3)" style="cursor: pointer;">Birthday</th>
+					<th onclick="sortTable(4)" style="cursor: pointer;">Travel document</th>
+					<th onclick="sortTable(5)" style="cursor: pointer;">Address</th>
+					<th onclick="sortTable(6)" style="cursor: pointer;">Postal</th>
+					<th onclick="sortTable(7)" style="cursor: pointer;">City</th>
+					<th onclick="sortTable(8)" style="cursor: pointer;">Email</th>
+					<th onclick="sortTable(9)" style="cursor: pointer;">Phone</th>
+					<th onclick="sortTable(10)" style="cursor: pointer;">Emergency</th>
+					<th onclick="sortTable(11)" style="cursor: pointer;">IBAN</th>
+					<th onclick="sortTable(12)" style="cursor: pointer;">BIC</th>
+					<th onclick="sortTable(13)" style="cursor: pointer;">Installments</th>
+					<th onclick="sortTable(14)" style="cursor: pointer;">Student transit product</th>
+					<th onclick="sortTable(15)" style="cursor: pointer;">Remarks</th>
+					<th onclick="sortTable(16)" style="cursor: pointer;">Status</th>
+					<th onclick="sortTable(17)" style="cursor: pointer;">Registration time</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php $pending_count = 0;
+					$total_count = 0;
+					foreach ($objects as $participant): ?>
+					<tr>
+						<td class="text-center bg-success">
+							<span class="badge badge-success">#<?= ++$total_count < 10 ? "0" . $total_count : $total_count ?></span>
+						</td>
+						<td><?= $this->html($participant['first_name']) ?></td>
+						<td><?= $this->html($participant['surname']) ?></td>
+						<td>
+							<?php if (date_diff(date_create($participant['birthday']), date_create('now'))->y < 18): ?>
+								<span class="badge badge-warning">
+							<?php endif ?>
+							<?= $this->html($participant['birthday']) ?>
+							<?php if (date_diff(date_create($participant['birthday']), date_create('now'))->y < 18): ?>
+								</span>
+							<?php endif ?>
+						</td>
+						<td class="text-center bg-secondary">
+							<a tabindex="0" data-toggle="popover" data-trigger="focus" title="Travel document number" data-content=<?= $this->html($participant['passport']) ?>>
+								<span class="badge badge-secondary">Click to view</span>
+							</a>
+						</td>
+						<td><?= $this->html($participant['address']) ?></td>
+						<td><?= $this->html($participant['postal_code']) ?></td>
+						<td><?= $this->html($participant['city']) ?></td>
+						<td><?= $this->html($participant['email']) ?></td>
+						<td><?= $this->html($participant['phone']) ?></td>
+						<td><?= $this->html($participant['emergency_phone']) ?></td>
+						<td><?= $this->html($participant['iban']) ?></td>
+						<td><?= $this->html($participant['bic']) ?></td>
+						<td class=<?= $participant['installments'] ? "bg-info" : "bg-warning"?>>
+							<?php if ($participant['installments'] == true): ?>
+								<span class="badge badge-info">Installments</span>
+							<?php else: ?>
+								<span class="badge badge-warning">Single payment</span>
+							<?php endif; ?>
+						</td>
+						<td class=
+							<?= ($participant['student_ov'] === 'Weekend') ? "bg-success" : (
+								($participant['student_ov'] === 'Week') ? "bg-warning" : (
+									($participant['student_ov'] === 'Neither') ? "bg-danger" : ""
+								)
+							) 
+							?>>
+							<?php if ($participant['student_ov'] === 'Weekend'): ?>
+								<span class="badge badge-success">Weekend free</span>
+							<?php elseif ($participant['student_ov'] === 'Week'): ?>
+								<span class="badge badge-warning">Weekdays free</span>
+							<?php elseif ($participant['student_ov'] === 'Neither'): ?>
+								<span class="badge badge-danger">No free :(</span>
+							<?php endif ?></td>
+						<td class="truncate"><?= $this->html($participant['remarks']) ?></td>
+						<td class=
+							<?= ($participant['status'] === 'pending') ? "bg-info" : (
+								($participant['status'] === 'registered') ? "bg-success" : (
+									($participant['status'] === 'cancelled') ? "bg-danger" : (
+										($participant['status'] === 'waiting_list') ? "bg-warning" : "bg-secondary")
+									)
+								) 
+							?>>
+							<?php if ($participant['status'] === 'pending'): ?>
+								<?php $pending_count = $pending_count + 1; ?>
+								<span class="badge badge-info">Pending #<?= $pending_count ?></span>
+							<?php elseif ($participant['status'] === 'registered'): ?>
+								<span class="badge badge-success">Registered</span>
+							<?php elseif ($participant['status'] === 'cancelled'): ?>
+								<span class="badge badge-danger">Cancelled</span>
+							<?php elseif ($participant['status'] === 'waiting_list'): ?>
+								<span class="badge badge-warning">Waiting List</span>
+							<?php else: ?>
+								<span class="badge badge-secondary">Status Unknown</span>
+							<?php endif ?>
+						</td>
+						<td class="text-center bg-primary">
+							<a tabindex="0" data-toggle="popover" data-trigger="focus" title="Time of registration" data-content="<?= 
+							$this->html(date_format(new DateTime($participant['registration_date']), "d-m H:i"))
+							?>">
+							<span class="badge badge-primary">
+								<?php 
+									$date1 = new DateTime (date("Y-m-d H:i:s"));
+									$date2 = new DateTime ($participant['registration_date']);
+									$diff = $date1->diff($date2);
+									$hours = $diff->h;
 
-                                    $result = "";
+									$result = "";
 
-                                    if ($diff->d != 0){
-                                        $result = $result . $diff->d . " day" . ($diff->d > 1 ? "s" : "");
-                                    }
-                                    if ($diff->h != 0)
-                                        $result = $result . " " . $diff->h . " hour" . ($diff->h > 1 ? "s" : "");
-                                    if ($diff->d == 0 && $diff->i != 0)
-                                        $result = $result . " " . $diff->i . " minute" . ($diff->i > 1 ? "s" : "");
-                                    if ($diff->d == 0 && $diff->h == 0 && $diff->i == 0)
-                                        $result = $result . $diff->s . " second" . ($diff->s > 1 ? "s" : "");
-                                    echo $result . " ago";
-                                ?>
-                            </span></a>
-                        </td>
-                        <td class="text-right bg-dark">
-                            <a href="/signup_admin.php?view=update&id=<?= $participant['id'] ?>">
-                                <span class="badge badge-dark">edit</span>
-                            </a>
-                        </td>
-                    </tr>
-                <?php endforeach ?>
-                <?php if (!$objects): ?>
-                    <tr><td colspan="14" class="text-muted text-center">Nobody has registered yet :(</td></tr>
-                <?php endif ?>
-            </tbody>
-        </table>
-        <script>
-            function sortTable(n) {
-                var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-                table = document.getElementById("registrations");
-                switching = true;
-                // Set the sorting direction to ascending:
-                dir = "asc"; 
-                /* Make a loop that will continue until
-                no switching has been done: */
-                while (switching) {
-                    // Start by saying: no switching is done:
-                    switching = false;
-                    rows = table.getElementsByTagName("TR");
-                    /* Loop through all table rows (except the
-                    first, which contains table headers): */
-                    for (i = 1; i < (rows.length - 1); i++) {
-                        // Start by saying there should be no switching:
-                        shouldSwitch = false;
-                        /* Get the two elements you want to compare,
-                        one from current row and one from the next: */
-                        x = rows[i].getElementsByTagName("TD")[n];
-                        y = rows[i + 1].getElementsByTagName("TD")[n];
-                        /* Check if the two rows should switch place,
-                        based on the direction, asc or desc: */
-                        if (dir == "asc") {
-                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                                // If so, mark as a switch and break the loop:
-                                shouldSwitch = true;
-                                break;
-                            }
-                        } else if (dir == "desc") {
-                            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                                // If so, mark as a switch and break the loop:
-                                shouldSwitch = true;
-                                break;
-                            }
-                        }
-                    }
-                    if (shouldSwitch) {
-                        /* If a switch has been marked, make the switch
-                        and mark that a switch has been done: */
-                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                        switching = true;
-                        // Each time a switch is done, increase this count by 1:
-                        switchcount ++; 
-                    } else {
-                        /* If no switching has been done AND the direction is "asc",
-                        set the direction to "desc" and run the while loop again. */
-                        if (switchcount == 0 && dir == "asc") {
-                            dir = "desc";
-                            switching = true;
-                        }
-                    }
-                }
-            }
+									if ($diff->d != 0){
+										$result = $result . $diff->d . " day" . ($diff->d > 1 ? "s" : "");
+									}
+									if ($diff->h != 0)
+										$result = $result . " " . $diff->h . " hour" . ($diff->h > 1 ? "s" : "");
+									if ($diff->d == 0 && $diff->i != 0)
+										$result = $result . " " . $diff->i . " minute" . ($diff->i > 1 ? "s" : "");
+									if ($diff->d == 0 && $diff->h == 0 && $diff->i == 0)
+										$result = $result . $diff->s . " second" . ($diff->s > 1 ? "s" : "");
+									echo $result . " ago";
+								?>
+							</span></a>
+						</td>
+						<td class="text-right bg-dark">
+							<a href="/signup_admin.php?view=update&id=<?= $participant['id'] ?>">
+								<span class="badge badge-dark">edit</span>
+							</a>
+						</td>
+					</tr>
+				<?php endforeach ?>
+				<?php if (!$objects): ?>
+					<tr><td colspan="14" class="text-muted text-center">Nobody has registered yet :(</td></tr>
+				<?php endif ?>
+			</tbody>
+		</table>
+		<script>
+			function sortTable(n) {
+				var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+				table = document.getElementById("registrations");
+				switching = true;
+				// Set the sorting direction to ascending:
+				dir = "asc"; 
+				/* Make a loop that will continue until
+				no switching has been done: */
+				while (switching) {
+					// Start by saying: no switching is done:
+					switching = false;
+					rows = table.getElementsByTagName("TR");
+					/* Loop through all table rows (except the
+					first, which contains table headers): */
+					for (i = 1; i < (rows.length - 1); i++) {
+						// Start by saying there should be no switching:
+						shouldSwitch = false;
+						/* Get the two elements you want to compare,
+						one from current row and one from the next: */
+						x = rows[i].getElementsByTagName("TD")[n];
+						y = rows[i + 1].getElementsByTagName("TD")[n];
+						/* Check if the two rows should switch place,
+						based on the direction, asc or desc: */
+						if (dir == "asc") {
+							if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+								// If so, mark as a switch and break the loop:
+								shouldSwitch = true;
+								break;
+							}
+						} else if (dir == "desc") {
+							if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+								// If so, mark as a switch and break the loop:
+								shouldSwitch = true;
+								break;
+							}
+						}
+					}
+					if (shouldSwitch) {
+						/* If a switch has been marked, make the switch
+						and mark that a switch has been done: */
+						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+						switching = true;
+						// Each time a switch is done, increase this count by 1:
+						switchcount ++; 
+					} else {
+						/* If no switching has been done AND the direction is "asc",
+						set the direction to "desc" and run the while loop again. */
+						if (switchcount == 0 && dir == "asc") {
+							dir = "desc";
+							switching = true;
+						}
+					}
+				}
+			}
 
-            function download() {
-                var table, rows, row, i, csv;
+			function download() {
+				var table, rows, row, i, csv;
 
-                table = document.getElementById("registrations");
-                rows = table.getElementsByTagName("TR");
+				table = document.getElementById("registrations");
+				rows = table.getElementsByTagName("TR");
 
-                csv = "type;name;surname;student_number;birthday;address;postal;city;email;phone;emergency_phone;iban;bic;study;study_year;remarks;vegetarian;status\n";
-                for (i = 1; i < rows.length; i++) {
-                    row = rows[i].getElementsByTagName("TD");
-                    csv += row[0].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "").replace(/\n/g, " -- ");
-                    for (j = 1; j < row.length - 1; j++) {
-                        csv += ";" + row[j].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "").replace(/\n/g, " -- ");
-                    }
-                    csv += "\n";
-                }
+				csv = "type;name;surname;student_number;birthday;address;postal;city;email;phone;emergency_phone;iban;bic;study;study_year;remarks;vegetarian;status\n";
+				for (i = 1; i < rows.length; i++) {
+					row = rows[i].getElementsByTagName("TD");
+					csv += row[0].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "").replace(/\n/g, " -- ");
+					for (j = 1; j < row.length - 1; j++) {
+						csv += ";" + row[j].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "").replace(/\n/g, " -- ");
+					}
+					csv += "\n";
+				}
 
-                if (!csv.match(/^data:text\/csv/i)) {
-                    csv = 'data:text/csv;charset=utf-8,' + csv;
-                }
-                data = encodeURI(csv);
+				if (!csv.match(/^data:text\/csv/i)) {
+					csv = 'data:text/csv;charset=utf-8,' + csv;
+				}
+				data = encodeURI(csv);
 
-                link = document.createElement('a');
-                link.setAttribute('href', data);
-                link.setAttribute('download', 'export.csv');
-                link.click();
-            }
+				link = document.createElement('a');
+				link.setAttribute('href', data);
+				link.setAttribute('download', 'export.csv');
+				link.click();
+			}
 
-            function exportForBar() {
-                var table, rows, row, i, csv, date;
+			function exportForBar() {
+				var table, rows, row, i, csv, date;
 
-                table = document.getElementById("registrations");
-                rows = table.getElementsByTagName("TR");
+				table = document.getElementById("registrations");
+				rows = table.getElementsByTagName("TR");
 
-                csv = "name;birthday;address;city;email;iban;bic\n";
-                for (i = 1; i < rows.length; i++) {
-                    row = rows[i].getElementsByTagName("TD");
-                    csv += row[1].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "") + " " + row[2].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "");
-                    date = row[4].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "").split ("-");
-                    csv += ";" + date[2] + "-" + date[1] + "-" + date[0];
-                    csv += ";" + row[5].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "");
-                    csv += ";" + row[7].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "");
-                    csv += ";" + row[8].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "");
-                    csv += ";" + row[11].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "");
-                    csv += ";" + row[12].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "");
-                    csv += "\n";
-                }
+				csv = "name;birthday;address;city;email;iban;bic\n";
+				for (i = 1; i < rows.length; i++) {
+					row = rows[i].getElementsByTagName("TD");
+					csv += row[1].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "") + " " + row[2].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "");
+					date = row[4].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "").split ("-");
+					csv += ";" + date[2] + "-" + date[1] + "-" + date[0];
+					csv += ";" + row[5].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "");
+					csv += ";" + row[7].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "");
+					csv += ";" + row[8].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "");
+					csv += ";" + row[11].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "");
+					csv += ";" + row[12].innerHTML.replace (/ *\<[^>]*\> */g, "").trim().replace(/;/g, "");
+					csv += "\n";
+				}
 
-                if (!csv.match(/^data:text\/csv/i)) {
-                    csv = 'data:text/csv;charset=utf-8,' + csv;
-                }
-                data = encodeURI(csv);
+				if (!csv.match(/^data:text\/csv/i)) {
+					csv = 'data:text/csv;charset=utf-8,' + csv;
+				}
+				data = encodeURI(csv);
 
-                link = document.createElement('a');
-                link.setAttribute('href', data);
-                link.setAttribute('download', 'export.csv');
-                link.click();
-            }
-        </script>
-    </div>
+				link = document.createElement('a');
+				link.setAttribute('href', data);
+				link.setAttribute('download', 'export.csv');
+				link.click();
+			}
+		</script>
+	</div>
 </div>
 <?php $this->end() ?>
