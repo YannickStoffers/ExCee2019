@@ -11,71 +11,69 @@
 	</header>
 
 	<h2>Statistics</h2>
-	<div class="row">
-		<div class="containter-fluid">
-			<div class="table-responsive"> 
-				<table class="table table-hover ">        
-					<thead>
+	<div class="containter-fluid">
+		<div class="table-responsive"> 
+			<table class="table table-hover ">        
+				<thead>
+					<tr>
+						<th>Student transit product type</th>
+						<th>Pending</th>
+						<th>Registered</th>
+						<th>Cancelled</th>
+						<th>Waiting list</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach (get_model('Registration')::$ov_options as $type): ?>
 						<tr>
-							<th>Student transit product type</th>
-							<th>Pending</th>
-							<th>Registered</th>
-							<th>Cancelled</th>
-							<th>Waiting list</th>
+							<td><?= $type ?></td>
+							<td>
+								<?= count( array_filter($objects, function ($p) use ($type) {
+									return $p['student_ov'] === $type && $p['status'] === 'pending';
+								}) ) ?>
+							</td>
+							<td>
+								<?= count( array_filter($objects, function ($p) use ($type) {
+									return $p['student_ov'] === $type && $p['status'] === 'registered';
+								}) ) ?>
+							</td>
+							<td>
+								<?= count( array_filter($objects, function ($p) use ($type) {
+									return $p['student_ov'] === $type && $p['status'] === 'cancelled';
+								}) ) ?>
+							</td>
+							<td>
+								<?= count( array_filter($objects, function ($p) use ($type) {
+									return $p['student_ov'] === $type && $p['status'] === 'waiting_list';
+								}) ) ?>
+							</td>
 						</tr>
-					</thead>
-					<tbody>
-						<?php foreach (get_model('Registration')::$ov_options as $type): ?>
-							<tr>
-								<td><?= $type ?></td>
-								<td>
-									<?= count( array_filter($objects, function ($p) use ($type) {
-										return $p['student_ov'] === $type && $p['status'] === 'pending';
-									}) ) ?>
-								</td>
-								<td>
-									<?= count( array_filter($objects, function ($p) use ($type) {
-										return $p['student_ov'] === $type && $p['status'] === 'registered';
-									}) ) ?>
-								</td>
-								<td>
-									<?= count( array_filter($objects, function ($p) use ($type) {
-										return $p['student_ov'] === $type && $p['status'] === 'cancelled';
-									}) ) ?>
-								</td>
-								<td>
-									<?= count( array_filter($objects, function ($p) use ($type) {
-										return $p['student_ov'] === $type && $p['status'] === 'waiting_list';
-									}) ) ?>
-								</td>
-							</tr>
-						<?php endforeach ?>
-					</tbody>
-					<tfoot>
-						<tr>
-							<th>
-								Total (<?= MAX_SIGNUPS - 
-									count( array_filter($objects, function ($p) { return $p['status'] === 'registered'; })) - 
-									count( array_filter($objects, function ($p) { return $p['status'] === 'waiting_list'; })) -
-									count( array_filter($objects, function ($p) { return $p['status'] === 'pending'; })) ?> 
-								spots remaining)
-							</th>
-							<th>
-								<?= count( array_filter($objects, function ($p) { return $p['status'] === 'pending'; }) ) ?>
-							</th>
-							<th>
-								<?= count( array_filter($objects, function ($p) { return $p['status'] === 'registered'; }) ) ?>
-							</th>
-							<th>
-								<?= count( array_filter($objects, function ($p) { return $p['status'] === 'cancelled'; }) ) ?>
-							</th>
-							<th>
-								<?= count( array_filter($objects, function ($p) { return $p['status'] === 'waiting_list'; }) ) ?>
-							</th>
-						</tr>
-					</tfoot>
-				</table>
-			</div>
+					<?php endforeach ?>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th>
+							Total (<?= MAX_SIGNUPS - 
+								count( array_filter($objects, function ($p) { return $p['status'] === 'registered'; })) - 
+								count( array_filter($objects, function ($p) { return $p['status'] === 'waiting_list'; })) -
+								count( array_filter($objects, function ($p) { return $p['status'] === 'pending'; })) ?> 
+							spots remaining)
+						</th>
+						<th>
+							<?= count( array_filter($objects, function ($p) { return $p['status'] === 'pending'; }) ) ?>
+						</th>
+						<th>
+							<?= count( array_filter($objects, function ($p) { return $p['status'] === 'registered'; }) ) ?>
+						</th>
+						<th>
+							<?= count( array_filter($objects, function ($p) { return $p['status'] === 'cancelled'; }) ) ?>
+						</th>
+						<th>
+							<?= count( array_filter($objects, function ($p) { return $p['status'] === 'waiting_list'; }) ) ?>
+						</th>
+					</tr>
+				</tfoot>
+			</table>
 		</div>
 	</div>
 
