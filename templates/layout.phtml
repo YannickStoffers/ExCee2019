@@ -1,106 +1,124 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php if (!empty($title)):?><?= $title ?> &mdash; <?php endif ?> Cover excursion 2019</title>
-    
-    <!-- Include stylesheets -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aleo">
-    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/css/font-awesome.min.css" type='text/css'>
-    <link rel="stylesheet" href="//cdl.svcover.nl/css/cdl.css" type="text/css">
-    <link rel="stylesheet" href="/static/css/excee.css" type="text/css">
-    
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <?= !empty($styles) ? $styles : ''?>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Enable iOS "app"-mode -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="ExCee">
+
+	<!-- Set title -->
+	<title><?php if (!empty($title)):?><?= $title ?> &mdash; <?php endif ?> Cover excursion 2019</title>
+	
+	<!-- Include stylesheets -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aleo">
+	<link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="/static/css/font-awesome.min.css" type='text/css'>
+	<link rel="stylesheet" href="//cdl.svcover.nl/css/cdl.css" type="text/css">
+	<link rel="stylesheet" href="/static/css/excee.css" type="text/css">
+	
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+	<!-- Set IOS "app"-mode imagery -->
+	<link rel="apple-touch-startup-image" href="/static/img/iOS/launch-screen.png">
+	<link rel="apple-touch-icon" href="/static/img/iOS/touch-icon.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/static/img/iOS/touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/static/img/iOS/touch-icon-180x180.png">
+	<link rel="apple-touch-icon" sizes="167x167" href="/static/img/iOS/touch-icon-167x167.png">
+
+	<!-- Stay in iOS "app"-mode once enabled -->
+	<script src="/static/js/ios-standalone-mode.js"></script>
+
+	<!-- Load additional styles specified by child templates. -->
+	<?= !empty($styles) ? $styles : ''?>
 </head>
 <body>
-    <div class=" navbar-expand-lg">
-        <nav class="navbar navbar-cover">
-            <div class="navbar-brand">
-                <a href="//www.svcover.nl/" class="navbar-logo"><img src="//sd.svcover.nl/Logos/Cover/white/cover_logo_white.svg" alt="Cover"></a>
-                <a href="index.php" class="navbar-logo"><img src="/static/img/logo_alt.svg" alt="Excursion 2019"></a>
-            </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" onclick="toggleHamburger(this)">
-                <div class="hamburger bar1"></div>
-                <div class="hamburger bar2"></div>
-                <div class="hamburger bar3"></div>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item <?php if ($page_id == 'index' || $page_id == 'pre-announcement'): ?>active<?php endif ?>" >
-                        <a href="/index.php">Home</a>
-                    </li>
-                    <li class="nav-item <?php if ($page_id == 'committee'): ?>active<?php endif ?>" >
-                        <a href="/committee.php">Committee</a>
-                    </li>
-                    <li class="nav-item <?php if ($page_id == 'signup'): ?>active<?php endif ?>" >
-                        <a href="/signup.php">Sign up</a>
-                    </li>
-                    <?php if ((cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITTEE)) || DEBUG): ?>
-                        <li class="nav-item <?php if ($page_id == 'signup_admin'): ?>active<?php endif ?>" >
-                            <a href="/signup_admin.php">Admin</a>
-                        </li>
-                    <?php endif; ?>
-                    <li class="nav-item <?php if ($page_id == 'programme'): ?>active<?php endif ?>" >
-                        <a href="/programme">Programme</a>
-                    </li>
-                    <li class="nav-item <?php if ($page_id == 'ideas'): ?>active<?php endif ?>" >
-                        <a href="/ideas.php">Ideas & Suggestions</a>
-                    </li>
-                    <?php if(cover_session_logged_in() || DEBUG): ?>
-                        <li class="nav-item">
-                            <a href="<?= cover_logout_url() ?>">
-                                Log <?= $this->html(get_cover_session()->voornaam) ?> out
-                            </a>
-                        </li>
-                    <?php endif; ?>
-                    <?php if ((cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITTEE)) || DEBUG): ?>
-                        <?= !empty($extra_navbar_button) ? $extra_navbar_button : '' ?>
-                    <?php endif; ?>
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <!-- Insert rendered content -->
-    <?= $content ?>
+	<div class=" navbar-expand-lg">
+		<nav class="navbar navbar-cover">
+			<div class="navbar-brand">
+				<a href="//www.svcover.nl/" class="navbar-logo"><img src="//sd.svcover.nl/Logos/Cover/white/cover_logo_white.svg" alt="Cover"></a>
+				<a href="index.php" class="navbar-logo"><img src="/static/img/logo_alt.svg" alt="Excursion 2019"></a>
+			</div>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" onclick="toggleHamburger(this)">
+				<div class="hamburger bar1"></div>
+				<div class="hamburger bar2"></div>
+				<div class="hamburger bar3"></div>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item <?php if ($page_id == 'index' || $page_id == 'pre-announcement'): ?>active<?php endif ?>" >
+						<a href="/index.php">Home</a>
+					</li>
+					<li class="nav-item <?php if ($page_id == 'committee'): ?>active<?php endif ?>" >
+						<a href="/committee.php">Committee</a>
+					</li>
+					<li class="nav-item <?php if ($page_id == 'signup'): ?>active<?php endif ?>" >
+						<a href="/signup.php">Sign up</a>
+					</li>
+					<?php if ((cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITTEE)) || DEBUG): ?>
+						<li class="nav-item <?php if ($page_id == 'signup_admin'): ?>active<?php endif ?>" >
+							<a href="/signup_admin.php">Admin</a>
+						</li>
+					<?php endif; ?>
+					<li class="nav-item <?php if ($page_id == 'programme'): ?>active<?php endif ?>" >
+						<a href="/programme">Programme</a>
+					</li>
+					<li class="nav-item <?php if ($page_id == 'ideas'): ?>active<?php endif ?>" >
+						<a href="/ideas.php">Ideas & Suggestions</a>
+					</li>
+					<?php if(cover_session_logged_in() || DEBUG): ?>
+						<li class="nav-item">
+							<a href="<?= cover_logout_url() ?>">
+								Log <?= $this->html(get_cover_session()->voornaam) ?> out
+							</a>
+						</li>
+					<?php endif; ?>
+					<?php if ((cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITTEE)) || DEBUG): ?>
+						<?= !empty($extra_navbar_button) ? $extra_navbar_button : '' ?>
+					<?php endif; ?>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<!-- Insert rendered content -->
+	<?= $content ?>
 
-    <a href="ideas.php">
-        <div class="ideas">
-            <p>
-                <?php $option = rand(0, 4); if ($option == 0): ?>
-                    Got an idea?
-                <?php elseif ($option == 1): ?>
-                    Submit ideas!
-                <?php elseif ($option == 2): ?>
-                    Share an idea!
-                <?php elseif ($option == 3): ?>
-                    We could do...
-                <?php else: ?>
-                    Ideas go here.
-                <?php endif; ?>
-            </p>
-        </div>
-    </a>
+	<a href="ideas.php">
+		<div class="ideas">
+			<p>
+				<?php $option = rand(0, 4); if ($option == 0): ?>
+					Got an idea?
+				<?php elseif ($option == 1): ?>
+					Submit ideas!
+				<?php elseif ($option == 2): ?>
+					Share an idea!
+				<?php elseif ($option == 3): ?>
+					We could do...
+				<?php else: ?>
+					Ideas go here.
+				<?php endif; ?>
+			</p>
+		</div>
+	</a>
 
-    <!-- Footer -->
-    <div class="container container-wide footer">
-        <hr>
-        <p>
-            Created with &hearts; by the <a href="/committee.php">ExCee</a> &bull;
-            <a href="//sd.svcover.nl/Privacy%20Statement/Privacy%20statement.pdf">Privacy Statement</a> &bull;
-            <a href="/static/docs/terms_and_conditions.pdf">Terms and Conditions</a>
-        </p>
-        <br>
-    </div>
+	<!-- Footer -->
+	<div class="container container-wide footer">
+		<hr>
+		<p>
+			Created with &hearts; by the <a href="/committee.php">ExCee</a> &bull;
+			<a href="//sd.svcover.nl/Privacy%20Statement/Privacy%20statement.pdf">Privacy Statement</a> &bull;
+			<a href="/static/docs/terms_and_conditions.pdf">Terms and Conditions</a>
+		</p>
+		<br>
+	</div>
 
-    <!-- Ìnclude scripts -->
-    <script src="//code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="//stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script src="/static/js/myapp.js"></script>
-    <?= !empty($scripts) ? $scripts : '' ?>
+	<!-- Ìnclude scripts -->
+	<script src="//code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="//stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<script src="/static/js/myapp.js"></script>
+	<?= !empty($scripts) ? $scripts : '' ?>
 </body>
 </html>
