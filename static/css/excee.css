@@ -229,3 +229,7 @@ button.astext {
 .extra-padding-top {
 	padding-top: 64px;
 }
+
+.dropdown-menu li {
+	line-height: normal;
+}

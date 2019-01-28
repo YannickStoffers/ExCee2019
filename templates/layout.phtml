@@ -57,14 +57,6 @@
 					<li class="nav-item <?php if ($page_id == 'signup'): ?>active<?php endif ?>" >
 						<a href="/signup.php">Sign up</a>
 					</li>
-					<?php if ((cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITTEE)) || DEBUG): ?>
-						<li class="nav-item <?php if ($page_id == 'signup_admin'): ?>active<?php endif ?>" >
-							<a href="/signup_admin.php">Admin</a>
-						</li>
-						<li class="nav-item <?php if ($page_id == 'companies'): ?>active<?php endif ?>" >
-							<a href="/companies">Companies</a>
-						</li>
-					<?php endif; ?>
 					<li class="nav-item <?php if ($page_id == 'programme'): ?>active<?php endif ?>" >
 						<a href="/programme">Programme</a>
 					</li>
@@ -79,7 +71,20 @@
 						</li>
 					<?php endif; ?>
 					<?php if ((cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITTEE)) || DEBUG): ?>
-						<?= !empty($extra_navbar_button) ? $extra_navbar_button : '' ?>
+						<li class="nav-item dropdown">
+							<a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Admin
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<li class="dropdown-header">Admin &middot; Registrations</li>
+								<li><a class="dropdown-item" href="/signup_admin.php">Overview</a></li>
+								<div class="dropdown-divider"></div>
+								<li class="dropdown-header">Admin &middot; Programme & Companies</li>
+								<li><a class="dropdown-item" href="/companies">Companies overview</a></li>
+								<li><a class="dropdown-item" href="/companies/index.php?view=create">Add Company</a></li>
+								<li><a class="dropdown-item" href="/programme/index.php?view=create">Add Activity</a></li>
+							</ul>
+						</li>
 					<?php endif; ?>
 				</ul>
 			</div>
