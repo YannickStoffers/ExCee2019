@@ -1,5 +1,9 @@
 <?php $this->extends('../layout.phtml') ?>
 
+<?php $this->begin('title') ?>
+You did it!
+<?php $this->end() ?>
+
 <?php $this->begin('content') ?>
 <div class="container container-narrow">
     <?php if ($status === 'success'): ?>
