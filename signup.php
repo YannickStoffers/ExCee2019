@@ -59,7 +59,7 @@ class SignupView extends FormView
 
         // Set the registration as pending, or waiting list if max capacity has been reached.
         $data['status'] = count( array_filter($this->model->get (), function ($p) {
-                    return $p['status'] === 'registered' || $p['status'] === 'pending';
+                    return $p['status'] === 'registered' || $p['status'] === 'pending' || $p['status'] === 'waiting_list';
                 })) >= MAX_SIGNUPS ? 'waiting_list' : 'pending';
         
         $this->model->create($data);

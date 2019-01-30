@@ -1,87 +1,5 @@
 /* Your custom js here */
 
-function changeImage()
-{
-	var image = document.getElementById("imgClickAndChange");
-	if (image.getAttribute('src') == "/static/img/committee.jpg")
-	{
-		var set = false;
-		var ca = document.cookie.split(";");
-		for (var i = 0; i < ca.length; i++) 
-		{
-			var c = ca[i];
-			while (c.charAt(0) == ' ') 
-			{
-				c = c.substring(1);
-			}
-			var elem = c.split("=")
-			console.log (elem);
-			if (elem[0] == "highQuality")
-			{
-				if (elem[1] == "true")
-				{
-					image.src = "/static/img/bier-hq.gif";
-					document.getElementById("lowQualityButton").style.visibility = "visible";
-				}
-				else
-				{
-					image.src = "/static/img/bier.gif";
-					document.getElementById("highQualityButton").style.visibility = "visible";
-				}
-				set = true;
-			}
-		}
-		if (!set)
-		{
-			image.src = "/static/img/bier.gif";
-			document.getElementById("highQualityButton").style.visibility = "visible";
-		}
-	}
-	else
-	{
-		image.src = "/static/img/committee.jpg";
-		document.getElementById("highQualityButton").style.visibility = "hidden";
-		document.getElementById("lowQualityButton").style.visibility = "hidden";
-	}
-}
-
-function highQuality()
-{
-	var image = document.getElementById("imgClickAndChange");
-	image.src = "/static/img/bier-hq.gif";
-
-	var d = new Date();
-	d.setTime(d.getTime() + (30*24*60*60*1000));
-	var expires = "expires="+ d.toUTCString();
-
-	var name = "highQuality=" + true + ";";
-
-	document.cookie = name + expires;
-	console.log (name + expires);
-
-	document.getElementById("highQualityButton").style.visibility = "hidden";
-	document.getElementById("lowQualityButton").style.visibility = "visible";
-}
-
-function lowQuality()
-{
-	var image = document.getElementById("imgClickAndChange");
-	image.src = "/static/img/bier.gif";
-
-	var d = new Date();
-	d.setTime(d.getTime() + (30*24*60*60*1000));
-	var expires = "expires="+ d.toUTCString();
-
-	var name = "highQuality=" + false + ";";
-
-	document.cookie = name + expires;
-	console.log (name + expires);
-
-	document.getElementById("highQualityButton").style.visibility = "visible";
-	document.getElementById("lowQualityButton").style.visibility = "hidden";
-}
-
-
 function toggleHamburger(x) {
 	x.classList.toggle("change");
 }
@@ -89,3 +7,58 @@ function toggleHamburger(x) {
 $(function () {
   $('[data-toggle="popover"]').popover()
 })
+
+function sortTable(n) {
+	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+	table = document.getElementById("registrations");
+	switching = true;
+	// Set the sorting direction to ascending:
+	dir = "asc"; 
+	/* Make a loop that will continue until
+	no switching has been done: */
+	while (switching) {
+		// Start by saying: no switching is done:
+		switching = false;
+		rows = table.getElementsByTagName("TR");
+		/* Loop through all table rows (except the
+		first, which contains table headers): */
+		for (i = 1; i < (rows.length - 1); i++) {
+			// Start by saying there should be no switching:
+			shouldSwitch = false;
+			/* Get the two elements you want to compare,
+			one from current row and one from the next: */
+			x = rows[i].getElementsByTagName("TD")[n];
+			y = rows[i + 1].getElementsByTagName("TD")[n];
+			/* Check if the two rows should switch place,
+			based on the direction, asc or desc: */
+			if (dir == "asc") {
+				if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+					// If so, mark as a switch and break the loop:
+					shouldSwitch = true;
+					break;
+				}
+			} else if (dir == "desc") {
+				if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+					// If so, mark as a switch and break the loop:
+					shouldSwitch = true;
+					break;
+				}
+			}
+		}
+		if (shouldSwitch) {
+			/* If a switch has been marked, make the switch
+			and mark that a switch has been done: */
+			rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+			switching = true;
+			// Each time a switch is done, increase this count by 1:
+			switchcount ++; 
+		} else {
+			/* If no switching has been done AND the direction is "asc",
+			set the direction to "desc" and run the while loop again. */
+			if (switchcount == 0 && dir == "asc") {
+				dir = "desc";
+				switching = true;
+			}
+		}
+	}
+}
