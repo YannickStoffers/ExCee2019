@@ -119,8 +119,10 @@
 		<p>
 			Created with &hearts; by the <a href="/committee.php">ExCee</a> &bull;
 			<a href="//sd.svcover.nl/Privacy%20Statement/Privacy%20statement.pdf" target="_blank">Privacy Statement</a> &bull;
-			<a href="//excee.svcover.nl/static/docs/terms_and_conditions.pdf" target="_blank">Terms and Conditions</a> &bull;
-			<a href="<?= cover_login_url() ?>">Log in</a>
+			<a href="//excee.svcover.nl/static/docs/terms_and_conditions.pdf" target="_blank">Terms and Conditions</a> 
+			<?php if (!cover_session_logged_in()): ?>
+				&bull; <a href="<?= cover_login_url() ?>">Log in</a>
+			<?php endif; ?>
 		</p>
 		<br>
 	</div>
