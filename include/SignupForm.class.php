@@ -11,10 +11,9 @@ class SignupForm extends Bootstrap3Form
         $ov_options = array_merge($ov_options, $model::$ov_options);
 
         $fields = [
-            'first_name'      => new StringField   ('First name',                             !$strict, ['maxlength' => 255]),
-            'surname'         => new StringField   ('Surname',                                !$strict, ['maxlength' => 255]),
+            'first_name'      => new StringField   ('First name (according to passport)',     !$strict, ['maxlength' => 255]),
+            'surname'         => new StringField   ('Surname (according to passport)',        !$strict, ['maxlength' => 255]),
             'birthday'        => new DateField     ('Date of birth', 'Y-m-d',                 !$strict),
-            'passport'        => new StringField   ('Travel document number (for flight check-in)',  !$strict, ['maxlength' => 9]),
             'address'         => new StringField   ('Street name + number',                   !$strict, ['maxlength' => 255]),
             'postal_code'     => new StringField   ('Postal code',                            !$strict, ['maxlength' => 255]),
             'city'            => new StringField   ('Place of residence',                     !$strict, ['maxlength' => 255]),
