@@ -3,59 +3,94 @@
 <?php $this->begin('content') ?>
 
 <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="/static/img/home/City-banner-01.png" class="banner">
-        </div>
-        <div class="carousel-item">
-            <img src="/static/img/home/City-banner-02.png" class="banner">
-        </div>
-        <div class="carousel-item">
-            <img src="/static/img/home/City-banner-03.png" class="banner">
-        </div>
-    </div>
+	<div class="carousel-inner">
+		<div class="carousel-item active">
+			<img src="/static/img/home/City-banner-01.png" class="banner">
+		</div>
+		<div class="carousel-item">
+			<img src="/static/img/home/City-banner-02.png" class="banner">
+		</div>
+		<div class="carousel-item">
+			<img src="/static/img/home/City-banner-03.png" class="banner">
+		</div>
+	</div>
 </div>
 
 <?php if (SIGNUPS_OPENED == true): ?>
 <a href="/signup.php">
-    <img src="/static/img/home/Sign-up-banner-alt.png" class="banner">
+	<img src="/static/img/home/Sign-up-banner-alt.png" class="banner">
 </a>
 <?php endif; ?>
 
 <div class="container container-narrow"> 
-    <h1> 
-        hallo
-    </h1>
-    <p>
-        Wij zijn de ExCee en we gaan op reis, jeej! Dibbes gaat niet mee :( 
-    </p>
+	<h1> 
+		Hallo
+	</h1>
+	<p>
+		Wij zijn de ExCee en we gaan op reis, jeej! Dibbes gaat niet mee :( 
+	</p>
+</div>
+
+<div class="container container-wide">
+	<div class="card-group">
+		<div class="card">
+			<h2 class="card-header">Destination 1</h2>
+			<div class="card-body">
+				<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+			</div>
+			<div class="card-footer bg-transparent border-0"><h4>26th - 29th of April</h4></div>
+			<img src="/static/img/programme/destination_banner_01.png" class="card-img-top">
+		</div>
+		<div class="card">
+			<h2 class="card-header">Destination 2</h2>
+			<div class="card-body">
+				<p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+			</div>
+			<div class="card-footer bg-transparent border-0"><h4>29th of April - 1st of May</h4></div>
+			<img src="/static/img/programme/destination_banner_02.png" class="card-img-top">
+		</div>
+		<div class="card">
+			<h2 class="card-header">Destination 3</h2>
+			<div class="card-body">
+				<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+			</div>
+			<div class="card-footer bg-transparent border-0"><h4>1st - 4th of May</h4></div>
+			<img src="/static/img/programme/destination_banner_03.png" class="card-img-top">
+		</div>
+	</div>
+</div>
+
+<div class="container container-narrow">
+	<h1>
+		Impression of previous excursions
+	</h1>
 </div> 
 
 <div class="row">
-    <div class="half-width">
-        <div class="quarter-width">
-            <a href="//www.svcover.nl/fotoboek.php?book=1227">
-                <img src="/static/img/home/Vierkant_placeholder_1.png">
-            </a>    
-        </div>
-        <div class="quarter-width">
-            <a href="//www.svcover.nl/fotoboek.php?book=1330">
-                <img src="/static/img/home/Vierkant_placeholder_2.png">
-            </a>
-        </div>
-    </div>
-    <div class="half-width">
-        <div class="quarter-width">
-            <a href="//www.svcover.nl/fotoboek.php?book=1345">
-                <img src="/static/img/home/Vierkant_placeholder_3.png"> 
-            </a>
-        </div>
-        <div class="quarter-width">
-            <a href="/programme.php">
-                <img src="/static/img/home/Vierkant_placeholder_4.png">
-            </a>
-        </div>
-    </div>
+	<div class="half-width">
+		<div class="quarter-width">
+			<a href="//www.svcover.nl/fotoboek.php?book=1227">
+				<img src="/static/img/home/Edinburgh.png">
+			</a>    
+		</div>
+		<div class="quarter-width">
+			<a href="//www.svcover.nl/fotoboek.php?book=1330">
+				<img src="/static/img/home/Antwerp.png">
+			</a>
+		</div>
+	</div>
+	<div class="half-width">
+		<div class="quarter-width">
+			<a href="//www.svcover.nl/fotoboek.php?book=1345">
+				<img src="/static/img/home/USA.png"> 
+			</a>
+		</div>
+		<div class="quarter-width">
+			<a href="/programme">
+				<img src="/static/img/home/2019.png">
+			</a>
+		</div>
+	</div>
 </div>   
 
 <?php $this->end() ?>
