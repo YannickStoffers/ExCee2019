@@ -1,103 +1,95 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Registration ExCee 2019 - [insert destination here]</title>
-    <style>
-    body {
-        font: 13px/16px sans-serif;
-    }
-    </style>
+	<meta charset="utf-8">
+	<title>Registration ExCee 2019 - [insert destination here]</title>
+	<style>
+	body {
+		font: 13px/16px sans-serif;
+	}
+	</style>
 </head>
 <body>
-    <p>Dear <?= $this->html($first_name) ?>,</p>
-    <?php if ($status === 'pending'): ?>
-        <p>
-            Thank you for your registration for the ExCee!
-            As you may know, we are working with a lottery system for the participants.
-            The lottery will take place at !TODO:INSERT DATUM HIER, after which we will inform you whether you get to come and have an awesome time with us!
-        </p>
-    <?php elseif ($status === 'registered'): ?>
-        <p>
-            Thank you for your registration for the ExCee. We're very excited already and we're glad you're going to be joining us!
-        </p>
-    <?php else: ?>
-        <p>
-            Thank you for your registration for the ExCee. But, due to high interest we have reached our participants capacity already. We will keep in touch in case someone still decides to cancel. We hope you understand.
-        </p>
-    <?php endif; ?>
-    <p>To reiterate, you provided us with the following information:<br>
-        <table>
-            <thead>
-                <tr>
-                    <th>Item</th>
-                    <th>Value</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Name</td>
-                    <td><?= $this->html($first_name) ?></td>
-                </tr>
-                <tr>
-                    <td>Surname</td>
-                    <td><?= $this->html($surname) ?></td>
-                </tr>
-                <tr>
-                    <td>Birthday</td>
-                    <td><?= $this->html($birthday) ?></td>
-                </tr>
-                <tr>
-                    <td>Identification document number</td>
-                    <td><?= $this->html($passport) ?></td>
-                </tr>
-                <tr>
-                    <td>Address</td>
-                    <td><?= $this->html($address) ?></td>
-                </tr>
-                <tr>
-                    <td>Postal</td>
-                    <td><?= $this->html($postal_code) ?></td>
-                </tr>
-                <tr>
-                    <td>City</td>
-                    <td><?= $this->html($city) ?></td>
-                </tr>
-                <tr>
-                    <td>Email</td>
-                    <td><?= $this->html($email) ?></td>
-                </tr>
-                <tr>
-                    <td>Phone</td>
-                    <td><?= $this->html($phone) ?></td>
-                </tr>
-                <tr>
-                    <td>Emergency</td>
-                    <td><?= $this->html($emergency_phone) ?></td>
-                </tr>
-                <tr>
-                    <td>IBAN</td>
-                    <td><?= $this->html($iban) ?></td>
-                </tr>
-                <tr>
-                    <td>BIC</td>
-                    <td><?= $this->html($bic) ?></td>
-                </tr>
-                <tr>
-                    <td>Payment in installments</td>
-                    <td><?= $this->html($installments) ? "Yes" : "No" ?></td>
-                </tr>
-                <tr>
-                    <td>Student OV product</td>
-                    <td><?= $this->html($student_ov) ?></td>
-                </tr>
-                <tr>
-                    <td>Remarks</td>
-                    <td><?= empty($remarks) ? "<i>No remarks</i>" : $this->html($remarks) ?></td>
-                </tr>
-            </tbody>
-        </table>
-    </p>
-    <p>Cheers,<br>The ExCee</p>
+	<p>Dear <?= $this->html($first_name) ?>,</p>
+	<?php if ($status === 'pending'): ?>
+		<p>
+			Thank you for your registration for the ExCee. We're very excited already and we're glad you're going to be joining us!
+		</p>
+	<?php else: ?>
+		<p>
+			Thank you for your registration for the ExCee. But, due to high interest we have reached our participants capacity already. We will keep in touch in case someone still decides to cancel. We hope you understand.
+		</p>
+	<?php endif; ?>
+	<p>
+		To reiterate, you provided us with the following information:
+		<br>
+		<table>
+			<thead>
+				<tr>
+					<th>Item</th>
+					<th>Value</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Name</td>
+					<td><?= $this->html($first_name) ?></td>
+				</tr>
+				<tr>
+					<td>Surname</td>
+					<td><?= $this->html($surname) ?></td>
+				</tr>
+				<tr>
+					<td>Birthday</td>
+					<td><?= $this->html($birthday) ?></td>
+				</tr>
+				<tr>
+					<td>Address</td>
+					<td><?= $this->html($address) ?></td>
+				</tr>
+				<tr>
+					<td>Postal</td>
+					<td><?= $this->html($postal_code) ?></td>
+				</tr>
+				<tr>
+					<td>City</td>
+					<td><?= $this->html($city) ?></td>
+				</tr>
+				<tr>
+					<td>Email</td>
+					<td><?= $this->html($email) ?></td>
+				</tr>
+				<tr>
+					<td>Phone</td>
+					<td><?= $this->html($phone) ?></td>
+				</tr>
+				<tr>
+					<td>Emergency</td>
+					<td><?= $this->html($emergency_phone) ?></td>
+				</tr>
+				<tr>
+					<td>IBAN</td>
+					<td><?= $this->html($iban) ?></td>
+				</tr>
+				<tr>
+					<td>BIC</td>
+					<td><?= empty($bic) ? "<i>&#10092;Not provided&#10093;</i>" : $this->html($bic) ?></td>
+				</tr>
+				<tr>
+					<td>Payment in installments</td>
+					<td><?= $this->html($installments) ? "Yes" : "No" ?></td>
+				</tr>
+				<tr>
+					<td>Student OV product</td>
+					<td><?= $this->html($student_ov) ?></td>
+				</tr>
+				<tr>
+					<td>Remarks</td>
+					<td><?= empty($remarks) ? "<i>&#10092;No remarks&#10093;</i>" : $this->html($remarks) ?></td>
+				</tr>
+			</tbody>
+		</table>
+	</p>
+	<p>Cheers,<br>The ExCee</p>
 </body>
 </html>
