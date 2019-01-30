@@ -9,7 +9,6 @@ CREATE TABLE `registrations` (
   `first_name` varchar(255),
   `surname` varchar(255),
   `birthday` date,
-  `passport` varchar(9), -- length of a travel document number
   `address` varchar(255),
   `postal_code` varchar(255),
   `city` varchar(255),
