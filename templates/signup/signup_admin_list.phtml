@@ -81,10 +81,9 @@ Admin &bull; Registrations overview
 		</div>
 	</div>
 
-	<?php encode_as_csv (['id', 'first_name', 'surname', 'birthday', 'address', 'postal_code', 'city', 'email', 'phone', 'emergency_phone', 'iban', 'bic', 'installments', 'student_ov', 'remarks', 'status', 'registration_date'], $objects, 'registrations.csv') ?>
 	<h2>
 		Registrations
-		<a href="/registrations.csv" download='ExCee_registrations_export.csv'><img src="static/icons/download.png" class="icon"></a>
+		<a href="/signup_admin.php?view=download" download="ExCee_registrations_export.csv"><img src="static/icons/download.png" class="icon"></a>
 	</h2>
 	<p>
 	

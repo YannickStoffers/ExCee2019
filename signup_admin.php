@@ -7,7 +7,7 @@ require_once 'include/SignupForm.class.php';
 /** Renders and processes CRUD operations for the Signup Model */
 class SignupAdminView extends ModelView
 {
-    protected $views = ['update', 'list'];
+    protected $views = ['update', 'list', 'download'];
     protected $template_base_name = 'templates/signup/signup_admin';
 
     /** 
@@ -20,6 +20,10 @@ class SignupAdminView extends ModelView
         else if (!session_is_admin ())
             throw new HttpException(403, 'You need to be a member of the ExCee to see this page!');
         else
+            if ($this->_view === 'download') {
+                encode_as_csv (['id', 'first_name', 'surname', 'birthday', 'address', 'postal_code', 'city', 'email', 'phone', 'emergency_phone', 'iban', 'bic', 'installments', 'student_ov', 'remarks', 'status', 'registration_date'], $this->get_model()->get(), 'php://output');
+                return;
+            }
             return parent::run_page();
     }
 
