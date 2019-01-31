@@ -64,6 +64,24 @@ function session_is_admin () {
     return $result;
 }
 
+function encode_as_csv ($header=null, $objects=null, $filename='export.csv') {
+
+    $fp = fopen ($filename, 'w');
+
+    fputcsv($fp, $header, ';');
+
+    foreach ($objects as $object) {
+        $list = [];
+        foreach ($header as $h) {
+            $list[] = $object[$h];
+            // $list[] = str_replace("\n", " -- ", $object[$h]);
+        }
+        fputcsv($fp, $list, ';');
+    }
+    
+    fclose ($fp);
+}
+
 /**
  * Template: Implements a simple template engine that allows template inheritance
  */
