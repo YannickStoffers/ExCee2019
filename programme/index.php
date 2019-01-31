@@ -11,15 +11,15 @@ class ProgrammeView extends ModelView
 	protected $template_base_name = 'templates/programme/programme';
 
 	public function run_page() {
-		if ($this->_view === 'list' && 														// LIST pages are accessible
-			(PRE_ANNOUNCEMENT === false) ||													// IF announcement event has been
-				(cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITTEE)))	// OR you're a member of the ExCee
+		if ($this->_view === 'list' && 			// LIST pages are accessible
+			(PRE_ANNOUNCEMENT === false) ||		// IF announcement event has been
+				session_is_admin ())			// OR you're a member of the ExCee or the board
 			return parent::run_page ();
 
 		// Other pages only accessible for the ExCee
 		if (!cover_session_logged_in() && !DEBUG)
 			throw new HttpException(401, 'Unauthorized', sprintf('<a href="%s" class="btn btn-primary">Login and get started!</a>', cover_login_url()));
-		else if (!cover_session_in_committee(ADMIN_COMMITTEE) && !DEBUG)
+		else if (!session_is_admin ())
 			throw new HttpException(403, 'You need to be a member of the ExCee to see this page!');
 		else
 			return parent::run_page ();

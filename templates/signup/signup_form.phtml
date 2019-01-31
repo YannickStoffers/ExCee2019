@@ -7,9 +7,7 @@ Sign Up
 <?php $this->begin('content') ?>
 <div class="container container-narrow">
     <!-- Show sign up form if user is logged in and sign ups are open. -->
-    <?php if ((cover_session_logged_in() && SIGNUPS_OPENED) || 
-        (cover_session_logged_in () && cover_session_in_committee (ADMIN_COMMITTEE)) ||
-        DEBUG): ?>
+    <?php if ((cover_session_logged_in() && SIGNUPS_OPENED) || session_is_admin ()): ?>
         <h1>Sign up</h1>
 
         <!-- Say hello to the user. -->

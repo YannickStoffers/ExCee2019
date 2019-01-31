@@ -72,7 +72,7 @@
 							</a>
 						</li>
 					<?php endif; ?>
-					<?php if ((cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITTEE)) || DEBUG): ?>
+					<?php if (session_is_admin ()): ?>
 						<li class="nav-item dropdown">
 							<a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Admin
