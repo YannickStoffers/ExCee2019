@@ -56,6 +56,14 @@ function send_mail($from, $to, $body, $subject=null, array $headers=[]) {
     }
 }
 
+function session_is_admin () {
+    $result = DEBUG;
+    foreach (ADMIN_COMMITTEES as $committee) {
+        $result = $result || (cover_session_logged_in () && cover_session_in_committee ($committee));
+    }
+    return $result;
+}
+
 /**
  * Template: Implements a simple template engine that allows template inheritance
  */

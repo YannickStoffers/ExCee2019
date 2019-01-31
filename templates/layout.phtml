@@ -54,7 +54,7 @@
 					<li class="nav-item <?php if ($page_id == 'committee'): ?>active<?php endif ?>" >
 						<a href="/committee.php">Committee</a>
 					</li>
-					<?php if (PRE_ANNOUNCEMENT === false || (cover_session_logged_in () && cover_session_in_committee (ADMIN_COMMITTEE)) || DEBUG): ?>
+					<?php if (PRE_ANNOUNCEMENT === false || session_is_admin ()): ?>
 						<li class="nav-item <?php if ($page_id == 'signup'): ?>active<?php endif ?>" >
 							<a href="/signup.php">Sign up</a>
 						</li>
