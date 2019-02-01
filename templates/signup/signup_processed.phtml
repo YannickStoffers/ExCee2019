@@ -6,38 +6,90 @@ You did it!
 
 <?php $this->begin('content') ?>
 <div class="container container-narrow">
-    <?php if ($status === 'success'): ?>
-        <h1>
-            <?php $option = rand(0, 4); if ($option == 0): ?>
-                Sweet!
-            <?php elseif ($option == 1): ?>
-                Awesome!
-            <?php elseif ($option == 2): ?>
-                You did it!
-            <?php elseif ($option == 3): ?>
-                Registered!
-            <?php else: ?>
-                Nice!
-            <?php endif; ?>
-        </h1>
-        <p>
-            You successfully registered for the ExCee 2019. We'll keep in touch considering the details. Also, we're very much looking forward to the trip, and we hope you're every bit excited as we are!
-        </p>
-        <p>
-            Also, look in your inbox for a confirmation email of your registration! Feel free to contact the <a href="mailto:excee@svcover.nl">ExCee</a> to correct any and all information if necessary.
-        </p>
-    <?php else: ?>
-        <h1>Woopsie :(</h1>
-        <p>
-            Information for nerds:
-            <br>
-            <div class="jumbotron" style="font-family: monospace;">
-                    <?= $this->html($message) ?>
-            </div>
-        </p>
-        <p>
-            Please contact the <a href="mailto:excee@svcover.nl">ExCee</a> if you strongly believe the website should not behave this way.
-        </p>
-    <?php endif; ?>
+	<?php if ($status === 'success'): ?>
+		<h1>
+			<?php $option = rand(0, 4); if ($option == 0): ?>
+				Sweet!
+			<?php elseif ($option == 1): ?>
+				Awesome!
+			<?php elseif ($option == 2): ?>
+				You did it!
+			<?php elseif ($option == 3): ?>
+				Registered!
+			<?php else: ?>
+				Nice!
+			<?php endif; ?>
+		</h1>
+		<p>
+			You successfully registered for the ExCee 2019. We'll keep in touch considering the details. Also, we're very much looking forward to the trip, and we hope you're every bit excited as we are!
+		</p>
+		<p>
+			Also, look in your inbox for a confirmation email of your registration! Feel free to contact the <a href="mailto:excee@svcover.nl">ExCee</a> to correct any and all information if necessary.
+		</p>
+
+		<div class="card">
+			<h2 class="card-header">Your info:</h2>
+			<table class="table">
+				<tbody>
+					<tr>
+						<th scope="row">Name & last name</th>
+						<td><?= $this->html($data['first_name']) ?></td>
+						<td><?= $this->html($data['surname']) ?></td>
+					</tr>
+					<tr>
+						<th scope="row">Birthday</th>
+						<td colspan="2"><?= $this->html($data['birthday']) ?></td>
+					</tr>
+					<tr>
+						<th scope="row" rowspan="2">Address</th>
+						<td colspan="2"><?= $this->html($data['address']) ?></td>
+					</tr>
+					<tr>
+						<td><?= $this->html($data['postal_code']) ?></td>
+						<td><?= $this->html($data['city']) ?></td>
+					</tr>
+					<tr>
+						<th scope="row" rowspan="2">Contact info</th>
+						<td colspan="2"><?= $this->html($data['email']) ?></td>
+					</tr>
+					<tr>
+						<td colspan="2"><?= $this->html($data['phone']) ?></td>
+					</tr>
+					<tr>
+						<th scope="row">Emergency contact</th>
+						<td colspan="2"><?= $this->html($data['emergency_phone']) ?></td>
+					</tr>
+					<tr>
+						<th scope="row" rowspan="2">Financial</th>
+						<td><?= $this->html($data['iban']) ?></td>
+						<td><?= $this->html($data['bic']) ?></td>
+					</tr>
+					<tr>
+						<td colspan="2"><?= $this->html($data['installments'] ? 'You are paying in installments' : 'You are paying in a single payment') ?></td>
+					</tr>
+					<tr>
+						<th scope="row">Student public transit product</th>
+						<td colspan="2"><?= $this->html($data['student_ov'] === 'Weekend' ? 'You travel for free during the weekend' : $data['student_ov'] === 'Week' ? 'You travel for free during weekdays' : 'You do not have a student public transit product') ?></td>
+					</tr>
+					<tr>
+						<th scope="row">Remarks</th>
+						<td colspan="2"><?= empty($data['remarks']) ? '&#10092;No remarks&#10093;' : $this->html($data['remarks']) ?></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	<?php else: ?>
+		<h1>Woopsie :(</h1>
+		<p>
+			Information for nerds:
+			<br>
+			<div class="jumbotron" style="font-family: monospace;">
+					<?= $this->html($message) ?>
+			</div>
+		</p>
+		<p>
+			Please contact the <a href="mailto:excee@svcover.nl">ExCee</a> if you strongly believe the website should not behave this way.
+		</p>
+	<?php endif; ?>
 </div>
 <?php $this->end() ?>
