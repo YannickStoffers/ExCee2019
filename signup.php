@@ -11,7 +11,7 @@ class SignupView extends FormView
     public function run_page() {
         if (cover_session_logged_in() || DEBUG) {
             $member = get_cover_session ();
-            $result = $this->model->get_by_id ($member['email'], 'email');
+            $result = $this->model->get_by_id ($member->member, 'email');
             if (!empty($result)) {
                 $context = [
                     'status' => 'success',
