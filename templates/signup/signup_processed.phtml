@@ -32,48 +32,84 @@ You did it!
 			<table class="table">
 				<tbody>
 					<tr>
+						<th scope="row">Status</th>
+						<td>
+							<?php if ($data['status'] === 'pending'): ?>
+								<span class="badge badge-info">Awaiting confirmation by the ExCee</span>
+							<?php elseif ($data['status'] === 'registered'): ?>
+								<span class="badge badge-success">Registered</span>
+							<?php elseif ($data['status'] === 'waiting_list'): ?>
+								<span class="badge badge-warning">Currently on the waiting list</span>
+							<?php elseif ($data['status'] === 'cancelled'): ?>
+								<span class="badge badge-danger">Registration cancelled</span>
+							<?php endif; ?>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">Time of registration</th>
+						<td>
+							<?= $this->html(date_format(new DateTime($data['registration_date']), "jS \of F H:i")) ?>
+							<span class="badge badge-primary"><?php 
+								$date1 = new DateTime (date("Y-m-d H:i:s"));
+								$date2 = new DateTime ($data['registration_date']);
+								$diff = $date1->diff($date2);
+								$hours = $diff->h;
+
+								$result = "";
+
+								if ($diff->d != 0){
+									$result = $result . $diff->d . " day" . ($diff->d > 1 ? "s" : "");
+								}
+								if ($diff->h != 0)
+									$result = $result . " " . $diff->h . " hour" . ($diff->h > 1 ? "s" : "");
+								if ($diff->d == 0 && $diff->i != 0)
+									$result = $result . " " . $diff->i . " minute" . ($diff->i > 1 ? "s" : "");
+								if ($diff->d == 0 && $diff->h == 0 && $diff->i == 0)
+									$result = $result . $diff->s . " second" . ($diff->s > 1 ? "s" : "");
+								echo $result . " ago";
+							?></span>
+						</td>
+					</tr>
+					<tr>
 						<th scope="row">Name & last name</th>
-						<td><?= $this->html($data['first_name']) ?></td>
-						<td><?= $this->html($data['surname']) ?></td>
+						<td><?= $this->html($data['first_name']) ?> <?= $this->html($data['surname']) ?></td>
 					</tr>
 					<tr>
 						<th scope="row">Birthday</th>
-						<td colspan="2"><?= $this->html($data['birthday']) ?></td>
+						<td><?= $this->html($data['birthday']) ?></td>
 					</tr>
 					<tr>
 						<th scope="row" rowspan="2">Address</th>
-						<td colspan="2"><?= $this->html($data['address']) ?></td>
+						<td><?= $this->html($data['address']) ?></td>
 					</tr>
 					<tr>
-						<td><?= $this->html($data['postal_code']) ?></td>
-						<td><?= $this->html($data['city']) ?></td>
+						<td><?= $this->html($data['postal_code']) ?> <?= $this->html($data['city']) ?></td>
 					</tr>
 					<tr>
 						<th scope="row" rowspan="2">Contact info</th>
-						<td colspan="2"><?= $this->html($data['email']) ?></td>
+						<td><?= $this->html($data['email']) ?></td>
 					</tr>
 					<tr>
-						<td colspan="2"><?= $this->html($data['phone']) ?></td>
+						<td><?= $this->html($data['phone']) ?></td>
 					</tr>
 					<tr>
 						<th scope="row">Emergency contact</th>
-						<td colspan="2"><?= $this->html($data['emergency_phone']) ?></td>
+						<td><?= $this->html($data['emergency_phone']) ?></td>
 					</tr>
 					<tr>
 						<th scope="row" rowspan="2">Financial</th>
-						<td><?= $this->html($data['iban']) ?></td>
-						<td><?= $this->html($data['bic']) ?></td>
+						<td><?= $this->html($data['iban']) ?> <?= empty($data['bic']) ? '' : '&bull; ' . $this->html($data['bic']) ?></td>
 					</tr>
 					<tr>
-						<td colspan="2"><?= $this->html($data['installments'] ? 'You are paying in installments' : 'You are paying in a single payment') ?></td>
+						<td><?= $this->html($data['installments'] ? 'You are paying in installments' : 'You are paying in a single payment') ?></td>
 					</tr>
 					<tr>
 						<th scope="row">Student public transit product</th>
-						<td colspan="2"><?= $this->html($data['student_ov'] === 'Weekend' ? 'You travel for free during the weekend' : $data['student_ov'] === 'Week' ? 'You travel for free during weekdays' : 'You do not have a student public transit product') ?></td>
+						<td><?= $this->html($data['student_ov'] === 'Weekend' ? 'You travel for free during the weekend' : $data['student_ov'] === 'Week' ? 'You travel for free during weekdays' : 'You do not have a student public transit product') ?></td>
 					</tr>
 					<tr>
 						<th scope="row">Remarks</th>
-						<td colspan="2"><?= empty($data['remarks']) ? '&#10092;No remarks&#10093;' : $this->html($data['remarks']) ?></td>
+						<td><?= empty($data['remarks']) ? '&#10092;No remarks&#10093;' : $this->html($data['remarks']) ?></td>
 					</tr>
 				</tbody>
 			</table>
