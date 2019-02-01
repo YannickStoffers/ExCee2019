@@ -8,6 +8,23 @@ class SignupView extends FormView
     protected $model;
     protected $template_base_name = 'templates/signup/signup';
 
+    public function run_page() {
+        if (cover_session_logged_in() || DEBUG) {
+            $member = get_cover_session ();
+            $result = $this->model->get_by_id ($member['email'], 'email');
+            if (!empty($result)) {
+                $context = [
+                    'status' => 'success',
+                    'data' => $result
+                ];
+                return $this->render_template($this->get_template('processed'), $context);
+            }
+            return parent::run_page();
+        }
+        else
+            return parent::run_page();
+    }
+
     public function __construct(){
         parent::__construct('signup', 'Sign up');
         $this->model = get_model('Registration');
@@ -39,7 +56,10 @@ class SignupView extends FormView
     protected function form_valid($form){
         try {
             $this->process_form_data($form->get_values());
-            $context = ['status' =>  'success'];
+            $context = [
+                'status' => 'success',
+                'data' => $form->get_values ()
+            ];
         } catch (Exception $e) {
             $context = [
                 'status' => 'error', 
