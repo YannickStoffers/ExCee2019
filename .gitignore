@@ -3,4 +3,4 @@ include/config.php
 **.html
 **.ai
 **placeholder**
-*static/img
+static/img**
