@@ -31,7 +31,15 @@ Sign Up
 
 		<form method="POST">
 			<h3>Personal</h3>
+				<div class="alert alert-danger alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					Please make sure that your first name is spelled as it is listed on your passport.
+				</div>
 				<?= $form->render_field('first_name', ['placeholder' => 'Jan']) ?>
+				<div class="alert alert-danger alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					Please make sure that your surname is spelled as it is listed on your passport.
+				</div>
 				<?= $form->render_field('surname', ['placeholder' => 'de Joker']) ?>
 				<?= $form->render_field('birthday', ['placeholder' => '20-09-1993']) ?>
 			<h3>Contact</h3>
@@ -48,79 +56,93 @@ Sign Up
 				<div class="card">
 					<h4 class="card-header">Payment</h4>
 					<div class="card-body">
-						<p>
-							Payment is done through Cover's payment systems. 
-							That means that the money will be withdrawn from your bank account directly through the SEPA direct debit system.
-							However, we will allow you to pay in installments.
-							<br>
-							Note that all payments need to take place before the 5<sup>th</sup> of April.
-						</p>
-						
-						<div class="card-group">
-							<div class="card">
-								<h5 class="card-header">
-									Single payment
-								</h5>
-								<table class="table">
-									<thead>
-										<tr>
-											<th>Month:</th>
-											<th>Amount due:</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>February</td>
-											<td>&euro;0,-</td>
-										</tr>
-										<tr>
-											<td>March</td>
-											<td>&euro;360,-</td>
-										</tr>
-									</tbody>
-									<tfoot>
-										<tr>
-											<th>Total:</th>
-											<th>&euro;360,-</th>
-										</tr>
-									</tfoot>
-								</table>
+						<?php if (INSTALLMENTS_ENABLED): ?>
+							<p>
+								Payment is done through Cover's payment systems. 
+								That means that the money will be withdrawn from your bank account directly through the SEPA direct debit system.
+								However, we will allow you to pay in installments.
+								<br>
+								Note that all payments need to take place before the 5<sup>th</sup> of April.
+							</p>
+							
+							<div class="card-group">
+								<div class="card">
+									<h5 class="card-header">
+										Single payment
+									</h5>
+									<table class="table">
+										<thead>
+											<tr>
+												<th>Month:</th>
+												<th>Amount due:</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>February</td>
+												<td>&euro;0,-</td>
+											</tr>
+											<tr>
+												<td>March</td>
+												<td>&euro;360,-</td>
+											</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+												<th>Total:</th>
+												<th>&euro;360,-</th>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+								<div class="card">
+									<h5 class="card-header">
+										Payment in installments
+									</h5>
+									<table class="table">
+										<thead>
+											<tr>
+												<th>Month:</th>
+												<th>Amount due:</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>February</td>
+												<td>&euro;180,-</td>
+											</tr>
+											<tr>
+												<td>March</td>
+												<td>&euro;180,-</td>
+											</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+												<th>Total:</th>
+												<th>&euro;360,-</th>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
 							</div>
-							<div class="card">
-								<h5 class="card-header">
-									Payment in installments
-								</h5>
-								<table class="table">
-									<thead>
-										<tr>
-											<th>Month:</th>
-											<th>Amount due:</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>February</td>
-											<td>&euro;180,-</td>
-										</tr>
-										<tr>
-											<td>March</td>
-											<td>&euro;180,-</td>
-										</tr>
-									</tbody>
-									<tfoot>
-										<tr>
-											<th>Total:</th>
-											<th>&euro;360,-</th>
-										</tr>
-									</tfoot>
-								</table>
-							</div>
-						</div>
+						<?php else: ?>
+							<p>
+								Payment is done through Cover's payment systems. 
+								That means that the money will be withdrawn from your bank account directly through the SEPA direct debit system around the end of March.
+								<br>
+								Note that all payments need to take place before the 5<sup>th</sup> of April.
+							</p>
+							<p>
+								It used to be possible to pay in two installments.
+								However, the first installment is already being processed.
+								If you still wish to pay in installments please contact the <a href="mailto:excee.svcover.nl">ExCee</a> and the <a href="mailto:treasurer@svcover.nl">treasurer of the board</a>.
+							</p>
+						<?php endif; ?>
 
 						<hr>
 						<div class="checkbox <?= empty($form->get_field('installments')->errors) ? '' : 'has-error' ?>">
 							<label>
-								<?= $form->get_field('installments')->render() ?>
+								<?= $form->get_field('installments')->render(INSTALLMENTS_ENABLED ? [] : ['disabled']) ?>
 								I would like to pay in installments.
 							</label>
 						</div>
