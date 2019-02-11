@@ -36,12 +36,12 @@ class SignupForm extends Bootstrap3Form
 	public function validate() {
 		$result = parent::validate();
 
-		if (defined('NO_IBAN_STRING') && $this->get_value('iban') == NO_IBAN_STRING)
+		if (defined('NO_IBAN_STRING') && $this->get_value('iban') === NO_IBAN_STRING)
 			return $result;
 
 
-		if (!\IsoCodes\Iban::validate($this->get_value('iban'))) {
-			$this->get_field('iban')->errors[] = 'Please provide a valid IBAN';      
+		if (!\IsoCodes\Iban::validate(trim($this->get_value('iban')))) {
+			$this->get_field('iban')->errors[] = 'Please provide a valid IBAN';
 			$result = false && $result;
 		}
 
@@ -63,4 +63,3 @@ class SignupForm extends Bootstrap3Form
 		return $result;
 	}
 }
-
