@@ -104,14 +104,14 @@ class Form
         if (get_class($field) === 'CheckBoxField')
             return sprintf('<div %s>%s %s</div>', 
                 _form_render_attributes($parent_attributes),
-                $field->render_with_label($attributes),
-                $this->render_field_errors($field, $error_attributes)
+                $this->render_field_errors($field, $error_attributes),
+                $field->render_with_label($attributes)
             );
         return sprintf('<div %s>%s %s %s</div>', 
             _form_render_attributes($parent_attributes),
             $field->render_label(),
-            $field->render($attributes),
-            $this->render_field_errors($field, $error_attributes)
+            $this->render_field_errors($field, $error_attributes),
+            $field->render($attributes)
         );
     }
     
@@ -120,7 +120,7 @@ class Form
         $error_html = [];
         $errors = array_unique($field->errors);
         foreach ($errors as $error) {
-            $error_html[] = sprintf('<span %s>%s</span>', 
+            $error_html[] = sprintf('<div role="alert" class="alert alert-danger" %s>%s</div>', 
                 _form_render_attributes($attributes),
                 _form_escape($error));
         }
