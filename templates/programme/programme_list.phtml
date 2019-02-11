@@ -39,6 +39,10 @@ Programme
 </div>
 
 <?php 
+	$destinations = [	'pre-excursion' => 'Vienna', 
+						'city-01' 		=> 'Bratislava', 
+						'city-02' 		=> 'Budapest',
+						'city-03'		=> 'Schiphol'];
 	$activities = [];
 	foreach (get_model('Programme')::$sections as $section)
 		$activities[$section] = [];
@@ -62,13 +66,13 @@ Programme
 				<?php endif; ?>
 				<h1><?= $activity['title'] ?></h1>
 				<p><?= $activity['description'] ?></p>
-				<?php if ($activity['company_visit'] || (cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITEE)) || DEBUG): ?>
+				<?php if ($activity['company_visit'] || session_is_admin ()): ?>
 					<div class="corner btn-group" role="group">
 						<?php if ($activity['company_visit']): ?>
 							<a class="btn btn-primary" href="/companies/index.php?view=read&id=<?= $activity['company_id'] ?>" role="button">Read more</a>
 							<a class="btn btn-secondary" href="/companies" role="button">All company visits</a>
 						<?php endif; ?>
-						<?php if ((cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITEE)) || DEBUG): ?>
+						<?php if (session_is_admin ()): ?>
 							<a class="btn btn-secondary" href="/programme/index.php?view=update&id=<?= $activity['id'] ?>" role="button">Edit</a>
 							<a class="btn btn-danger" href="/programme/index.php?view=delete&id=<?= $activity['id'] ?>" role="button">Delete</a>
 						<?php endif; ?>
@@ -78,7 +82,12 @@ Programme
 		</div>
 	<?php endforeach; ?>
 
-	<img src="/static/img/programme/end-of-section-banners/<?= $section ?>.png" class="banner" id="<?= $section ?>">
+	<?php if (array_key_exists($section, $destinations)): ?>
+		<div class="destination-banner" id="<?= $section ?>">
+			<h1>Destination: <?= $destinations[$section] ?></h1>
+		</div>
+		<div></div>
+	<?php endif; ?>
 
 <?php endforeach; ?>
 
