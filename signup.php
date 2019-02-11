@@ -55,10 +55,10 @@ class SignupView extends FormView
     /** Renders response indicating whether the valid form was successfully processed (or not) */
     protected function form_valid($form){
         try {
-            $this->process_form_data($form->get_values());
+            $data = $this->process_form_data($form->get_values());
             $context = [
                 'status' => 'success',
-                'data' => $form->get_values ()
+                'data' => $data
             ];
         } catch (Exception $e) {
             $context = [
@@ -96,6 +96,8 @@ class SignupView extends FormView
         // Determine wether email has ben send succesfully
         if (!$success)
             throw new HttpException(500, 'Your registration has been stored in our database, but we failed to send you a confirmation email!');
+
+        return $data;
     }
 }
 
