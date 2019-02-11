@@ -8,20 +8,34 @@ You did it!
 <div class="container container-narrow">
 	<?php if ($status === 'success'): ?>
 		<h1>
-			<?php $option = rand(0, 4); if ($option == 0): ?>
-				Sweet!
-			<?php elseif ($option == 1): ?>
-				Awesome!
-			<?php elseif ($option == 2): ?>
-				You did it!
-			<?php elseif ($option == 3): ?>
-				Registered!
-			<?php else: ?>
-				Nice!
+			<?php 
+				if ($data['status'] !== 'cancelled'):
+					$option = rand(0, 4); 
+					if ($option == 0): ?>
+						Sweet!
+					<?php elseif ($option == 1): ?>
+						Awesome!
+					<?php elseif ($option == 2): ?>
+						You did it!
+					<?php elseif ($option == 3): ?>
+						Registered!
+					<?php else: ?>
+						Nice!
+					<?php endif; 
+				else: ?>
+				Sad :C
 			<?php endif; ?>
 		</h1>
 		<p>
-			You successfully registered for the ExCee 2019. We'll keep in touch considering the details. Also, we're very much looking forward to the trip, and we hope you're every bit excited as we are!
+			<?php if ($data['status'] === 'pending' || $data['status'] === 'registered'): ?>
+				You successfully registered for the ExCee 2019. We'll keep in touch considering the details. Also, we're very much looking forward to the trip, and we hope you're every bit excited as we are!
+			<?php elseif ($data['status'] === 'waiting_list'): ?>
+				You successfully registered for the ExCee 2019. But, due to high demand we are already full! Therefore, we put you on the waiting list automatically. We'll contact you in case the situation changes and you get to come!
+			<?php elseif ($data['status'] === 'cancelled'): ?>
+				You successfully registered for the ExCee 2019, and you cancelled again as well.
+			<?php else: ?>
+
+			<?php endif; ?>
 		</p>
 		<p>
 			Also, look in your inbox for a confirmation email of your registration! Feel free to contact the <a href="mailto:excee@svcover.nl">ExCee</a> to correct any and all information if necessary.
