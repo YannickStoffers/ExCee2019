@@ -21,17 +21,17 @@ Programme
 	</div>
 </div>
 <div class="banner sticky-top extra-padding-top">
-	<a href="#pre-excursion">
+	<a href="#city-01">
 		<div class="third-width">
 			<img src="/static/img/programme/destination_title_banner_01.png">
 		</div>
 	</a>
-	<a href="#city-01">
+	<a href="#city-02">
 		<div class="third-width">
 			<img src="/static/img/programme/destination_title_banner_02.png">
 		</div>
 	</a>
-	<a href="#city-02">
+	<a href="#city-03">
 		<div class="third-width">
 			<img src="/static/img/programme/destination_title_banner_03.png">
 		</div>
@@ -39,10 +39,10 @@ Programme
 </div>
 
 <?php 
-	$destinations = [	'pre-excursion' => 'City 01', 
-						'city-01' 		=> 'City 02', 
-						'city-02' 		=> 'City 03',
-						'city-03'		=> 'Schiphol'];
+	$destinations = [	'post-excursion' => 'Schiphol', 
+						'city-01' 		=> 'City 01', 
+						'city-02' 		=> 'City 02',
+						'city-03'		=> 'City 03'];
 	$activities = [];
 	foreach (get_model('Programme')::$sections as $section)
 		$activities[$section] = [];
@@ -51,6 +51,14 @@ Programme
 ?>
 
 <?php foreach (get_model('Programme')::$sections as $section): ?>
+
+	<?php if (array_key_exists($section, $destinations)): ?>
+		<div class="destination-banner" id="<?= $section ?>">
+			<h1>Destination: <?= $destinations[$section] ?></h1>
+		</div>
+		<div></div>
+	<?php endif; ?>
+
 	<?php $set = $activities[$section];
 		usort($set, function($a, $b) {
 			return strtotime($a['date']) - strtotime($b['date']);
@@ -81,13 +89,6 @@ Programme
 			</div>
 		</div>
 	<?php endforeach; ?>
-
-	<?php if (array_key_exists($section, $destinations)): ?>
-		<div class="destination-banner" id="<?= $section ?>">
-			<h1>Destination: <?= $destinations[$section] ?></h1>
-		</div>
-		<div></div>
-	<?php endif; ?>
 
 <?php endforeach; ?>
 
