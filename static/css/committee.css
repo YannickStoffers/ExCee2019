@@ -1,7 +1,7 @@
 /* Your custom CSS here */
 
 body {
-	background-image: url("/static/img/committee/background-banana-yellow.svg");
+	background-image: url("/static/img/committee/background.png");
 	background-attachment: fixed;
 	background-position: center;
 	background-size: cover; 
