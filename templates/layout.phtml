@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<link rel="stylesheet" href="/static/css/font-awesome.min.css" type='text/css'>
 	<link rel="stylesheet" href="//cdl.svcover.nl/css/cdl.css" type="text/css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" type="text/css">
 	<link rel="stylesheet" href="/static/css/excee.css" type="text/css">
 	
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
@@ -33,6 +34,83 @@
 
 	<!-- Load additional styles specified by child templates. -->
 	<?= !empty($styles) ? $styles : ''?>
+
+	
+	<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+	<script>
+		function enableSpotify () {
+			var container = document.getElementById ('playlist-container');
+
+			if (container != null) {
+				var playlist = document.createElement ('iframe');
+				playlist.setAttribute ('src', 'https://open.spotify.com/embed/user/1112409957/playlist/7h6I42n2F3mnN1HX2EjMpE');
+				playlist.setAttribute ('width', '100%');
+				playlist.setAttribute ('height', '380px');
+				playlist.setAttribute ('frameborder', '0');
+				playlist.setAttribute ('allowtransparency', 'true');
+				playlist.setAttribute ('allow', 'encrypted-media');
+				
+				container.removeChild (container.lastChild);
+				container.appendChild (playlist);
+			}
+		}
+
+		function disableSpotify () {
+			var container = document.getElementById ('playlist-container');
+
+			if (container != null) {
+				var placeholder = document.createElement ('div');
+				placeholder.setAttribute ('class', 'card-body');
+				placeholder.appendChild (document.createTextNode ('Accept cookies to see this playlist.'));
+	
+				container.removeChild (container.lastChild);
+				container.appendChild (placeholder);
+			}
+		}
+
+		window.addEventListener("load", function(){
+		window.cookieconsent.initialise({
+			"palette": {
+				"popup": {
+					"padding-top": "5px",
+					"background": "#ffe135",
+					"text": "#000000"
+				},
+				"button": {
+					"background": "#ffe135",
+					"text": "#000000"
+				}
+			},
+			"theme": "classic",
+			"type": "opt-in",
+			"content": {
+				"message": "This website allows third party (Spotify and therefore Google) cookies to be placed. If you do not consent, those parts of the website will be disabled.",
+				"href": "//sd.svcover.nl/Privacy%20Statement/Privacy%20statement.pdf"
+			},
+			onInitialise: function (status) {
+				var didConsent = this.hasConsented();
+				if (didConsent) {
+					enableSpotify ();
+				} else {
+					disableSpotify ();
+				}
+			},
+			onStatusChange: function(status, chosenBefore) {
+				var didConsent = this.hasConsented();
+				if (didConsent) {
+					enableSpotify ();
+				} else {
+					disableSpotify ();
+				}
+			},
+			onRevokeChoice: function() {
+				disableSpotify ();
+			},
+			onPopupOpen: function () {
+				disableSpotify ();
+			}
+		})});
+	</script>
 </head>
 <body>
 	<div class=" navbar-expand-lg">
