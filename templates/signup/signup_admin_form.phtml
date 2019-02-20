@@ -16,7 +16,7 @@ Admin &bull; Modify registration
     <?php if (session_is_admin ()): ?>
 		<?= $form->render() ?>
 	<?php elseif (!cover_session_logged_in ()): ?>
-		<a href="<?= cover_login_url() ?>" class="btn btn-primary">Login and get started!</a>
+		<a href="<?= cover_login_url() ?>" class="btn btn-excee">Login and get started!</a>
 	<?php elseif (!cover_session_in_committee (ADMIN_COMMITTEE)): ?>
 		You need to be a member of the ExCee to see this page!
 	<?php endif; ?>

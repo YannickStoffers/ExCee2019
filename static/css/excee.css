@@ -114,13 +114,13 @@ button.astext {
 }
 
 .ideas {
-	background: #C8102E; 
+	background: #ffe135; 
 	border-radius: 50%; 
 	min-width: 75px;
 	min-height: 75px;
 	width: 5%; 
 	padding-top: 5%;
-	color: white; 
+	color: #000; 
 	position: fixed;
 	bottom: 50px;
 	right: 50px;
@@ -173,6 +173,45 @@ button.astext {
 	position: relative;
 }
 
+.center-image {
+	width: 50%;
+	min-width: 600px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.cc-revoke,
+.cc-window {
+	font: inherit;
+}
+
+hr,
+.list-group-flush,
+.list-group-item,
+.table thead th,
+.table th,
+.table td,
+.card {
+	border-color: #ffe135;
+}
+
+.card-header {
+	background: #ffe135;
+	border-color: #ffe135;
+}
+
+.alert-excee {
+	color: #000;
+	background-color: rgba(255,225,53,.5);
+	border-color: #ffe135;
+}
+
+.btn-excee {
+	color: #000;
+	background-color: #ffe135;
+	border-color: #ffe135;
+}
+
 @media only screen and (max-width: 786px) {
     .ideas {
         display: none;
@@ -193,7 +232,12 @@ button.astext {
 
 	.extra-padding-top {
 		padding-top: 48px !important;
-}
+	}
+
+	.center-image {
+		width: 100%;
+		min-width: 0;
+	}
 
 }
 

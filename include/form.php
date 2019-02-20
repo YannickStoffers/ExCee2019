@@ -627,6 +627,6 @@ class Bootstrap3Form extends Form
 
     /** Returns a Bootstrap 3 style HTML string of the form buttons */
     protected function render_buttons() {
-        return '<div class="form-group"><button type="submit" class="btn btn-primary">Submit</button></div>';
+        return '<div class="form-group"><button type="submit" class="btn btn-excee">Submit</button></div>';
     }
 }
