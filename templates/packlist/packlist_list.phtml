@@ -1,0 +1,128 @@
+<?php $this->extends('../layout.phtml') ?>
+
+<?php $this->begin('title') ?>
+Pack list
+<?php $this->end() ?>
+
+<?php
+
+$sections = get_model ('PackList')::$sections;
+$sorted = [];
+foreach ($sections as $section) {
+	$sorted[$section] = count (array_filter($objects, function ($p) use ($section) {
+		return $p['section'] === $section;
+	}));
+}
+arsort ($sorted);
+$keys = array_keys($sorted);
+$sections = [$keys[1], $keys[4], $keys[0], $keys[3], $keys[2]];
+
+?>
+
+<?php $this->begin('content') ?>
+<div class="container container-narrow">
+	<h1 class="text-center">
+		Make sure to grab everything!
+		<?php if (session_is_admin ()): ?>
+			<button class="btn btn-excee" onclick="toggle_admin()">Edit</button>
+		<?php endif; ?>
+	</h1>
+</div>
+<div class="container container-wide">
+	<?php if (!$admin_view_enabled): ?>
+		<div class="alert alert-excee alert-dismissable">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<p>
+				Hey you!
+			</p>
+			<p>
+				As you probably are already aware of, we are travelling by plane. Therefore, we are limited in the amount of luggage we may carry. Fortunately, we are flying with KLM, which is a very decent airline considering luggage allowance. Hence, we ask you to limit your luggage size to an amount of two pieces of carry-on items. The first of which measuring a whopping <span class="badge badge-pill badge-dark">55 &times; 35 &times; 25 cm</span>, this item may be a trolley. The second piece of luggage, if you bring any, measuring no larger than <span class="badge badge-pill badge-dark">40 &times; 30 &times; 20 cm</span>, must be an accessory bag such as a backpack, laptop case, or purse.
+			</p>
+			<div class="center-image">
+				<img src="static/img/packlist/luggage.png" class="center-image">
+			</div>
+			<p>
+				Also, this pack list doubles as a checklist, which you may or may not find useful. Ticking off an item places a cookie, which expires after 31 days. This cookie's sole purpose is remembering what you checked off on the client side. No data is send to our server.
+			</p>
+			<p>
+				Cheers & see you soon,
+				<br>
+				The ExCee
+			</p>
+		</div>
+	<?php endif; ?>
+	<div class="card-columns">
+		<?php foreach ($sections as $section): ?>
+			<div class="card">
+				<h4 class="card-header"><?= $section ?></h4>
+				<ul class="list-group list-group-flush">
+					<?php foreach ($objects as $item): ?>
+						<?php if ($item['section'] === $section): ?>
+							<li class="list-group-item d-flex justify-content-between align-items-center">
+								<div>
+									<input type="checkbox" value="" id="<?= $item['id']?>" onclick="setCookie('<?= $item['id']?>')">
+									<?= $item['item']; ?>
+								</div>
+								<?php if (session_is_admin ()): ?>
+									<a name="admin" href="/packlist?view=delete&id=<?= $item['id'] ?>" class="btn btn-sm btn-danger" style="display:<?= $admin_view_enabled ? 'block' : 'none' ?>;">Delete</a>
+								<?php endif; ?>
+							</li>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+		<?php endforeach; ?>
+		<?php if (session_is_admin ()): ?>
+			<div class="card" name="admin" <?= $admin_view_enabled ? '' : 'style="display: none;"' ?>>
+				<h4 class="card-header">Add item to pack list</h4>
+				<div class="card-body">
+					<?= $form->render ('/packlist?view=create'); ?>
+				</div>
+			</div>
+		<?php endif;?>
+	</div>
+</div>
+<?php $this->end() ?>
+
+<?php $this->begin ('scripts') ?>
+<script type="text/javascript">
+	function toggle_admin () {
+		var admin_elements = document.getElementsByName("admin");
+		var i;
+		for (i = 0; i < admin_elements.length; i++) {
+			if (admin_elements[i].style.display === "none") {
+				admin_elements[i].style.display = "block";
+			} else {
+				admin_elements[i].style.display = "none";
+			}
+		}
+	}
+
+	function setCookie(name){
+        var c = name + "=" + document.getElementById(name).checked + ";"
+
+        var d = new Date();
+        d.setTime(d.getTime() + (30*24*60*60*1000));
+        var expires = "expires="+ d.toUTCString();
+
+        document.cookie = c + expires;
+        console.log (c + expires);
+    }
+
+    window.onload = function getCookie(){
+        var ca = document.cookie.split(";");
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            var elem = c.split("=");
+            console.log(elem);
+            if (elem[0] != "expires") {
+                document.getElementById(elem[0]).checked = (elem[1] == "true");
+            }
+        }
+        console.log (ca)
+    }
+</script>
+<?php $this->end () ?>

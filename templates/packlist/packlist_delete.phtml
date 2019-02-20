@@ -1,0 +1,36 @@
+<?php $this->extends('../layout.phtml') ?>
+
+<?php $this->begin('title') ?>
+Admin &bull; Delete packlist item
+<?php $this->end() ?>
+
+<?php $this->begin('styles') ?>
+<link rel="stylesheet" href="/static/css/admin.css" type="text/css">
+<?php $this->end() ?>
+
+<?php $this->begin('content') ?>
+<div class="container container-narrow">
+
+	<h1>Delete pack list item</h1>
+	<form method="POST">
+		<fieldset disabled>
+			<div class="form-group">
+				<label for="id">Item ID</label>
+				<input class="form-control disabled" type="text" name="id" id="id" value="<?= $object['id'] ?>">
+			</div>
+			<div class="form-group">
+				<label for="name">Item label</label>
+				<input class="form-control disabled" type="text" name="name" id="name" value="<?= $object['item'] ?>">
+			</div>
+			<div class="form-group">
+				<label for="name">Item section</label>
+				<input class="form-control disabled" type="text" name="name" id="name" value="<?= $object['section'] ?>">
+			</div>
+		</fieldset>
+		<div class="form-group">
+			<button class="btn btn-danger" type="submit">Permanently delete this item</button>
+		</div>
+	</form>
+	
+</div>
+<?php $this->end() ?>
