@@ -35,9 +35,18 @@
 	<!-- Load additional styles specified by child templates. -->
 	<?= !empty($styles) ? $styles : ''?>
 
-	
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135114803-1"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
 	<script>
+		function runGoogleAnalytics () {
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-135114803-1');
+		}
+
 		function enableSpotify () {
 			var container = document.getElementById ('playlist-container');
 
@@ -68,6 +77,11 @@
 			}
 		}
 
+		function enableCookies () {
+			runGoogleAnalytics ();
+			enableSpotify ();
+		}
+
 		window.addEventListener("load", function(){
 		window.cookieconsent.initialise({
 			"palette": {
@@ -84,13 +98,13 @@
 			"theme": "classic",
 			"type": "opt-in",
 			"content": {
-				"message": "This website allows third party (Spotify and therefore Google) cookies to be placed. If you do not consent, those parts of the website will be disabled.",
+				"message": "This website allows third party (Spotify and Google) cookies to be placed. If you do not consent, those parts of the website will be disabled.",
 				"href": "//sd.svcover.nl/Privacy%20Statement/Privacy%20statement.pdf"
 			},
 			onInitialise: function (status) {
 				var didConsent = this.hasConsented();
 				if (didConsent) {
-					enableSpotify ();
+					enableCookies ();
 				} else {
 					disableSpotify ();
 				}
@@ -98,7 +112,7 @@
 			onStatusChange: function(status, chosenBefore) {
 				var didConsent = this.hasConsented();
 				if (didConsent) {
-					enableSpotify ();
+					enableCookies ();
 				} else {
 					disableSpotify ();
 				}
