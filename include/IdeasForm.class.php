@@ -7,7 +7,7 @@ class IdeasForm extends Bootstrap3Form
 {
     public function __construct($name, $strict=true){
         $fields = [
-            'name'  => new StringField   ('Name',               true, ['maxlength' => 8]),
+            'name'  => new StringField   ('Name',               true, ['maxlength' => 64]),
             'email' => new StringField   ('Email',              true, ['maxlength' => 255]),
             'idea'  => new TextAreaField ('Idea for the trip!', false,  ['maxlength' => 4096]),
         ];
