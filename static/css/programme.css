@@ -36,8 +36,7 @@
 	margin-bottom: auto;
 	position: relative;
 	object-fit: cover;
-
-	background-image: url("/static/img/woopsie.svg");
+	
 	background-position: center;
 	background-size: cover; 
 }
