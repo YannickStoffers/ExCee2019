@@ -24,14 +24,14 @@ Companies
 			<div class="company-text">
 				<h1>
 					<?= $company['name'] ?>
-					<?php if ((cover_session_logged_in() && cover_session_in_committee(ADMIN_COMMITEE)) || DEBUG): ?>
+					<?php if (session_is_admin ()): ?>
 						<span class="badge badge-dark">#<?= $company['id'] ?></span>
 					<?php endif; ?>
 				</h1>
 				<p><?= $company['description'] ?></p>
 				<div class="btn-group corner">
 					<a class="btn btn-excee" href="/companies/index.php?view=read&id=<?= $company['id'] ?>">Read more</a>
-					<?php if ((cover_session_logged_in () && cover_session_in_committee (ADMIN_COMMITEE)) || DEBUG): ?>
+					<?php if (session_is_admin ()): ?>
 						<a class="btn btn-secondary" href="/companies/index.php?view=update&id=<?= $company['id'] ?>">Edit</a>
 						<a class="btn btn-danger" href="/companies/index.php?view=delete&id=<?= $company['id'] ?>">Delete</a>
 					<?php endif;?>
