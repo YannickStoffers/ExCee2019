@@ -194,20 +194,23 @@ Admin &bull; Registrations overview
 									$date1 = new DateTime (date("Y-m-d H:i:s"));
 									$date2 = new DateTime ($participant['registration_date']);
 									$diff = $date1->diff($date2);
-									$hours = $diff->h;
+									
+									if ($diff->m > 0) {
+										echo "> " . $diff->m . "m ago";
+									} else {
+										$result = "";
 
-									$result = "";
-
-									if ($diff->d != 0){
-										$result = $result . $diff->d . " day" . ($diff->d > 1 ? "s" : "");
+										if ($diff->d != 0){
+											$result = $result . $diff->d . " day" . ($diff->d > 1 ? "s" : "");
+										}
+										if ($diff->h != 0)
+											$result = $result . " " . $diff->h . " hour" . ($diff->h > 1 ? "s" : "");
+										if ($diff->d == 0 && $diff->i != 0)
+											$result = $result . " " . $diff->i . " minute" . ($diff->i > 1 ? "s" : "");
+										if ($diff->d == 0 && $diff->h == 0 && $diff->i == 0)
+											$result = $result . $diff->s . " second" . ($diff->s > 1 ? "s" : "");
+										echo $result . " ago";
 									}
-									if ($diff->h != 0)
-										$result = $result . " " . $diff->h . " hour" . ($diff->h > 1 ? "s" : "");
-									if ($diff->d == 0 && $diff->i != 0)
-										$result = $result . " " . $diff->i . " minute" . ($diff->i > 1 ? "s" : "");
-									if ($diff->d == 0 && $diff->h == 0 && $diff->i == 0)
-										$result = $result . $diff->s . " second" . ($diff->s > 1 ? "s" : "");
-									echo $result . " ago";
 								?>
 							</a>
 						</td>

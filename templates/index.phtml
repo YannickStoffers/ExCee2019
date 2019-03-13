@@ -16,9 +16,39 @@
 	</div>
 </div>
 
-<?php if (SIGNUPS_OPENED == true): ?>
+<?php 
+	$now = date_create ();
+	$deadline = date_create (DEADLINE);
+	if (SIGNUPS_OPENED == true && $deadline > $now): ?>
 <a href="/signup.php">
 	<img src="/static/img/home/Sign-up-banner-alt.png" class="banner">
+	<div class="text-center deadline-banner">
+		<div>
+			<h1>The deadline is in
+				<?php 
+					$date1 = date_create ();
+					$date2 = date_create (DEADLINE);
+					$diff = $date2->diff($date1);
+
+					$result = "";
+					if ($diff->d != 0){
+						$result = $result . $diff->d . " day" . ($diff->d > 1 ? "s" : "");
+					}
+					if ($diff->h != 0) {
+						if ($result != "")
+							$result = $result . " and";
+						$result = $result . " " . $diff->h . " hour" . ($diff->h > 1 ? "s" : "");
+					}
+					if ($diff->d == 0 && $diff->i != 0) {
+						if ($result != "")
+							$result = $result . " and";
+						$result = $result . " " . $diff->i . " minute" . ($diff->i > 1 ? "s" : "");
+					}
+					echo $result;
+				?>!
+			</h1>
+		</div>
+	</div>
 </a>
 <?php endif; ?>
 

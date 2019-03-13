@@ -99,30 +99,27 @@ $sections = [$keys[1], $keys[4], $keys[0], $keys[3], $keys[2]];
 	}
 
 	function setCookie(name){
-        var c = name + "=" + document.getElementById(name).checked + ";"
+		var c = name + "=" + document.getElementById(name).checked + ";"
 
-        var d = new Date();
-        d.setTime(d.getTime() + (30*24*60*60*1000));
-        var expires = "expires="+ d.toUTCString();
+		var d = new Date();
+		d.setTime(d.getTime() + (30*24*60*60*1000));
+		var expires = "expires="+ d.toUTCString();
 
-        document.cookie = c + expires;
-        console.log (c + expires);
-    }
+		document.cookie = c + expires;
+	}
 
-    window.onload = function getCookie(){
-        var ca = document.cookie.split(";");
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-            }
-            var elem = c.split("=");
-            console.log(elem);
-            if (elem[0] != "expires") {
-                document.getElementById(elem[0]).checked = (elem[1] == "true");
-            }
-        }
-        console.log (ca)
-    }
+	window.onload = function getCookie(){
+		var ca = document.cookie.split(";");
+		for (var i = 0; i < ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
+			}
+			var elem = c.split("=");
+			if (elem[0] != "expires") {
+				document.getElementById(elem[0]).checked = (elem[1] == "true");
+			}
+		}
+	}
 </script>
 <?php $this->end () ?>
