@@ -22,21 +22,21 @@ class PackListView extends ModelView
 
 	}
 
-	public function run_page() {
-		// Delete and create page requires admin rights.
-		if ($this->_view !== 'delete' && $this->_view !== 'create') {
-			if ($_SERVER['REQUEST_METHOD'] === 'POST' && $this->form->validate() && session_is_admin ())
-				$this->process_form_data ($this->form->get_values());
-			return parent::run_page ();
-		}
+	// public function run_page() {
+	// 	// Delete and create page requires admin rights.
+	// 	if ($this->_view !== 'delete' && $this->_view !== 'create') {
+	// 		if ($_SERVER['REQUEST_METHOD'] === 'POST' && $this->form->validate() && session_is_admin ())
+	// 			$this->process_form_data ($this->form->get_values());
+	// 		return parent::run_page ();
+	// 	}
 
-		if (!cover_session_logged_in() && !DEBUG)
-			throw new HttpException(401, 'Unauthorized', sprintf('<a href="%s" class="btn btn-excee">Login and get started!</a>', cover_login_url()));
-		else if (!session_is_admin ())
-			throw new HttpException(403, 'You need to be a member of the ExCee to see this page!');
-		else
-			return parent::run_page();
-	}
+	// 	if (!cover_session_logged_in() && !DEBUG)
+	// 		throw new HttpException(401, 'Unauthorized', sprintf('<a href="%s" class="btn btn-excee">Login and get started!</a>', cover_login_url()));
+	// 	else if (!session_is_admin ())
+	// 		throw new HttpException(403, 'You need to be a member of the ExCee to see this page!');
+	// 	else
+	// 		return parent::run_page();
+	// }
 
 	/** Runs the list view */
 	protected function run_list() {
